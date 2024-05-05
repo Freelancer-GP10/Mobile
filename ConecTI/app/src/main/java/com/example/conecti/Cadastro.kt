@@ -1,6 +1,7 @@
 package com.example.conecti
 
-
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,7 +9,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,64 +25,62 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.ui.theme.ConecTITheme
 
-
 class Cadastro : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ConecTITheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    LoginScreenCadastro(null)
-                }
+                LoginScreenCadastro(this) // Passando a instância da atividade atual
             }
         }
     }
 }
-
 @Composable
-fun LoginScreenCadastro(extras: Bundle?) {
-    val contexto = LocalContext.current
-    Surface(color = MaterialTheme.colorScheme.background) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(Color.White, Color(127, 184, 197)),
-                    startY = 0f,
-                    endY = Float.POSITIVE_INFINITY
-                )
-            )
-    ) {
-        Image(
-            painter = painterResource(id = R.mipmap.logo),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .size(100.dp)
-                .padding(top = 20.dp),
-            contentScale = ContentScale.Fit
-        )
+fun LoginScreenCadastro(activity: Activity) {
+    val contexto = activity
 
-        Column(
+    Surface(color = MaterialTheme.colorScheme.background) {
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(Color.White, Color(127, 184, 197)),
+                        startY = 0f,
+                        endY = Float.POSITIVE_INFINITY
+                    )
+                )
         ) {
-            Text(
-                text = "Como você deseja\n" +
-                        "se registrar?",
-                fontSize = 30.sp,
-                color = Color.Black,
+            Image(
+                painter = painterResource(id = R.mipmap.logo),
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .size(100.dp)
+                    .padding(top = 20.dp),
+                contentScale = ContentScale.Fit
             )
 
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Como você deseja\n" +
+                            "se registrar?",
+                    fontSize = 30.sp,
+                    color = Color.Black,
+                    modifier = Modifier // Adicionando o argumento opcional nomeado
+                )
+
                 Button(
-                    onClick = {},
+                    onClick = {
+                        val cadastroFrellaTres = Intent(contexto, CadastroFrellaTres::class.java)
+                        contexto.startActivity(cadastroFrellaTres)
+                    },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .padding(top = 60.dp)
@@ -93,37 +91,40 @@ fun LoginScreenCadastro(extras: Bundle?) {
                         text = "Freelancer",
                         fontSize = 24.sp,
                         color = Color.White,
+                        modifier = Modifier // Adicionando o argumento opcional nomeado
                     )
                 }
 
-                    Text(
-                        text = "Ou",
-                        fontSize = 20.sp,
-                        color = androidx.compose.ui.graphics.Color.Companion.Black
-                    )
-
-
-            Button(
-                onClick = {},
-                shape = MaterialTheme.shapes.medium,
-                modifier = Modifier
-                    .padding(top = 5.dp)
-                    .width(290.dp)
-                    .height(71.dp)
-            ) {
                 Text(
-                    text = "Microempreendedor",
-                    fontSize = 24.sp,
-                    color = Color.White,
+                    text = "Ou",
+                    fontSize = 20.sp,
+                    color = Color.Black,
+                    modifier = Modifier // Adicionando o argumento opcional nomeado
                 )
+
+                Button(
+                    onClick = {},
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier
+                        .padding(top = 5.dp)
+                        .width(290.dp)
+                        .height(71.dp)
+                ) {
+                    Text(
+                        text = "Microempreendedor",
+                        fontSize = 24.sp,
+                        color = Color.White,
+                        modifier = Modifier // Adicionando o argumento opcional nomeado
+                    )
+                }
             }
         }
     }
 }
-}
+
 
 @Preview
 @Composable
 fun PreviewLoginScreenCadastro() {
-    LoginScreenCadastro(null)
+    LoginScreenCadastro(Activity())
 }

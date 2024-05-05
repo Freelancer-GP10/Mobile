@@ -2,6 +2,8 @@ package com.example.conecti.ui.theme
 import androidx.compose.ui.graphics.Color
 import com.example.conecti.R
 
+
+val AzulFundo = Color(0xFF215683)
 val md_theme_light_primary = Color(0xFF204A7B)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFFFDAD3)
