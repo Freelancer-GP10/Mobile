@@ -47,7 +47,7 @@
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        LoginScreenCadastro(null)
+                        LoginScreenCadastro_Free(null)
                     }
                 }
             }
