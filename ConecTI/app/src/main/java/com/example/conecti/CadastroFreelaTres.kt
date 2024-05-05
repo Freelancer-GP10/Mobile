@@ -95,7 +95,7 @@ fun EtapaTres(viewModel: UsuarioViewModel = UsuarioViewModel()) {
 
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
-    val entradaPapel = remember { mutableStateOf("") }
+    val entradaPapel = remember { mutableStateOf("Freelancer") }
     val entradaConfirmarSenha = remember { mutableStateOf("") }
 
 
@@ -166,7 +166,20 @@ fun EtapaTres(viewModel: UsuarioViewModel = UsuarioViewModel()) {
         ) {
             OutlinedButton(
                 onClick = {
-                    viewModel.criarUsuario(usuarioCriacaoDto = Service.UsuarioCriacaoDto(entradaEmail, entradaPapel, entradaSenha, ))
+                    println("entrou na funcao")
+                    println(entradaEmail)
+                    println(entradaPapel)
+                    println(entradaSenha)
+                    // Imprime "Hello, world!" no console
+
+                    viewModel.criarUsuario(
+                        usuarioCriacaoDto = Service.UsuarioCriacaoDto(
+                            email = entradaEmail.value,
+                            papel = entradaPapel.value,
+                            senha = entradaSenha.value
+                        )
+                    )
+
                 },
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(2.dp, Color(0xFF204A7B)),

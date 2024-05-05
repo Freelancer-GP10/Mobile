@@ -1,7 +1,9 @@
 package com.example.conecti
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.security.NetworkSecurityPolicy
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -32,12 +34,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.ui.theme.ConecTITheme
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            configureNetworkSecurityExceptions()
             ConecTITheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -48,6 +53,18 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+private fun configureNetworkSecurityExceptions() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return
+
+    try {
+        // Cria um contexto SSL permitindo tráfego não seguro
+        val sslContext = SSLContext.getInstance("TLS")
+        sslContext.init(null, null, null)
+        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.socketFactory)
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
