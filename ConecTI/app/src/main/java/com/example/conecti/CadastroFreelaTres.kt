@@ -1,9 +1,11 @@
 package com.example.conecti
 
 import UsuarioViewModel
+import android.content.Intent
 import  android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,10 +37,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.media3.common.util.Log
+import androidx.media3.common.util.UnstableApi
 import com.example.conecti.network.Service
 
 class CadastroFrellaTres : ComponentActivity() {
@@ -90,12 +95,13 @@ fun BackgroundImageTres() {
     }
 }
 
-@Composable
-fun EtapaTres(viewModel: UsuarioViewModel = UsuarioViewModel()) {
-
+@OptIn(UnstableApi::class) @Composable
+fun EtapaTres(extras: Bundle? = null) {
+    val context = LocalContext.current
+    val viewModel = remember { UsuarioViewModel(context) }
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
-    val entradaPapel = remember { mutableStateOf("") }
+    val entradaPapel = remember { mutableStateOf("Freelancer") }
     val entradaConfirmarSenha = remember { mutableStateOf("") }
 
 
@@ -166,7 +172,13 @@ fun EtapaTres(viewModel: UsuarioViewModel = UsuarioViewModel()) {
         ) {
             OutlinedButton(
                 onClick = {
+                    Log.d("SeuBotao", "Botão Clicado")
+                    Log.d("Email", entradaEmail.value)
+                    Log.d("Senha", entradaSenha.value)
+                    Log.d("Confirmar Senha", entradaConfirmarSenha.value)
                     viewModel.criarUsuario(usuarioCriacaoDto = Service.UsuarioCriacaoDto(entradaEmail, entradaPapel, entradaSenha, ))
+
+                    Log.d("Usuario", "Usuario criado com sucesso")
                 },
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(2.dp, Color(0xFF204A7B)),

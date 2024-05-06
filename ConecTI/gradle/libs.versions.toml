@@ -10,6 +10,8 @@ activityCompose = "1.7.0"
 composeBom = "2023.08.00"
 firebaseCrashlyticsBuildtools = "3.0.0"
 material3Android = "1.2.1"
+media3Common = "1.3.1"
+common = "18.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +30,8 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+androidx-media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Common" }
+common = { group = "com.google.mlkit", name = "common", version.ref = "common" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

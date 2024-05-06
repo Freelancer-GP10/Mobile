@@ -20,4 +20,15 @@ class Service {
         val papel: MutableState<String>,
         val senha: MutableState<String>
     )
+
+    data class UsuarioTokenDto(
+        val usuario: UsuarioLoginDto,
+        val token: String
+    )
+
+    data class UsuarioLoginDto(
+        val email: String,
+        val senha: String
+    )
+
 }
