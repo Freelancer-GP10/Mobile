@@ -12,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,6 +36,8 @@ class Perfil_Free : ComponentActivity() {
                     color = Color.White
                 ) {
                     ProfileScreen(null)
+                    Menu()
+
                 }
             }
         }
@@ -45,7 +46,9 @@ class Perfil_Free : ComponentActivity() {
 
 @Composable
 fun ProfileScreen(extras: Bundle?) {
+
     val contexto = LocalContext.current
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -53,14 +56,16 @@ fun ProfileScreen(extras: Bundle?) {
                 .padding(bottom = 24.dp)
 
         ) {
-            IconButton(
-                onClick = { },
-                modifier = Modifier.padding(start = 16.dp, top = 16.dp)
-            ) {
-                Icon(Icons.Default.Menu, contentDescription = "Menu")
-            }
+//            IconButton(
+//                onClick = { },
+//                modifier = Modifier.padding(start = 16.dp, top = 16.dp)
+//            ) {
+//                Icon(Icons.Default.Menu, contentDescription = "Menu")
+//            }
 
-            Spacer(modifier = Modifier.height(25.dp))
+            Spacer(modifier = Modifier.height(70.dp))
+
+
 
             LazyColumn(
                 modifier = Modifier
@@ -93,7 +98,11 @@ fun ProfileScreen(extras: Bundle?) {
                 .fillMaxWidth()
                 .height(100.dp)
                 .align(Alignment.BottomCenter)
-                .background(AzulFundo))
+                .background(AzulFundo)
+        ){
+
+        }
+
     }
 }
 
@@ -239,5 +248,7 @@ fun NavigationButton(
 fun PreviewProfileScreen() {
     ConecTITheme {
         ProfileScreen(null)
+        Menu()
+
     }
 }

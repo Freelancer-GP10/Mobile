@@ -89,10 +89,7 @@ fun LoginScreenCadastro(activity: Activity) {
                         .width(290.dp)
                         .height(71.dp)
                 ) {
-                    
 
-
-                    
                     Text(
                         text = "Freelancer",
                         fontSize = 24.sp,
