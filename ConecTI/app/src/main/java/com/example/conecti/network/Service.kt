@@ -16,9 +16,9 @@ class Service {
 
     // Classe que representa os dados de criação de usuário
     data class UsuarioCriacaoDto(
-        val email: MutableState<String>,
-        val papel: MutableState<String>,
-        val senha: MutableState<String>
+        val email: String,
+        val papel: String,
+        val senha: String
     )
 
     data class UsuarioTokenDto(

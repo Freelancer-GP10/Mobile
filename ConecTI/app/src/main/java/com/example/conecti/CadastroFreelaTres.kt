@@ -172,13 +172,22 @@ fun EtapaTres(extras: Bundle? = null) {
         ) {
             OutlinedButton(
                 onClick = {
-                    Log.d("SeuBotao", "Botão Clicado")
-                    Log.d("Email", entradaEmail.value)
-                    Log.d("Senha", entradaSenha.value)
-                    Log.d("Confirmar Senha", entradaConfirmarSenha.value)
-                    viewModel.criarUsuario(usuarioCriacaoDto = Service.UsuarioCriacaoDto(entradaEmail, entradaPapel, entradaSenha, ))
 
-                    Log.d("Usuario", "Usuario criado com sucesso")
+                    println("entrou na funcao")
+                    println(entradaEmail)
+                    println(entradaPapel)
+                    println(entradaSenha)
+                    // Imprime "Hello, world!" no console
+
+                    viewModel.criarUsuario(
+                        usuarioCriacaoDto = Service.UsuarioCriacaoDto(
+                            email = entradaEmail.value,
+                            papel = entradaPapel.value,
+                            senha = entradaSenha.value
+                        )
+                    )
+
+
                 },
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(2.dp, Color(0xFF204A7B)),
