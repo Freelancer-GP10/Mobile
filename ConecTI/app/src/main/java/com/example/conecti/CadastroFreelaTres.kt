@@ -1,11 +1,9 @@
 package com.example.conecti
 
 import UsuarioViewModel
-import android.content.Intent
 import  android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -37,13 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.media3.common.util.Log
-import androidx.media3.common.util.UnstableApi
 import com.example.conecti.network.Service
 
 class CadastroFrellaTres : ComponentActivity() {
@@ -58,6 +53,7 @@ class CadastroFrellaTres : ComponentActivity() {
                 ) {
                     BackgroundImageTres()
                     EtapaTres()
+
 
                 }
             }
@@ -95,10 +91,9 @@ fun BackgroundImageTres() {
     }
 }
 
-@OptIn(UnstableApi::class) @Composable
-fun EtapaTres(extras: Bundle? = null) {
-    val context = LocalContext.current
-    val viewModel = remember { UsuarioViewModel(context) }
+@Composable
+fun EtapaTres(viewModel: UsuarioViewModel = UsuarioViewModel()) {
+
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
     val entradaPapel = remember { mutableStateOf("Freelancer") }
@@ -172,7 +167,6 @@ fun EtapaTres(extras: Bundle? = null) {
         ) {
             OutlinedButton(
                 onClick = {
-
                     println("entrou na funcao")
                     println(entradaEmail)
                     println(entradaPapel)
@@ -186,7 +180,6 @@ fun EtapaTres(extras: Bundle? = null) {
                             senha = entradaSenha.value
                         )
                     )
-
 
                 },
                 shape = RoundedCornerShape(8.dp),

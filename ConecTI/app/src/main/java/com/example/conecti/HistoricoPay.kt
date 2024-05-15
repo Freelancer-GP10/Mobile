@@ -6,13 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +20,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
@@ -29,17 +31,18 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,41 +64,203 @@ import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class MenuLateral : ComponentActivity() {
+class HistoricoPay : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-                Menu()
+
+            }
+        }
+    }
+}
+
+// AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
+@Composable
+fun MainContent3(scope: CoroutineScope, iniciarJanela: DrawerState) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 15.dp) // Adiciona um espaçamento na parte superior da tela
+    ) {
+        IconButton(
+            onClick = {
+                scope.launch {
+                    iniciarJanela.open()
+                }
+            },
+            modifier = Modifier.padding(start = 16.dp), // Adiciona um espaçamento à esquerda
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Menu,
+                contentDescription = "menu Icon",
+                tint = Color(0xFF50FAAB),
+                modifier = Modifier.size(40.dp)
+            )
+        }
+
+        // Conteúdo principal da tela
+        // Use weight(1f) para ocupar todo o espaço disponível na tela
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 24.dp)
+
+            ) {
+                Text(
+                    text = "Pay",
+                    color = Color(0xFF215683),
+                    fontSize = 38.sp,
+                    modifier = Modifier
+                        .padding(start = 30.dp, bottom = 0.dp)
+                        .align(Alignment.Start),
+
+                    )
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Row {
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Box(
+                        modifier = Modifier
+                            .background(Color(0xFF204A7B), shape = RoundedCornerShape(8.dp))
+                            .padding(start = 0.dp, bottom = 0.dp)
+                            .width(180.dp)
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(-5.dp)
+                        ) {
+
+                            Text(
+                                text = "Disponível para saque",
+                                color = Color.White,
+                                fontSize = 14.sp
+                            )
+                            Text(
+                                text = "R$ 2.950,65",
+                                color = Color.White
+                            )
+                        }
+
+                    }
+                    Spacer(modifier = Modifier.width(25.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .background(Color(0xFF204A7B), shape = RoundedCornerShape(8.dp))
+                            .padding(start = 0.dp, bottom = 0.dp)
+                            .width(145.dp)
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ){
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(-5.dp)
+                        ) {
+
+                            Text(
+                                text = "Saldo bloqueado",
+                                color = Color.White,
+                                fontSize = 14.sp
+                            )
+                            Text(
+                                text = "R$ 2.950,65",
+                                color = Color.White
+                            )
+                        }
+                    }
+
+                }
+
+                Spacer(modifier = Modifier.height(35.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Histórico mais recente:",
+                        modifier = Modifier
+                            .padding(start = 25.dp),
+                        fontSize = 19.sp,
+                    )
+
+                    Spacer(modifier = Modifier.width(24.dp))
+
+                    Button(
+                        onClick = { /*TODO*/ },
+                        shape = RoundedCornerShape(7.dp),
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(100.dp)
+
+                    ) {
+                        Text(
+                            text = "Sacar",
+                            fontSize = 17.sp
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
+                ) {
+                    items(6) { index ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(87.dp)
+                                .padding(16.dp)
+                                .border(1.dp, Color.Gray)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .border(3.dp, Color(0xFFCBE0F1))
+                                    .background(Color(0xFFCBE0F1)),
+                                    //.background(Color.Red),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "16/Fevereiro",
+                                    fontSize = 18.sp,
+                                    modifier = Modifier
+                                        .weight(1.9f)
+                                        .padding(start = 10.dp)
+                                )
+
+                                Text(
+                                    text = "R$100,00",
+                                    modifier = Modifier
+                                        .padding(end = 20.dp),
+                                    fontSize = 18.sp,
+                                )
+                            }
+                        }
+                    }
+                }
+
+
             }
 
         }
     }
 }
 
-@Composable
-fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
-    IconButton(
-        onClick = {
-            scope.launch {
-                iniciarJanela.open()
-            }
-        },
-        modifier = Modifier.padding(top = 6.dp, start = 6.dp ), // Adiciona um espaçamento de 8dp na parte inferior
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Menu,
-            contentDescription = "menu Icon",
-            tint = Color(0xFF50FAAB),
-            modifier = Modifier.size(40.dp)
-        )
-    }
-}
 
+// AQUI ESTA TODA PARTE DE LOGICA DO MENU LATERAL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Menu() {
+fun Perfil3() {
 
     val subMenus = listOf(
         SubMenusBotoes(Icons.Default.AccountCircle, "Perfil", 0, false),
@@ -118,7 +283,6 @@ fun Menu() {
 
             Column(
                 Modifier
-                    .fillMaxSize()
                     .background(
                         brush = Brush.verticalGradient(
                             colors = listOf(
@@ -131,7 +295,7 @@ fun Menu() {
                             endY = 0f // Posição inicial do gradiente no eixo x
                         )
                     )
-                    .fillMaxHeight() // Preenche toda a altura disponível
+                    // Preenche toda a altura disponível
                     .padding(
                         start = 25.dp,
                         top = 30.dp,
@@ -228,12 +392,15 @@ fun Menu() {
         }
     }, drawerState = iniciarJanela,
         content = {
-            MainContent(scope = scope, iniciarJanela = iniciarJanela )
+            MainContent3(scope = scope, iniciarJanela = iniciarJanela)
+
+
         }
     )
 }
 
-data class SubMenusBotoes(
+// ESTE DATA CLASS É PARA CHAMAR OS ICONES TIPO SETA ETC..
+data class SubMenusBotoes3(
 
     val icone: ImageVector,
     val texto_botao: String,
@@ -241,8 +408,10 @@ data class SubMenusBotoes(
     val booleanNotificao: Boolean
 )
 
+
+// AQUI ESTA OS BOTÕES DE ESCOLHO DO MENU LATERAL
 @Composable
-fun CustomMenuItem(
+fun CustomMenuItem3(
     icon: ImageVector,
     text: String,
     badgeCount: Int = 0,
@@ -292,8 +461,9 @@ fun CustomMenuItem(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview3() {
+fun GreetingPreview5() {
     ConecTITheme {
-        Menu()
+        BarraButton2()
+        Perfil3()
     }
 }

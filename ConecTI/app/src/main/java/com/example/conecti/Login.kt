@@ -1,12 +1,10 @@
 package com.example.conecti
 
-import UsuarioViewModel
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,11 +25,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
+
 class Login : ComponentActivity() {
-    private val usuarioViewModel: UsuarioViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +37,7 @@ class Login : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreenLogin(null, usuarioViewModel = usuarioViewModel)
+                    LoginScreenLogin(null)
                 }
             }
         }
@@ -49,14 +45,15 @@ class Login : ComponentActivity() {
 }
 
 @Composable
-fun LoginScreenLogin(extras: Bundle?, usuarioViewModel: UsuarioViewModel) {
+fun LoginScreenLogin(extras: Bundle?) {
     val contexto = LocalContext.current
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
 
     Surface(color = MaterialTheme.colorScheme.background) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             BackgroundImageLogin()
 
@@ -117,26 +114,7 @@ fun LoginScreenLogin(extras: Bundle?, usuarioViewModel: UsuarioViewModel) {
                 }
 
                 Button(
-                    onClick = {
-                        usuarioViewModel.login(
-                            Service.UsuarioLoginDto(
-                                email = emailValue,
-                                senha = passwordValue
-                            ),
-                            onLoginSuccess = {
-                                // Lógica para lidar com o sucesso do login
-                                // Por exemplo, redirecionar para outra tela
-                              //  val intent = Intent(contexto, TelaPrincipal::class.java)
-                                //contexto.startActivity(intent)
-                            },
-                            onError = { errorMessage ->
-                                // Lógica para lidar com o erro de login
-                                // Por exemplo, exibir uma mensagem de erro na tela
-                                // ou fazer algo para informar o usuário sobre o erro
-                                println("Erro de login: $errorMessage")
-                            }
-                        )
-                    },
+                    onClick = { /* Login Logic */ },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .padding(top = 16.dp)
@@ -144,13 +122,10 @@ fun LoginScreenLogin(extras: Bundle?, usuarioViewModel: UsuarioViewModel) {
                 ) {
                     Text(text = "Entrar")
                 }
-
             }
         }
     }
 }
-
-
 
 @Composable
 fun BackgroundImageLogin() {
@@ -174,6 +149,6 @@ fun BackgroundImageLogin() {
 @Composable
 fun DefaultPreview() {
     MaterialTheme {
-        LoginScreenLogin(null, UsuarioViewModel(LocalContext.current))
+        LoginScreenLogin(null)
     }
 }

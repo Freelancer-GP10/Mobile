@@ -20,15 +20,4 @@ class Service {
         val papel: String,
         val senha: String
     )
-
-    data class UsuarioTokenDto(
-        val usuario: UsuarioLoginDto,
-        val token: String
-    )
-
-    data class UsuarioLoginDto(
-        val email: String,
-        val senha: String
-    )
-
 }
