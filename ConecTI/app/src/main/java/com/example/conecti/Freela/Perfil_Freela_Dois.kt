@@ -1,5 +1,6 @@
-package com.example.conecti
+package com.example.conecti.Freela
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -58,12 +59,15 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.conecti.BarraButton1
+import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -95,7 +99,7 @@ fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     iniciarJanela.open()
                 }
             },
-            modifier = Modifier.padding(start = 16.dp), // Adiciona um espaçamento à esquerda
+            modifier = Modifier.padding(start = 16.dp,top = 15.dp), // Adiciona um espaçamento à esquerda
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
@@ -473,12 +477,13 @@ fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
 @Composable
 fun Perfil2() {
 
+    val contexto = LocalContext.current
+
     val subMenus = listOf(
         SubMenusBotoes(Icons.Default.AccountCircle, "Perfil", 0, false),
         SubMenusBotoes(Icons.Rounded.Home, "WorkSpace", 32, true),
         SubMenusBotoes(Icons.Filled.Build, "Services", 32, true),
         SubMenusBotoes(Icons.Filled.ShoppingCart, "Pay", 0, false),
-        SubMenusBotoes(Icons.Filled.Call, "Contato", 0, false)
     )
     val subMenus2 = listOf(
         SubMenusBotoes(Icons.Default.ExitToApp, "Sair", 0, false),
@@ -520,7 +525,7 @@ fun Perfil2() {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(260.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(
@@ -573,13 +578,27 @@ fun Perfil2() {
                             scope.launch {
                                 iniciarJanela.close()
                             }
+                            if (it.texto_botao == "Perfil") {
+                                val mainIntent = Intent(contexto, Perfil_Freela_One::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "WorkSpace") {
+                                val mainIntent = Intent(contexto, WorkSpaceFreela::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "Services") {
+                                val mainIntent = Intent(contexto, ServiceFreela::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "Pay") {
+                                val mainIntent = Intent(contexto, HistoricoPay::class.java)
+                                contexto.startActivity(mainIntent)
+                            }
+
                         }
                     )
                 }
 
 
 
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(25.dp))
                 Row {
                     Spacer(modifier = Modifier.width(80.dp))
                     subMenus2.forEach {
@@ -597,8 +616,9 @@ fun Perfil2() {
                             }
                         )
                     }
-                }
 
+                }
+                Spacer(modifier = Modifier.height(35.dp))
             }
         }
     }, drawerState = iniciarJanela,

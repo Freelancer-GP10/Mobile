@@ -16,44 +16,44 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".kkk"
+            android:name=".ButtonBarMicro"
             android:exported="false"
-            android:label="@string/title_activity_kkk"
+            android:label="@string/title_activity_button_bar_micro"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".aaaaa"
+            android:name=".Micro.ServiceMicro"
             android:exported="false"
-            android:label="@string/title_activity_aaaaa"
+            android:label="@string/title_activity_service_micro"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".WorkSpaceFreela"
+            android:name=".Micro.WorkSpaceMicro"
+            android:exported="false"
+            android:label="@string/title_activity_work_space_micro"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.HIstoricoPayMicro"
+            android:exported="false"
+            android:label="@string/title_activity_historico_pay_micro"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.Perfil_Micro_Dois"
+            android:exported="false"
+            android:label="@string/title_activity_perfil_micro_dois"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.Perfil_Micro_One"
+            android:exported="false"
+            android:label="@string/title_activity_perfil_micro_one"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Freela.WorkSpaceFreela"
             android:exported="false"
             android:label="@string/title_activity_work_space_freela"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".WorkSpaceFreela"
-            android:exported="false"
-            android:label="@string/title_activity_work_space_freela"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".HistoricoPay"
+            android:name=".Freela.HistoricoPay"
             android:exported="false"
             android:label="@string/title_activity_historico_pay"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".Teststst"
-            android:exported="false"
-            android:label="@string/title_activity_teststst"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".Perfil_freela_dois"
-            android:exported="false"
-            android:label="@string/title_activity_perfil_freela_dois"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
             android:theme="@style/Theme.ConecTI" />
         <activity
             android:name=".NavBar"
@@ -61,14 +61,19 @@
             android:label="@string/title_activity_nav_bar"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".Teste"
+            android:name=".Freela.ServiceFreela"
             android:exported="false"
-            android:label="@string/title_activity_teste"
+            android:label="@string/title_activity_service_freela"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".MenuLateral"
+            android:name=".Freela.Perfil_Freela_One"
             android:exported="false"
-            android:label="@string/title_activity_menu_lateral"
+            android:label="@string/title_activity_perfil_freela_one"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Freela.Perfil_Freela_Dois"
+            android:exported="false"
+            android:label="@string/title_activity_perfil_freela_dois"
             android:theme="@style/Theme.ConecTI" />
         <activity
             android:name=".CadastroFrellaTres"
@@ -79,11 +84,6 @@
             android:name=".CadastroFreelaOne"
             android:exported="false"
             android:label="@string/title_activity_cadastro_freela_one"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".Perfil_Free"
-            android:exported="false"
-            android:label="@string/title_activity_perfil_free"
             android:theme="@style/Theme.ConecTI" />
         <activity
             android:name=".Cadastro_Free"
