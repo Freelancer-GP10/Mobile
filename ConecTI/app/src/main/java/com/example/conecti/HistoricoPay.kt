@@ -40,7 +40,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -76,9 +75,55 @@ class HistoricoPay : ComponentActivity() {
     }
 }
 
+
+// FUNÇÃO USADA PARA ADICONAR OS VALORES DOS COMPONETES
+@Composable
+fun componetesdePagamento(
+data: String,
+valor: String,
+
+) {
+      Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(87.dp)
+            .padding(16.dp)
+            .border(1.dp, Color.Gray)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .border(3.dp, Color(0xFFCBE0F1))
+                .background(Color(0xFFCBE0F1)),
+            //.background(Color.Red),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = data,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .weight(1.9f)
+                    .padding(start = 10.dp)
+            )
+
+            Text(
+                text = "R$: ${valor}",
+                modifier = Modifier
+                    .padding(end = 20.dp),
+                fontSize = 18.sp,
+            )
+        }
+    }
+}
+
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
 @Composable
-fun MainContent3(scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContent3(
+    scope: CoroutineScope,
+    iniciarJanela: DrawerState,
+    valorDisponivel: String,
+    valorBloqueado: String
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -144,7 +189,7 @@ fun MainContent3(scope: CoroutineScope, iniciarJanela: DrawerState) {
                                 fontSize = 14.sp
                             )
                             Text(
-                                text = "R$ 2.950,65",
+                                text = "R$: ${valorDisponivel}",
                                 color = Color.White
                             )
                         }
@@ -170,7 +215,7 @@ fun MainContent3(scope: CoroutineScope, iniciarJanela: DrawerState) {
                                 fontSize = 14.sp
                             )
                             Text(
-                                text = "R$ 2.950,65",
+                                text = "R$: ${valorBloqueado}",
                                 color = Color.White
                             )
                         }
@@ -211,41 +256,14 @@ fun MainContent3(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = 24.dp),
+                        .padding(bottom = 50.dp),
                     verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
                 ) {
-                    items(6) { index ->
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(87.dp)
-                                .padding(16.dp)
-                                .border(1.dp, Color.Gray)
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .border(3.dp, Color(0xFFCBE0F1))
-                                    .background(Color(0xFFCBE0F1)),
-                                    //.background(Color.Red),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = "16/Fevereiro",
-                                    fontSize = 18.sp,
-                                    modifier = Modifier
-                                        .weight(1.9f)
-                                        .padding(start = 10.dp)
-                                )
-
-                                Text(
-                                    text = "R$100,00",
-                                    modifier = Modifier
-                                        .padding(end = 20.dp),
-                                    fontSize = 18.sp,
-                                )
-                            }
-                        }
+                    items(12) { index ->
+                        componetesdePagamento(
+                            data = "16/Fev" ,
+                            valor = "2.350,41"
+                        )
                     }
                 }
 
@@ -392,8 +410,30 @@ fun Perfil3() {
         }
     }, drawerState = iniciarJanela,
         content = {
-            MainContent3(scope = scope, iniciarJanela = iniciarJanela)
+            MainContent3(
+                scope = scope,
+                iniciarJanela = iniciarJanela,
+                valorDisponivel = "2.350,41",
+                valorBloqueado = "1.050,25"
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Bottom
 
+
+
+                // Alinha o Column na parte inferior central da tela
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ){
+                    BarraButton2()
+                }
+            }
 
         }
     )
@@ -463,7 +503,7 @@ fun CustomMenuItem3(
 @Composable
 fun GreetingPreview5() {
     ConecTITheme {
-        BarraButton2()
+
         Perfil3()
     }
 }

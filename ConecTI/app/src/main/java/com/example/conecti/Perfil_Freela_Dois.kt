@@ -68,7 +68,7 @@ import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class MenuLateral : ComponentActivity() {
+class Perfil_Freela_Dois : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -604,7 +604,22 @@ fun Perfil2() {
     }, drawerState = iniciarJanela,
         content = {
             MainContent(scope = scope, iniciarJanela = iniciarJanela)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Bottom
 
+                // Alinha o Column na parte inferior central da tela
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                ){
+                    BarraButton1()
+                }
+            }
 
         }
     )
@@ -675,7 +690,6 @@ data class SubMenusBotoes(
 @Composable
 fun GreetingPreview3() {
     ConecTITheme {
-        BarraButton()
         Perfil2()
     }
 }

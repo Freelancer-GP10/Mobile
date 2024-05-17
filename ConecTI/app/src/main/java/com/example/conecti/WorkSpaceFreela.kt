@@ -4,20 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -25,6 +23,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
@@ -33,24 +32,26 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.twotone.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,8 +60,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -68,13 +72,12 @@ import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class Perfil_Freela_One : ComponentActivity() {
+class WorkSpaceFreela : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-
 
             }
         }
@@ -82,9 +85,143 @@ class Perfil_Freela_One : ComponentActivity() {
 }
 
 
+//AQUI ESTA AS VARIAVEIS E OS COMPONENTES DAS DEMANDAS
+@Composable
+fun componentesWorkSpace(
+    tagTipo: String,
+    titulo: String,
+    empresa: String,
+    description: String,
+    valor: String,
+    data: String
+
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val showExpandButton = description.length > 40
+    val displayText =
+        if (expanded || !showExpandButton) description else description.take(70) + "..."
+    Box(
+        modifier = Modifier
+            //.fillMaxWidth()
+            .fillMaxSize()
+            //.height(200.dp)
+            //.background(Color.Yellow)
+            .padding(16.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(8.dp))
+                .border(1.dp, Color(0xFF204A7B), RoundedCornerShape(8.dp))
+            //.background(Color.Green)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.66f),
+                //.background(Color.Red),
+                horizontalAlignment = Alignment.Start
+
+            ) {
+                Text(
+                    text = "[ ${tagTipo} ] - ${titulo}",
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 8.dp, top = 15.dp)
+                )
+                Text(
+                    text = "Empresa: ${empresa}",
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 8.dp, top = 2.dp)
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    val annotatedText = buildAnnotatedString {
+                        append("Demanda: $displayText ")
+                        if (showExpandButton) {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Blue,
+                                    textDecoration = TextDecoration.Underline
+                                )
+                            ) {
+                                append(if (expanded) "Ver menos" else "Ver mais")
+                            }
+                        }
+                    }
+
+                    ClickableText(
+                        text = annotatedText,
+                        onClick = {
+                            if (showExpandButton) {
+                                expanded = !expanded
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+
+                        )
+                }
+
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.34f)
+                    //.background(Color.Blue)
+                    .align(Alignment.TopEnd),
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally
+
+            ) {
+
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .padding(top = 25.dp, bottom = 10.dp)
+                        .height(40.dp)
+                        .width(88.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color.Black,
+                        containerColor = Color(0xFF50FAAB),
+                        disabledContainerColor = Color.Gray,
+                        disabledContentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(8.dp),
+                ) {
+                    Text(
+                        text = "Ativo",
+                        fontSize = 12.sp,
+
+                        )
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(
+                    text = "${data}",
+                    fontSize = 15.sp
+                )
+
+
+
+            }
+        }
+
+    }
+}
+
+
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
 @Composable
-fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContent4(scope: CoroutineScope, iniciarJanela: DrawerState) {
+
+    val pesquisaPay = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -119,38 +256,81 @@ fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     .padding(bottom = 24.dp)
 
             ) {
-
-
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "Perfil",
-                    fontSize = 38.sp,
-                    fontWeight = FontWeight.W400,
+                    text = "Workspace",
                     color = Color(0xFF215683),
+                    fontSize = 38.sp,
                     modifier = Modifier
-                        .padding(start = 30.dp)
-                )
+                        .padding(start = 30.dp, bottom = 0.dp)
+                        .align(Alignment.Start),
+
+                    )
+                Spacer(modifier = Modifier.height(20.dp))
+
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    //.background(Color.Red)
+                    //.padding(start = 30.dp),
+                    horizontalArrangement = Arrangement.Center,
+
+                    ) {
+
+                    OutlinedTextField(
+                        value = pesquisaPay.value,
+                        onValueChange = { pesquisaPay.value = it },
+                        label = {
+                            Text(
+                                "Pesquisar",
+                                modifier = Modifier
+                                    .fillMaxSize(),
+                                textAlign = TextAlign.Start
+                            )
+                        },
+                        modifier = Modifier
+                            .width(280.dp) // Define a largura desejada
+                            .height(58.dp), // Define a altura desejada
+                        trailingIcon = {
+                            IconButton(
+                                onClick = {
+                                    // Ação ao clicar no ícone de lupa
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.TwoTone.Search,
+                                    contentDescription = "Pesquisar"
+                                )
+                            }
+                        }
+                    )
+
+                }
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+
                 LazyColumn(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .weight(1f)
+                        .fillMaxSize()
+                        .padding(bottom = 50.dp),
+                    verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
                 ) {
-                    item {
-                        ProfileSection()
+                    items(8) { index ->
+                        componentesWorkSpace(
+                            tagTipo = "Front-End",
+                            titulo = "Site institucional",
+                            empresa = "SpTech",
+                            description = "Este é um texto gerado com 40 caracteres que eu pesquisei no chat e ele é chat muito vida loka e pah e isso mesmo e tchururu e pahh e thcururu e pah ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ",
+                            valor = "2.000,00 ",
+                            data = "21/jan"
+                        )
                     }
-
-                    item {
-                        PortfolioSection()
-                    }
-
-
                 }
+
+
             }
-
-            // Retângulo azul na parte inferior da tela
-
 
         }
     }
@@ -160,7 +340,7 @@ fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 // AQUI ESTA TODA PARTE DE LOGICA DO MENU LATERAL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Perfil1() {
+fun Perfil4() {
 
     val subMenus = listOf(
         SubMenusBotoes(Icons.Default.AccountCircle, "Perfil", 0, false),
@@ -175,6 +355,7 @@ fun Perfil1() {
     var selecilionarSubMenu = remember {
         mutableStateOf(subMenus[0])
     }
+
 
     val iniciarJanela = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -292,32 +473,32 @@ fun Perfil1() {
         }
     }, drawerState = iniciarJanela,
         content = {
-            MainContent2(scope = scope, iniciarJanela = iniciarJanela)
+
+            MainContent4(scope = scope, iniciarJanela = iniciarJanela)
             Column(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(top = 60.dp),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom
-
 
 
                 // Alinha o Column na parte inferior central da tela
             ) {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-
-                ){
-                    BarraButton1()
+                        .fillMaxWidth(),
+                ) {
+                    BarraButton4()
                 }
             }
-
         }
     )
+
 }
 
 // ESTE DATA CLASS É PARA CHAMAR OS ICONES TIPO SETA ETC..
-data class SubMenusBotoes2(
+data class SubMenusBotoes4(
 
     val icone: ImageVector,
     val texto_botao: String,
@@ -326,222 +507,10 @@ data class SubMenusBotoes2(
 )
 
 
-// AQUI ESTA OS BOTÕES DE ESCOLHO DO MENU LATERAL
-@Composable
-fun CustomMenuItem2(
-    icon: ImageVector,
-    text: String,
-    badgeCount: Int = 0,
-    colorVetor: Color,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .clickable { onClick() }
-            .padding(16.dp)
-            .fillMaxWidth(), // Preencher a largura
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start // Alinhamento à esquerda
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = colorVetor,
-            modifier = Modifier.size(38.dp) // Tamanho aumentado dos ícones
-        )
-        Spacer(modifier = Modifier.width(12.dp))
-        Text(
-            text = text,
-            color = Color.White,
-            fontSize = 25.sp,
-            fontWeight = FontWeight.Normal,
-            modifier = Modifier.weight(1f) // Ocupar o espaço disponível
-        )
-        if (badgeCount > 0) {
-            Spacer(modifier = Modifier.width(8.dp))
-            Box(
-                modifier = Modifier
-                    .background(Color.Red)
-                    .padding(5.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = badgeCount.toString(),
-                    color = Color.White,
-                    fontSize = 18.sp
-                )
-            }
-        }
-    }
-}
-
-
-// YAGO & ISAIAS FEZ - AQUI ESTA O QUADRADO DE PERFIL
-@Composable
-fun ProfileSection() {
-    Surface(
-        modifier = Modifier
-            .padding(10.dp)
-            .clip(shape = RoundedCornerShape(8.dp))
-            .border(1.dp, Color.Black) // Adiciona uma borda preta à seção
-            .fillMaxWidth(), // Preenche a largura
-        color = Color.White
-    ) {
-        Box(
-            modifier = Modifier
-                .padding(14.dp)
-        ) {
-
-            Column(
-                modifier = Modifier
-                    .width(156.dp)
-                    .height(180.dp),
-                horizontalAlignment = Alignment.Start
-
-            ) {
-
-                Text(
-                    text = "Usuario:",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 2.dp, top = 10.dp)
-                )
-                Text(
-                    text = "Receba FIH",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 20.dp)
-                )
-
-                Text(
-                    text = "Email:",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 2.dp)
-                )
-
-                Text(
-                    text = "usuario@example.com",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 20.dp)
-                )
-                Text(
-                    text = "Senha:",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 1.dp)
-                )
-                Text(
-                    text = "**************",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-            }
-
-            Column (
-                modifier = Modifier
-                    .height(180.dp)
-                    .width(155.dp)
-                    .align(alignment = Alignment.TopEnd),
-                horizontalAlignment = Alignment.CenterHorizontally
-
-            ){
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Image(
-                    painter = painterResource(id = R.mipmap.luva),
-                    contentDescription = "profile pic",
-                    modifier = Modifier
-                        .size(90.dp)
-                        .clip(CircleShape)
-                        .scale(2f, 2f)
-
-
-                )
-
-                Spacer(modifier = Modifier.height(30.dp))
-                OutlinedButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .height(40.dp) // Define a altura do botão como 40dp
-                        .width(100.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    border = BorderStroke(1.dp, Color(0xFF215683)),
-
-                    ) {
-                    Text(
-                        text = "Editar",
-                        fontSize = 19.sp,
-                    )
-                }
-            }
-
-
-        }
-    }
-}
-
-
-
-// YAGO FEZ - AQUI ESTA O PORTIFOLIO DO CARA
-@Composable
-fun PortfolioSection() {
-    Spacer(modifier = Modifier.height(35.dp))
-    Surface(
-
-        modifier = Modifier
-            .padding(10.dp)
-            .clip(shape = RoundedCornerShape(10.dp)) // Adiciona bordas arredondadas ao Surface
-            .border(1.dp, Color.Black) // Adiciona uma borda preta ao redor do Surface
-            .fillMaxWidth(), // Preenche a largura
-        color = Color.White
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Olá Freelancer, Seu Portfólio?",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-            Text(
-                text = "Guardamos seu portfólio para que possamos fazer análises e indicar onde deve estar melhorando!\n" +
-                        "\nVocê pode realizar a atualização dele ou até mesmo baixar o seu portfólio que temos guardado!",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 32.dp)
-            )
-
-            Spacer(modifier = Modifier.height(25.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .weight(1f)
-                        .heightIn(min = 48.dp)
-                ) {
-                    Text(text = "Atualizar")
-                }
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .weight(1f)
-                        .heightIn(min = 48.dp)
-                ) {
-                    Text(text = "Baixar")
-                }
-
-            }
-        }
-    }
-}
-
-
-
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview6() {
+fun GreetingPreview9() {
     ConecTITheme {
-        Perfil1()
+Perfil4()
     }
 }
