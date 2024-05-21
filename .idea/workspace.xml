@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e1f0809-895a-43d0-9cb5-0aab357dd3a1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/.idea/deploymentTargetDropDown.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/Cadastro.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/Cadastro.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/CadastroFreelaTres.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/CadastroFreelaTres.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/Login.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/Login.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/MenuLateral.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/Perfil_Free.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/RetrofitClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/RetrofitClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/Service.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/UsuarioViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/UsuarioViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/UsuarioViewModelFactory.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/apiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/network/apiService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/util/AuthInterceptor.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/java/com/example/conecti/util/SharedPrefManager.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConecTI/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/ConecTI/gradle/libs.versions.toml" afterDir="false" />
-    </list>
+    <list default="true" id="3e1f0809-895a-43d0-9cb5-0aab357dd3a1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,9 +35,9 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "isaias__front",
+    "git-widget-placeholder": "yago__conexao",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/isaiasrlc/Área de Trabalho/atividade/Mobile/ConecTI"
+    "last_opened_file_path": "/home/isaiasrlc/Área de Trabalho/conexao yago/Mobile/ConecTI"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

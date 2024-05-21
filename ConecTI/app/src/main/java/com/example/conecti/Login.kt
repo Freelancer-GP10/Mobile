@@ -126,8 +126,7 @@ fun LoginScreenLogin(extras: Bundle?) {
                             )
                             // Chame a função loginUsuario do viewModel
                             UsuarioViewModel(contexto).loginUsuario(usuarioLoginDto)
-                            val viewModel = UsuarioViewModel(contexto)
-                            Log.d()
+
                                   },
                         shape = MaterialTheme.shapes.medium,
                         modifier = Modifier

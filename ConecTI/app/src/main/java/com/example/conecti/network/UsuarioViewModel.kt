@@ -24,7 +24,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-val Context.tokenUsuario: DataStore<Preferences> by preferencesDataStore("token")
 
 class UsuarioViewModel(private val context: Context) : ViewModel() {
     private val apiService = connection()
@@ -82,10 +81,6 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
         }
     }
 
-    suspend fun getToken(): String? {
-        val token = stringPreferencesKey("token")
-        val preferences = context.tokenUsuario.data.first()
-        return preferences[token]
-    }
+
 
 }
