@@ -16,6 +16,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Cadastro_UsuarioDois"
+            android:exported="false"
+            android:label="@string/title_activity_cadastro_usuario_dois"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
             android:name=".ButtonBarMicro"
             android:exported="false"
             android:label="@string/title_activity_button_bar_micro"
