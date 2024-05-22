@@ -1,8 +1,10 @@
 package com.example.conecti
 
+import UsuarioViewModel
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
 
 class Login : ComponentActivity() {
@@ -113,19 +116,30 @@ fun LoginScreenLogin(extras: Bundle?) {
                     Text(text = "Voltar")
                 }
 
-                Button(
-                    onClick = { /* Login Logic */ },
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .width(112.dp)
-                ) {
-                    Text(text = "Entrar")
+
+                    Button(
+                        onClick = {
+                            // Crie um objeto UsuarioLoginDto com as informações de login do usuário
+                            val usuarioLoginDto = Service.UsuarioLoginDto(
+                                email = emailValue, // use o email fornecido pelo usuário
+                                senha = passwordValue  // use a senha fornecida pelo usuário
+                            )
+                            // Chame a função loginUsuario do viewModel
+                            UsuarioViewModel(contexto).loginUsuario(usuarioLoginDto)
+
+                                  },
+                        shape = MaterialTheme.shapes.medium,
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .width(112.dp)
+                    ) {
+                        Text(text = "Entrar")
+                    }
                 }
+
             }
         }
     }
-}
 
 @Composable
 fun BackgroundImageLogin() {
