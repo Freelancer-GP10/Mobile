@@ -1,8 +1,6 @@
 package com.example.conecti
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.compose.material3.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,7 +21,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,17 +35,20 @@ import androidx.compose.ui.unit.dp
 import com.example.conecti.Freela.HistoricoPay
 import com.example.conecti.Freela.Perfil_Freela_One
 import com.example.conecti.Freela.ServiceFreela
-
 import com.example.conecti.Freela.WorkSpaceFreela
-import com.example.conecti.ui.ui.theme.ConecTITheme
+import com.example.conecti.Micro.HIstoricoPayMicro
+import com.example.conecti.Micro.Perfil_Micro_One
+import com.example.conecti.Micro.ServiceMicro
+import com.example.conecti.Micro.WorkSpaceMicro
+import com.example.conecti.ui.theme.ConecTITheme
 
-class NavBar : ComponentActivity() {
+class ButtonBarMicro : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-
+               
             }
         }
     }
@@ -53,7 +57,7 @@ class NavBar : ComponentActivity() {
 // FUNÇÃO DO BARRA BUTTON  - PARTE 1
 
 @Composable
-fun BarraButton1() {
+fun BarraButtonMicro1() {
     val contexto2 = LocalContext.current
 
     Box(
@@ -130,7 +134,7 @@ fun BarraButton1() {
 
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto2, HistoricoPay::class.java)
+                        val mainIntent = Intent(contexto2, HIstoricoPayMicro::class.java)
                         contexto2.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -154,7 +158,7 @@ fun BarraButton1() {
 // FUNÇÃO DO BARRA BUTTON - PARTE 2
 
 @Composable
-fun BarraButton2() {
+fun BarraButtonMicro2() {
     val contexto2 = LocalContext.current
 
     Box(
@@ -179,7 +183,7 @@ fun BarraButton2() {
             ) {
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto2, Perfil_Freela_One::class.java)
+                        val mainIntent = Intent(contexto2, Perfil_Micro_One::class.java)
                         contexto2.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -248,7 +252,7 @@ fun BarraButton2() {
 
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto2, WorkSpaceFreela::class.java)
+                        val mainIntent = Intent(contexto2, WorkSpaceMicro::class.java)
                         contexto2.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -273,7 +277,7 @@ fun BarraButton2() {
 // FUNÇÃO DO BARRA BUTTON - PARTE 3
 
 @Composable
-fun BarraButton3() {
+fun BarraButtonMicro3() {
     val contexto2 = LocalContext.current
     val contexto4 = LocalContext.current
 
@@ -299,7 +303,7 @@ fun BarraButton3() {
             ) {
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto2, HistoricoPay::class.java)
+                        val mainIntent = Intent(contexto2, HIstoricoPayMicro::class.java)
                         contexto2.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -368,7 +372,7 @@ fun BarraButton3() {
 
                 IconButton(
                     onClick = {
-                        val mainIntent2 = Intent(contexto4, ServiceFreela::class.java)
+                        val mainIntent2 = Intent(contexto4, ServiceMicro::class.java)
                         contexto4.startActivity(mainIntent2)
                     },
                     modifier = Modifier
@@ -392,7 +396,7 @@ fun BarraButton3() {
 // FUNÇÃO DO BARRA BUTTON - PARTE 4
 
 @Composable
-fun BarraButton4() {
+fun BarraButtonMicro4() {
     val contexto = LocalContext.current
 
     Box(
@@ -417,7 +421,7 @@ fun BarraButton4() {
             ) {
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto, WorkSpaceFreela::class.java)
+                        val mainIntent = Intent(contexto, WorkSpaceMicro::class.java)
                         contexto.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -492,12 +496,8 @@ fun BarraButton4() {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview4() {
+fun GreetingPreview14() {
     ConecTITheme {
-        Column {
-            BarraButton2()
-            BarraButton4()
-        }
-
+       
     }
 }

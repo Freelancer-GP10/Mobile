@@ -1,5 +1,6 @@
-package com.example.conecti
+package com.example.conecti.Micro
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +36,6 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.twotone.Search
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -59,35 +60,40 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.conecti.BarraButton4
+import com.example.conecti.BarraButtonMicro4
+import com.example.conecti.Freela.CustomMenuItem
+import com.example.conecti.Freela.Perfil5
+import com.example.conecti.Freela.SubMenusBotoes
+import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class WorkSpaceFreela : ComponentActivity() {
+class ServiceMicro : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ConecTITheme {
-
-            }
+            PerfilMicro5()
         }
     }
 }
 
-
 //AQUI ESTA AS VARIAVEIS E OS COMPONENTES DAS DEMANDAS
 @Composable
-fun componentesWorkSpace(
+fun componentesServiceMicro(
     tagTipo: String,
     titulo: String,
     empresa: String,
@@ -162,7 +168,9 @@ fun componentesWorkSpace(
                                 expanded = !expanded
                             }
                         },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp),
 
                         )
                 }
@@ -180,35 +188,33 @@ fun componentesWorkSpace(
 
             ) {
 
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .padding(top = 25.dp, bottom = 10.dp)
-                        .height(40.dp)
-                        .width(88.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Black,
-                        containerColor = Color(0xFF50FAAB),
-                        disabledContainerColor = Color.Gray,
-                        disabledContentColor = Color.White
-                    ),
-                    shape = RoundedCornerShape(8.dp),
-                ) {
-                    Text(
-                        text = "Ativo",
-                        fontSize = 12.sp,
-
-                        )
-                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = "R$ ${valor}",
+                    fontSize = 15.sp,
+                )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "${data}",
+                    text = "Inicio: ${data}",
                     fontSize = 15.sp
                 )
 
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .padding(top = 15.dp, bottom = 15.dp, end = 10.dp)
+                        .height(40.dp)
+                        .width(125.dp),
+                    shape = RoundedCornerShape(7.dp)
+                ) {
+                    Text(
+                        text = "Aguardando",
+                        fontSize = 10.sp,
 
+                        )
+                }
 
             }
         }
@@ -216,10 +222,9 @@ fun componentesWorkSpace(
     }
 }
 
-
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
 @Composable
-fun MainContent4(scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContentMicro5(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
     val pesquisaPay = remember { mutableStateOf("") }
     Column(
@@ -233,7 +238,10 @@ fun MainContent4(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     iniciarJanela.open()
                 }
             },
-            modifier = Modifier.padding(start = 16.dp), // Adiciona um espaçamento à esquerda
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 15.dp
+            ), // Adiciona um espaçamento à esquerda
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
@@ -257,15 +265,48 @@ fun MainContent4(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
             ) {
                 Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = "Workspace",
-                    color = Color(0xFF215683),
-                    fontSize = 38.sp,
+                Row(
                     modifier = Modifier
-                        .padding(start = 30.dp, bottom = 0.dp)
-                        .align(Alignment.Start),
+                        .fillMaxWidth(),
+                     //   .background(Color.Red),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    Text(
+                        text = "Service",
+                        color = Color(0xFF215683),
+                        fontSize = 38.sp,
+                        modifier = Modifier
+                            .padding(start = 0.dp, bottom = 10.dp)
+
 
                     )
+
+                    Button(
+                        onClick = { /*TODO*/ },
+                        modifier = Modifier
+                            .height(60.dp)
+                            .width(125.dp),
+                        shape = RoundedCornerShape(7.dp)
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Aguardando",
+                                fontSize = 14.sp,
+
+                                )
+                            Text(
+                                text = "Serviço",
+                                fontSize = 14.sp,
+                            )
+                        }
+                    }
+                }
+
+
                 Spacer(modifier = Modifier.height(20.dp))
 
 
@@ -318,7 +359,7 @@ fun MainContent4(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
                 ) {
                     items(8) { index ->
-                        componentesWorkSpace(
+                        componentesServiceMicro(
                             tagTipo = "Front-End",
                             titulo = "Site institucional",
                             empresa = "SpTech",
@@ -340,14 +381,16 @@ fun MainContent4(scope: CoroutineScope, iniciarJanela: DrawerState) {
 // AQUI ESTA TODA PARTE DE LOGICA DO MENU LATERAL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Perfil4() {
+fun PerfilMicro5() {
+
+    val contexto = LocalContext.current
 
     val subMenus = listOf(
         SubMenusBotoes(Icons.Default.AccountCircle, "Perfil", 0, false),
         SubMenusBotoes(Icons.Rounded.Home, "WorkSpace", 32, true),
         SubMenusBotoes(Icons.Filled.Build, "Services", 32, true),
         SubMenusBotoes(Icons.Filled.ShoppingCart, "Pay", 0, false),
-        SubMenusBotoes(Icons.Filled.Call, "Contato", 0, false)
+
     )
     val subMenus2 = listOf(
         SubMenusBotoes(Icons.Default.ExitToApp, "Sair", 0, false),
@@ -390,7 +433,7 @@ fun Perfil4() {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(260.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(
@@ -402,7 +445,7 @@ fun Perfil4() {
                         ) {
 
                         Image(
-                            painter = painterResource(id = R.mipmap.luva),
+                            painter = painterResource(id = R.mipmap.tiringa),
                             contentDescription = "profile pic",
                             modifier = Modifier
                                 .size(150.dp)
@@ -443,13 +486,28 @@ fun Perfil4() {
                             scope.launch {
                                 iniciarJanela.close()
                             }
+
+                            if (it.texto_botao == "Perfil") {
+                                val mainIntent = Intent(contexto, Perfil_Micro_One::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "WorkSpace") {
+                                val mainIntent = Intent(contexto, WorkSpaceMicro::class.java)
+                                contexto.startActivity(mainIntent)
+                            }else if (it.texto_botao == "Services") {
+                                val mainIntent = Intent(contexto, ServiceMicro::class.java)
+                                contexto.startActivity(mainIntent)
+                            }else if (it.texto_botao == "Pay") {
+                                val mainIntent = Intent(contexto, HIstoricoPayMicro::class.java)
+                                contexto.startActivity(mainIntent)
+                            }
+
                         }
                     )
                 }
 
 
 
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(25.dp))
                 Row {
                     Spacer(modifier = Modifier.width(80.dp))
                     subMenus2.forEach {
@@ -467,14 +525,16 @@ fun Perfil4() {
                             }
                         )
                     }
+
                 }
+                Spacer(modifier = Modifier.height(35.dp))
 
             }
         }
     }, drawerState = iniciarJanela,
         content = {
 
-            MainContent4(scope = scope, iniciarJanela = iniciarJanela)
+            MainContentMicro5(scope = scope, iniciarJanela = iniciarJanela)
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -489,7 +549,7 @@ fun Perfil4() {
                     modifier = Modifier
                         .fillMaxWidth(),
                 ) {
-                    BarraButton4()
+                    BarraButtonMicro4()
                 }
             }
         }
@@ -498,7 +558,7 @@ fun Perfil4() {
 }
 
 // ESTE DATA CLASS É PARA CHAMAR OS ICONES TIPO SETA ETC..
-data class SubMenusBotoes4(
+data class SubMenusBotoesMicro5(
 
     val icone: ImageVector,
     val texto_botao: String,
@@ -507,10 +567,60 @@ data class SubMenusBotoes4(
 )
 
 
+// AQUI ESTA OS BOTÕES DE ESCOLHO DO MENU LATERAL
+@Composable
+fun CustomMenuItemMicro5(
+    icon: ImageVector,
+    text: String,
+    badgeCount: Int = 0,
+    colorVetor: Color,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .clickable { onClick() }
+            .padding(16.dp)
+            .fillMaxWidth(), // Preencher a largura
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start // Alinhamento à esquerda
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = colorVetor,
+            modifier = Modifier.size(38.dp) // Tamanho aumentado dos ícones
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+            text = text,
+            color = Color.White,
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Normal,
+            modifier = Modifier.weight(1f) // Ocupar o espaço disponível
+        )
+        if (badgeCount > 0) {
+            Spacer(modifier = Modifier.width(8.dp))
+            Box(
+                modifier = Modifier
+                    .background(Color.Red)
+                    .padding(5.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = badgeCount.toString(),
+                    color = Color.White,
+                    fontSize = 18.sp
+                )
+            }
+        }
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview9() {
+fun GreetingPreview13() {
     ConecTITheme {
-Perfil4()
+        PerfilMicro5()
     }
 }

@@ -33,6 +33,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.conecti.Freela.Perfil1
+import com.example.conecti.Freela.Perfil5
+import com.example.conecti.Micro.PerfilMicro1
+import com.example.conecti.Micro.PerfilMicro4
+import com.example.conecti.Micro.WorkSpaceMicro
 import com.example.conecti.ui.theme.ConecTITheme
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
@@ -51,7 +56,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen("android")
+                    Perfil1()
                 }
             }
         }
@@ -169,6 +174,6 @@ fun BackgroundImage() {
 @Composable
 fun GreetingPreview() {
     ConecTITheme {
-        LoginScreen("android")
+        Perfil1()
     }
 }
