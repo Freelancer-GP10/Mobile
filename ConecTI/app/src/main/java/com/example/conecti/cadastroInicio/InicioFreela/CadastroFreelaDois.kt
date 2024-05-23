@@ -1,11 +1,8 @@
-package com.example.conecti
+package com.example.conecti.cadastroInicio.InicioFreela
 
-import UsuarioViewModel
-import android.content.Intent
 import  android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,10 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,19 +28,12 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.media3.common.util.Log
-import androidx.media3.common.util.UnstableApi
-import com.example.conecti.network.Service
 
-class CadastroFrellaTres : ComponentActivity() {
+class CadastroFrellaDois : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,8 +43,9 @@ class CadastroFrellaTres : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BackgroundImageTres()
-                    EtapaTres()
+                    Background()
+                    EtapaDoisFreela()
+
 
                 }
             }
@@ -65,40 +53,11 @@ class CadastroFrellaTres : ComponentActivity() {
     }
 }
 
+
+
 @Composable
-fun BackgroundImageTres() {
-    val corHexadecimal = 0xFF9ED4DF
-    val corInteira = corHexadecimal.toInt()
-    // Substitua R.drawable.background_image pelo ID de sua imagem
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color.White,
-                        Color(android.graphics.Color.parseColor("#FF9ED4DF"))
-                    )
-                )
-            )
-    ) {
+fun EtapaDoisFreela() {
 
-
-        Image(
-            painter = painterResource(id = R.mipmap.logo),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.TopStart) // Alinha a imagem ao canto superior esquerdo
-                .size(100.dp),
-            contentScale = ContentScale.Fit
-        )
-    }
-}
-
-@OptIn(UnstableApi::class) @Composable
-fun EtapaTres(extras: Bundle? = null) {
-    val context = LocalContext.current
-    val viewModel = remember { UsuarioViewModel(context) }
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
     val entradaPapel = remember { mutableStateOf("Freelancer") }
@@ -113,6 +72,38 @@ fun EtapaTres(extras: Bundle? = null) {
             .padding(16.dp)
 
     ) {
+        Row(
+            horizontalArrangement = Arrangement.End,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 20.dp)
+
+        ) {
+            Spacer(modifier = Modifier.weight(1f)) // Ocupa todo o espaço à esquerda
+            Text(
+                text = "Faça seu registro!",
+                fontSize = 30.sp
+            )
+            Spacer(modifier = Modifier.width(25.dp))
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.End,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Spacer(modifier = Modifier.weight(1f)) //
+            Text(
+                text = "Já possui cadastro? ",
+            )
+            Text(
+                text = "Login",
+                color = Color(0xFF204A7B)
+            )
+            Spacer(modifier = Modifier.width(28.dp))
+
+        }
+        Spacer(modifier = Modifier.height(46.dp))
+
         OutlinedTextField(
             value = entradaEmail.value,
             onValueChange = { entradaEmail.value = it },
@@ -173,20 +164,6 @@ fun EtapaTres(extras: Bundle? = null) {
             OutlinedButton(
                 onClick = {
 
-                    println("entrou na funcao")
-                    println(entradaEmail)
-                    println(entradaPapel)
-                    println(entradaSenha)
-                    // Imprime "Hello, world!" no console
-
-                    viewModel.criarUsuario(
-                        usuarioCriacaoDto = Service.UsuarioCriacaoDto(
-                            email = entradaEmail.value,
-                            papel = entradaPapel.value,
-                            senha = entradaSenha.value
-                        )
-                    )
-
 
                 },
                 shape = RoundedCornerShape(8.dp),
@@ -214,7 +191,7 @@ fun EtapaTres(extras: Bundle? = null) {
     Column( verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.End, // Centraliza horizontalmente
         modifier = Modifier
-            .fillMaxHeight(0.81f)
+            .fillMaxHeight(0.94f)
 
 
     ) {
@@ -235,16 +212,7 @@ fun EtapaTres(extras: Bundle? = null) {
                 )
             }
 
-            Canvas(
-                modifier = Modifier
-                    .size(44.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
-            }
+
 
             Canvas(
                 modifier = Modifier
@@ -269,8 +237,8 @@ fun EtapaTres(extras: Bundle? = null) {
 @Composable
 fun FreelaTresPreview() {
     MaterialTheme {
-        BackgroundImageTres()
-        EtapaTres()
+        Background()
+        EtapaDoisFreela()
 
     }
 }

@@ -5,5 +5,33 @@
     <string name="title_activity_cadastro_free">Cadastro_Free</string>
     <string name="title_activity_perfil_free">Perfil_Free</string>
     <string name="title_activity_cadastro_freela_one">CadastroFreelaOne</string>
-    <string name="title_activity_cadastro_freela_tres">CadastroFreelaTres</string>
+    <string name="title_activity_cadastro_freela_dois">CadastroFreelaDois</string>
+    <string name="title_activity_menu_lateral">MenuLateral</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_perfil_freela_one">Perfil_freela_one</string>
+    <string name="title_activity_nav_bar">NavBar</string>
+    <string name="title_activity_perfil_freela_dois">Perfil_freela_dois</string>
+    <string name="title_activity_teststst">Teststst</string>
+    <string name="title_activity_historico_pay">HistoricoPay</string>
+    <string name="title_activity_work_space_freela">WorkSpaceFreela</string>
+    <string name="title_activity_service_freela">ServiceFreela</string>
+    <string name="title_activity_perfil_micro_one">Perfil_Micro_One</string>
+    <string name="title_activity_perfil_micro_dois">Perfil_Micro_Dois</string>
+    <string name="title_activity_historico_pay_micro">HIstoricoPayMicro</string>
+    <string name="title_activity_work_space_micro">WorkSpaceMicro</string>
+    <string name="title_activity_service_micro">ServiceMicro</string>
+    <string name="title_activity_button_bar_micro">ButtonBarMicro</string>
+    <string name="title_activity_cadastro_usuario_dois">Cadastro_UsuarioDois</string>
+    <string name="title_activity_cadastro_micro_one">CadastroMicroOne</string>
+    <string name="title_activity_cadastro_micro_dois">CadastroMicroDois</string>
 </resources>
