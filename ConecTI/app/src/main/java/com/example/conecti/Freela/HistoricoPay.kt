@@ -1,10 +1,10 @@
-package com.example.conecti
+package com.example.conecti.Freela
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -28,7 +27,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -40,11 +38,8 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -58,23 +53,25 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.conecti.ButtonBars.BarraButton2
+import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class Perfil_Freela_One : ComponentActivity() {
+class HistoricoPay : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-
 
             }
         }
@@ -82,9 +79,54 @@ class Perfil_Freela_One : ComponentActivity() {
 }
 
 
+// FUNÇÃO USADA PARA ADICONAR OS VALORES DOS COMPONETES
+@Composable
+fun componetesdePagamento(
+    data: String,
+    valor: String,
+
+    ) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(87.dp)
+            .padding(16.dp)
+            .border(1.dp, Color.Gray)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .border(3.dp, Color(0xFFCBE0F1))
+                .background(Color(0xFFCBE0F1)),
+            //.background(Color.Red),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = data,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .weight(1.9f)
+                    .padding(start = 10.dp)
+            )
+
+            Text(
+                text = "R$: ${valor}",
+                modifier = Modifier
+                    .padding(end = 20.dp),
+                fontSize = 18.sp,
+            )
+        }
+    }
+}
+
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
 @Composable
-fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContent3(
+    scope: CoroutineScope,
+    iniciarJanela: DrawerState,
+    valorDisponivel: String,
+    valorBloqueado: String
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -96,7 +138,10 @@ fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     iniciarJanela.open()
                 }
             },
-            modifier = Modifier.padding(start = 16.dp), // Adiciona um espaçamento à esquerda
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 15.dp
+            ), // Adiciona um espaçamento à esquerda
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
@@ -119,38 +164,117 @@ fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     .padding(bottom = 24.dp)
 
             ) {
-
-
                 Text(
-                    text = "Perfil",
-                    fontSize = 38.sp,
-                    fontWeight = FontWeight.W400,
+                    text = "Pay",
                     color = Color(0xFF215683),
+                    fontSize = 38.sp,
                     modifier = Modifier
-                        .padding(start = 30.dp)
-                )
+                        .padding(start = 30.dp, bottom = 0.dp)
+                        .align(Alignment.Start),
 
+                    )
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Row {
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Box(
+                        modifier = Modifier
+                            .background(Color(0xFF204A7B), shape = RoundedCornerShape(8.dp))
+                            .padding(start = 0.dp, bottom = 0.dp)
+                            .width(180.dp)
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(-5.dp)
+                        ) {
+
+                            Text(
+                                text = "Disponível para saque",
+                                color = Color.White,
+                                fontSize = 14.sp
+                            )
+                            Text(
+                                text = "R$: ${valorDisponivel}",
+                                color = Color.White
+                            )
+                        }
+
+                    }
+                    Spacer(modifier = Modifier.width(25.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .background(Color(0xFF204A7B), shape = RoundedCornerShape(8.dp))
+                            .padding(start = 0.dp, bottom = 0.dp)
+                            .width(145.dp)
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(-5.dp)
+                        ) {
+
+                            Text(
+                                text = "Saldo bloqueado",
+                                color = Color.White,
+                                fontSize = 14.sp
+                            )
+                            Text(
+                                text = "R$: ${valorBloqueado}",
+                                color = Color.White
+                            )
+                        }
+                    }
+
+                }
+
+                Spacer(modifier = Modifier.height(35.dp))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Histórico mais recente:",
+                        modifier = Modifier
+                            .padding(start = 25.dp),
+                        fontSize = 19.sp,
+                    )
+
+                    Spacer(modifier = Modifier.width(24.dp))
+
+                    Button(
+                        onClick = { /*TODO*/ },
+                        shape = RoundedCornerShape(7.dp),
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(100.dp)
+
+                    ) {
+                        Text(
+                            text = "Sacar",
+                            fontSize = 17.sp
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.height(20.dp))
 
                 LazyColumn(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .weight(1f)
+                        .fillMaxSize()
+                        .padding(bottom = 50.dp),
+                    verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
                 ) {
-                    item {
-                        ProfileSection()
+                    items(12) { index ->
+                        componetesdePagamento(
+                            data = "16/Fev",
+                            valor = "2.350,41"
+                        )
                     }
-
-                    item {
-                        PortfolioSection()
-                    }
-
-
                 }
+
+
             }
-
-            // Retângulo azul na parte inferior da tela
-
 
         }
     }
@@ -160,14 +284,15 @@ fun MainContent2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 // AQUI ESTA TODA PARTE DE LOGICA DO MENU LATERAL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Perfil1() {
+fun Perfil3() {
+
+    val contexto = LocalContext.current
 
     val subMenus = listOf(
         SubMenusBotoes(Icons.Default.AccountCircle, "Perfil", 0, false),
         SubMenusBotoes(Icons.Rounded.Home, "WorkSpace", 32, true),
         SubMenusBotoes(Icons.Filled.Build, "Services", 32, true),
         SubMenusBotoes(Icons.Filled.ShoppingCart, "Pay", 0, false),
-        SubMenusBotoes(Icons.Filled.Call, "Contato", 0, false)
     )
     val subMenus2 = listOf(
         SubMenusBotoes(Icons.Default.ExitToApp, "Sair", 0, false),
@@ -209,7 +334,7 @@ fun Perfil1() {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(260.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(
@@ -262,13 +387,27 @@ fun Perfil1() {
                             scope.launch {
                                 iniciarJanela.close()
                             }
+                            if (it.texto_botao == "Perfil") {
+                                val mainIntent = Intent(contexto, Perfil_Freela_One::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "WorkSpace") {
+                                val mainIntent = Intent(contexto, WorkSpaceFreela::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "Services") {
+                                val mainIntent = Intent(contexto, ServiceFreela::class.java)
+                                contexto.startActivity(mainIntent)
+                            } else if (it.texto_botao == "Pay") {
+                                val mainIntent = Intent(contexto, HistoricoPay::class.java)
+                                contexto.startActivity(mainIntent)
+                            }
+
                         }
                     )
                 }
 
 
 
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(25.dp))
                 Row {
                     Spacer(modifier = Modifier.width(80.dp))
                     subMenus2.forEach {
@@ -286,19 +425,24 @@ fun Perfil1() {
                             }
                         )
                     }
-                }
 
+                }
+                Spacer(modifier = Modifier.height(35.dp))
             }
         }
     }, drawerState = iniciarJanela,
         content = {
-            MainContent2(scope = scope, iniciarJanela = iniciarJanela)
+            MainContent3(
+                scope = scope,
+                iniciarJanela = iniciarJanela,
+                valorDisponivel = "2.350,41",
+                valorBloqueado = "1.050,25"
+            )
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom
-
 
 
                 // Alinha o Column na parte inferior central da tela
@@ -307,8 +451,8 @@ fun Perfil1() {
                     modifier = Modifier
                         .fillMaxWidth()
 
-                ){
-                    BarraButton1()
+                ) {
+                    BarraButton2()
                 }
             }
 
@@ -317,7 +461,7 @@ fun Perfil1() {
 }
 
 // ESTE DATA CLASS É PARA CHAMAR OS ICONES TIPO SETA ETC..
-data class SubMenusBotoes2(
+data class SubMenusBotoes3(
 
     val icone: ImageVector,
     val texto_botao: String,
@@ -328,7 +472,7 @@ data class SubMenusBotoes2(
 
 // AQUI ESTA OS BOTÕES DE ESCOLHO DO MENU LATERAL
 @Composable
-fun CustomMenuItem2(
+fun CustomMenuItem3(
     icon: ImageVector,
     text: String,
     badgeCount: Int = 0,
@@ -376,172 +520,11 @@ fun CustomMenuItem2(
 }
 
 
-// YAGO & ISAIAS FEZ - AQUI ESTA O QUADRADO DE PERFIL
-@Composable
-fun ProfileSection() {
-    Surface(
-        modifier = Modifier
-            .padding(10.dp)
-            .clip(shape = RoundedCornerShape(8.dp))
-            .border(1.dp, Color.Black) // Adiciona uma borda preta à seção
-            .fillMaxWidth(), // Preenche a largura
-        color = Color.White
-    ) {
-        Box(
-            modifier = Modifier
-                .padding(14.dp)
-        ) {
-
-            Column(
-                modifier = Modifier
-                    .width(156.dp)
-                    .height(180.dp),
-                horizontalAlignment = Alignment.Start
-
-            ) {
-
-                Text(
-                    text = "Usuario:",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 2.dp, top = 10.dp)
-                )
-                Text(
-                    text = "Receba FIH",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 20.dp)
-                )
-
-                Text(
-                    text = "Email:",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 2.dp)
-                )
-
-                Text(
-                    text = "usuario@example.com",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 20.dp)
-                )
-                Text(
-                    text = "Senha:",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 1.dp)
-                )
-                Text(
-                    text = "**************",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-            }
-
-            Column (
-                modifier = Modifier
-                    .height(180.dp)
-                    .width(155.dp)
-                    .align(alignment = Alignment.TopEnd),
-                horizontalAlignment = Alignment.CenterHorizontally
-
-            ){
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Image(
-                    painter = painterResource(id = R.mipmap.luva),
-                    contentDescription = "profile pic",
-                    modifier = Modifier
-                        .size(90.dp)
-                        .clip(CircleShape)
-                        .scale(2f, 2f)
-
-
-                )
-
-                Spacer(modifier = Modifier.height(30.dp))
-                OutlinedButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .height(40.dp) // Define a altura do botão como 40dp
-                        .width(100.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    border = BorderStroke(1.dp, Color(0xFF215683)),
-
-                    ) {
-                    Text(
-                        text = "Editar",
-                        fontSize = 19.sp,
-                    )
-                }
-            }
-
-
-        }
-    }
-}
-
-
-
-// YAGO FEZ - AQUI ESTA O PORTIFOLIO DO CARA
-@Composable
-fun PortfolioSection() {
-    Spacer(modifier = Modifier.height(35.dp))
-    Surface(
-
-        modifier = Modifier
-            .padding(10.dp)
-            .clip(shape = RoundedCornerShape(10.dp)) // Adiciona bordas arredondadas ao Surface
-            .border(1.dp, Color.Black) // Adiciona uma borda preta ao redor do Surface
-            .fillMaxWidth(), // Preenche a largura
-        color = Color.White
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Olá Freelancer, Seu Portfólio?",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-            Text(
-                text = "Guardamos seu portfólio para que possamos fazer análises e indicar onde deve estar melhorando!\n" +
-                        "\nVocê pode realizar a atualização dele ou até mesmo baixar o seu portfólio que temos guardado!",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(bottom = 32.dp)
-            )
-
-            Spacer(modifier = Modifier.height(25.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .weight(1f)
-                        .heightIn(min = 48.dp)
-                ) {
-                    Text(text = "Atualizar")
-                }
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .weight(1f)
-                        .heightIn(min = 48.dp)
-                ) {
-                    Text(text = "Baixar")
-                }
-
-            }
-        }
-    }
-}
-
-
-
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview6() {
+fun GreetingPreview5() {
     ConecTITheme {
-        Perfil1()
+
+        Perfil3()
     }
 }

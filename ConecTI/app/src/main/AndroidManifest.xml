@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,86 +14,86 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConecTI"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".Cadastro_Freela_Dois"
+            android:name=".ButtonBars.ButtonBarMicro"
+            android:exported="false"
+            android:label="@string/title_activity_button_bar_micro"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.ServiceMicro"
+            android:exported="false"
+            android:label="@string/title_activity_service_micro"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.WorkSpaceMicro"
+            android:exported="false"
+            android:label="@string/title_activity_work_space_micro"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.Perfil_Micro_Dois"
+            android:exported="false"
+            android:label="@string/title_activity_perfil_micro_dois"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.Perfil_Micro_One"
+            android:exported="false"
+            android:label="@string/title_activity_perfil_micro_one"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".Micro.HistoricoPayMicro"
+            android:exported="false"
+            android:label="@string/title_activity_historico_pay_micro"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".cadastroInicial.MicroInicio.CadastroMicroOne"
+            android:exported="false"
+            android:label="@string/title_activity_cadastro_micro_one"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".cadastroInicial.MicroInicio.CadastroMicroDois"
+            android:exported="false"
+            android:label="@string/title_activity_cadastro_micro_dois"
+            android:theme="@style/Theme.ConecTI" />
+        <activity
+            android:name=".cadastroInicial.FreelaInicio.CadastroFreelaDois"
             android:exported="false"
             android:label="@string/title_activity_cadastro_freela_dois"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".kkk"
-            android:exported="false"
-            android:label="@string/title_activity_kkk"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".aaaaa"
-            android:exported="false"
-            android:label="@string/title_activity_aaaaa"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".WorkSpaceFreela"
+            android:name=".Freela.WorkSpaceFreela"
             android:exported="false"
             android:label="@string/title_activity_work_space_freela"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".WorkSpaceFreela"
+            android:name=".Freela.ServiceFreela"
             android:exported="false"
-            android:label="@string/title_activity_work_space_freela"
+            android:label="@string/title_activity_service_freela"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".HistoricoPay"
+            android:name=".Freela.HistoricoPay"
             android:exported="false"
             android:label="@string/title_activity_historico_pay"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".Teststst"
-            android:exported="false"
-            android:label="@string/title_activity_teststst"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".Perfil_freela_dois"
+            android:name=".Freela.Perfil_Freela_Dois"
             android:exported="false"
             android:label="@string/title_activity_perfil_freela_dois"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".ButtonBars.ButtonBar"
             android:exported="false"
-            android:label="@string/title_activity_main2"
+            android:label="@string/title_activity_button_bar"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".NavBar"
-            android:exported="false"
-            android:label="@string/title_activity_nav_bar"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".Teste"
-            android:exported="false"
-            android:label="@string/title_activity_teste"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".MenuLateral"
-            android:exported="false"
-            android:label="@string/title_activity_menu_lateral"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".CadastroFrellaTres"
-            android:exported="false"
-            android:label="@string/title_activity_cadastro_freela_tres"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".CadastroFreelaOne"
+            android:name=".cadastroInicial.FreelaInicio.CadastroFreelaOne"
             android:exported="false"
             android:label="@string/title_activity_cadastro_freela_one"
             android:theme="@style/Theme.ConecTI" />
         <activity
-            android:name=".Perfil_Free"
+            android:name=".Freela.Perfil_Freela_One"
             android:exported="false"
-            android:label="@string/title_activity_perfil_free"
-            android:theme="@style/Theme.ConecTI" />
-        <activity
-            android:name=".Cadastro_Free"
-            android:exported="false"
-            android:label="@string/title_activity_cadastro_free"
+            android:label="@string/title_activity_perfil_freela_one"
             android:theme="@style/Theme.ConecTI" />
         <activity
             android:name=".Cadastro"
@@ -109,7 +109,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ConecTI" >
+            android:theme="@style/Theme.ConecTI">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

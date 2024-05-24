@@ -21,6 +21,55 @@ class Service {
         val senha: String
     )
 
+//    data class CadastrarFreelaDto(
+//        val nome: String,
+//        val sobrenome: String,
+//        val areaAtuacao: String,
+//        val linguagemDominio: String,
+//        val formacao: String,
+//        val cpf: String,
+//        val telefone: String
+//    )
+
+    data class CadastrarFreelaDto(
+        var nome: String,
+        var sobrenome: String,
+        var areaAtuacao: String,
+        var linguagemDominio: String,
+        var formacao: String,
+        var cpf: String,
+        var telefone: String
+    )
+
+    data class FreelancerResponse2(
+        val id: Long,
+        val nome: String,
+        val sobrenome: String,
+        val areaAtuacao: String,
+        val linguagemDominio: String,
+        val formacao: String,
+        val cpf: String,
+        val telefone: String,
+        val email: String,
+        val ativo: Boolean
+    )
+
+
+    data class FreelancerResponse(
+        val id: Long,
+        val nome: String,
+        val sobrenome: String,
+        val email: String,
+        val telefone: String,
+        val areaAtuacao: String,
+        val linguagemDominio: String,
+        val formacao: String,
+        val cpf: String,
+        val ativo: Boolean
+    )
+
+
+
     data class UsuarioLoginDto(
         val email: String,
         val senha: String

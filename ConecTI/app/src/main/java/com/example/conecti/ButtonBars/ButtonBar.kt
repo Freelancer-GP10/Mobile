@@ -1,8 +1,6 @@
-package com.example.conecti
+package com.example.conecti.ButtonBars
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.material3.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,29 +22,21 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.ArrowForward
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.conecti.Freela.HistoricoPay
+import com.example.conecti.Freela.Perfil_Freela_One
+import com.example.conecti.Freela.ServiceFreela
+import com.example.conecti.Freela.WorkSpaceFreela
 import com.example.conecti.ui.ui.theme.ConecTITheme
-import kotlinx.coroutines.delay
 
-class NavBar : ComponentActivity() {
+class ButtonBar : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -58,8 +48,9 @@ class NavBar : ComponentActivity() {
     }
 }
 
+
 // FUNÇÃO DO BARRA BUTTON  - PARTE 1
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @Composable
 fun BarraButton1() {
     val contexto2 = LocalContext.current
@@ -84,24 +75,13 @@ fun BarraButton1() {
                     .align(Alignment.CenterHorizontally)
                     .padding(horizontal = 16.dp)
             ) {
-               Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.width(90.dp))
 
                 Row(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier
                         .fillMaxWidth(0.7f) // ajuste conforme necessário
                 ) {
-                    Canvas(
-                        modifier = Modifier
-                            .size(42.dp)
-                    ) {
-                        drawCircle(
-                            color = Color.White,
-                            radius = 22f,
-                            center = center
-                        )
-                    }
-
                     Canvas(
                         modifier = Modifier
                             .size(42.dp)
@@ -134,11 +114,22 @@ fun BarraButton1() {
                             center = center
                         )
                     }
+
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
                 }
 
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto2, WorkSpaceFreela ::class.java)
+                        val mainIntent = Intent(contexto2, HistoricoPay::class.java)
                         contexto2.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -256,7 +247,7 @@ fun BarraButton2() {
 
                 IconButton(
                     onClick = {
-                        val mainIntent = Intent(contexto2, WorkSpaceFreela ::class.java)
+                        val mainIntent = Intent(contexto2, WorkSpaceFreela::class.java)
                         contexto2.startActivity(mainIntent)
                     },
                     modifier = Modifier
@@ -279,224 +270,221 @@ fun BarraButton2() {
 
 
 // FUNÇÃO DO BARRA BUTTON - PARTE 3
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @Composable
 fun BarraButton3() {
-    var temporarySelectedItem = rememberSaveable { mutableStateOf(-1) }
+    val contexto2 = LocalContext.current
+    val contexto4 = LocalContext.current
 
-    var bottomNavState = rememberSaveable { mutableStateOf(0) }
-
-
-    val contexto = LocalContext.current
-
-    NavigationBar(
-        modifier = Modifier.fillMaxWidth(),
-        containerColor = Color(0xFF215683)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(75.dp)
+            .background(Color(0xFF215683))
     ) {
-        NavigationBarItem(
-            selected = bottomNavState.value == 1 || temporarySelectedItem.value == 1,
-            onClick = {
-                bottomNavState.value = 0
-                temporarySelectedItem.value = 1
-            },
-            icon = {
-                Box(
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp)
+            ) {
+                IconButton(
+                    onClick = {
+                        val mainIntent = Intent(contexto2, HistoricoPay::class.java)
+                        contexto2.startActivity(mainIntent)
+                    },
                     modifier = Modifier
+                        .padding(start = 0.dp)
+                        .height(60.dp)
                         .width(90.dp)
-                        .height(60.dp),
-                    contentAlignment = Alignment.Center
+                    //   .background(Color.Red)
                 ) {
                     Icon(
-                        imageVector = if (bottomNavState.value == 0) Icons.Default.ArrowBack
-                        else Icons.Outlined.ArrowBack,
-                        contentDescription = "Back",
-                        modifier = Modifier.size(54.dp),
-                        tint = Color.White
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Voltar",
+                        tint = Color.White,
+                        modifier = Modifier.size(66.dp)
                     )
                 }
-            }
-        )
 
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .width(160.dp)
-                .height(40.dp)
-                .align(Alignment.CenterVertically),
-        ) {
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
-            }
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f) // ajuste conforme necessário
+                ) {
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
 
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
-            }
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
 
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color(0xFF3492FF),
-                    radius = 22f,
-                    center = center
-                )
-            }
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color(0xFF3492FF),
+                            radius = 22f,
+                            center = center
+                        )
+                    }
 
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
+                }
+
+                IconButton(
+                    onClick = {
+                        val mainIntent2 = Intent(contexto4, ServiceFreela::class.java)
+                        contexto4.startActivity(mainIntent2)
+                    },
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .height(60.dp)
+                        .width(90.dp)
+                    //.background(Color.Red)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = "Continuar",
+                        tint = Color.White,
+                        modifier = Modifier.size(66.dp)
+                    )
+                }
             }
         }
-
-        NavigationBarItem(
-            selected = bottomNavState.value == 1 || temporarySelectedItem.value == 1,
-            onClick = {
-                bottomNavState.value = 1
-                temporarySelectedItem.value = 1
-            },
-            icon = {
-                Box(
-                    modifier = Modifier
-                        .width(90.dp)
-                        .height(60.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = if (bottomNavState.value == 1) Icons.Default.ArrowForward
-                        else Icons.Outlined.ArrowForward,
-                        contentDescription = "Forward",
-                        modifier = Modifier.size(54.dp),
-                        tint = Color.White
-                    )
-                }
-            }
-        )
-    }
-
-    LaunchedEffect(temporarySelectedItem) {
-        delay(200)
-        temporarySelectedItem.value = -1
     }
 }
-
 
 // FUNÇÃO DO BARRA BUTTON - PARTE 4
 
 @Composable
 fun BarraButton4() {
-    var temporarySelectedItem = rememberSaveable { mutableStateOf(-1) }
-
-    var bottomNavState = rememberSaveable { mutableStateOf(0) }
-
     val contexto = LocalContext.current
 
-    NavigationBar(
-        modifier = Modifier.fillMaxWidth(),
-        containerColor = Color(0xFF215683)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(75.dp)
+            .background(Color(0xFF215683))
     ) {
-        NavigationBarItem(
-            selected = bottomNavState.value == 1 || temporarySelectedItem.value == 1,
-            onClick = {
-                bottomNavState.value = 0
-                temporarySelectedItem.value = 1
-            },
-            icon = {
-                Box(
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+                    .padding(horizontal = 16.dp)
+            ) {
+                IconButton(
+                    onClick = {
+                        val mainIntent = Intent(contexto, WorkSpaceFreela::class.java)
+                        contexto.startActivity(mainIntent)
+                    },
                     modifier = Modifier
+                        .padding(start = 0.dp)
+                        .height(60.dp)
                         .width(90.dp)
-                        .height(60.dp),
-                    contentAlignment = Alignment.Center
+                    //   .background(Color.Red)
                 ) {
                     Icon(
-                        imageVector = if (bottomNavState.value == 0) Icons.Default.ArrowBack
-                        else Icons.Outlined.ArrowBack,
-                        contentDescription = "Back",
-                        modifier = Modifier.size(54.dp),
-                        tint = Color.White
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Voltar",
+                        tint = Color.White,
+                        modifier = Modifier.size(66.dp)
                     )
                 }
-            }
-        )
 
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .width(160.dp)
-                .height(40.dp)
-                .align(Alignment.CenterVertically),
-        ) {
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
-            }
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f) // ajuste conforme necessário
+                ) {
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
 
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
-            }
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
 
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color.White,
-                    radius = 22f,
-                    center = center
-                )
-            }
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color.White,
+                            radius = 22f,
+                            center = center
+                        )
+                    }
 
-            Canvas(
-                modifier = Modifier
-                    .size(42.dp)
-            ) {
-                drawCircle(
-                    color = Color(0xFF3492FF),
-                    radius = 22f,
-                    center = center
-                )
+                    Canvas(
+                        modifier = Modifier
+                            .size(42.dp)
+                    ) {
+                        drawCircle(
+                            color = Color(0xFF3492FF),
+                            radius = 22f,
+                            center = center
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.width(90.dp))
             }
         }
-
-        Spacer(modifier = Modifier.width(110.dp))
-    }
-
-    LaunchedEffect(temporarySelectedItem) {
-        delay(200)
-        temporarySelectedItem.value = -1
     }
 }
 
