@@ -2,6 +2,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.example.conecti.netWorkMIcro.ServiceMicro
 import com.example.conecti.network.Service
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -18,8 +19,9 @@ interface ApiService {
 
 //    @POST("/freelancers")
 //    fun cadastrarFreelancer(@Body cadastrarFreelaDto: RequestBody): Call<Service.FreelancerResponse>
-
     @POST("/usuarios")
     fun cadastrarFreelancer(@Body freelancer: Service.CadastrarFreelaDto): Call<Service.FreelancerResponse2>
+    @POST("api/empresa")
+    fun cadastrarEmpresa(@Body empresa: ServiceMicro.CadastrarEmpresaDto): Call<ServiceMicro.Empresa>
 
 }

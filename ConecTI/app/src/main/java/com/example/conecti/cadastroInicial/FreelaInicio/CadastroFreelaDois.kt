@@ -173,7 +173,7 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                     // Imprime "Hello, world!" no console
 
                     viewModel.criarUsuario(
-                        usuarioCriacaoDto = Service     .UsuarioCriacaoDto(
+                        usuarioCriacaoDto = Service.UsuarioCriacaoDto(
                             email = entradaEmail.value,
                             papel = entradaPapel.value,
                             senha = entradaSenha.value

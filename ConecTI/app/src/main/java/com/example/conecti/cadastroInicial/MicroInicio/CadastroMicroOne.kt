@@ -1,5 +1,7 @@
 package com.example.conecti.cadastroInicial.MicroInicio
 
+import MicroViewModel
+import UsuarioViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,12 +36,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.conecti.RetrofitClient.context
 import com.example.conecti.cadastroInicial.FreelaInicio.Background
+import com.example.conecti.netWorkMIcro.ServiceMicro
 import com.example.conecti.ui.theme.ConecTITheme
+
 
 class CadastroMicroOne : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +63,8 @@ class CadastroMicroOne : ComponentActivity() {
 }
 
 @Composable
-fun EtapaUmMMicro() {
-
+fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.current)) {
+    val context = LocalContext.current
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -232,7 +240,22 @@ fun EtapaUmMMicro() {
 
                 ) {
                 OutlinedButton(
-                    onClick = {},
+                    onClick = {
+                        // Chamada para cadastrar
+                        val cadastroDto = ServiceMicro.CadastrarEmpresaDto(
+                            nome = nomeEmpresa.value,
+                            cnpj = cnpjEmpresa.value,
+                            ramo = selectedRamo.value,
+                            telefone = telefoneEmpresa.value
+                        )
+                        viewModel.cadastrarEmpresa(cadastroDto) { response ->
+                            if (response.isSuccessful) {
+                                println("Empresa cadastrada com sucesso")
+                            } else {
+                                println("Erro ao cadastrar empresa: ${response.errorBody()?.string()}")
+                            }
+                        }
+                    },
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(2.dp, Color(0xFF204A7B)),
                     modifier = Modifier

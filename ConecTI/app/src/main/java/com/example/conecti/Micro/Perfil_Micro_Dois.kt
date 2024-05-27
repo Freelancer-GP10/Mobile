@@ -587,5 +587,6 @@ data class SubMenusBotoesMicro2(
 @Composable
 fun GreetingPreview12() {
     ConecTITheme {
+        PerfilMicro2()
     }
 }
