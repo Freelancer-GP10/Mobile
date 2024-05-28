@@ -5,15 +5,12 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.conecti.RetrofitClient
 import com.example.conecti.RetrofitClient.connection
 import com.example.conecti.network.Service
 import com.example.conecti.network.Service.UsuarioCriacaoDto
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-
 import kotlinx.coroutines.launch
-import okhttp3.RequestBody.Companion.toRequestBody
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -114,27 +111,7 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
     }
 
 
-    fun criarUsuarioParte2(cadastrarFreelaDto: Service.CadastrarFreelaDto) {
-        apiService.cadastrarFreelancer(cadastrarFreelaDto).enqueue(object :
-            Callback<Service.FreelancerResponse2> {
-            override fun onResponse(
-                call: Call<Service.FreelancerResponse2>,
-                response: Response<Service.FreelancerResponse2>
-            ) {
-                if (response.isSuccessful) {
-                    println("Usuário criado com sucesso")
-                } else {
-                    println("Erro ao criar usuário: ${response.errorBody()?.string()}")
-                    erroApi.postValue("Erro ao criar usuário: ${response.errorBody()?.string()}")
-                }
-            }
 
-            override fun onFailure(call: Call<Service.FreelancerResponse2>, t: Throwable) {
-                println("Falha ao criar usuário: ${t.message}")
-                erroApi.postValue("Falha ao criar usuário: ${t.message}")
-            }
-        })
-    }
 
 
 //    fun cadastrarFreelancer(dto: Service.CadastrarFreelaDto, navigateToNextScreen: () -> Unit) {

@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.cadastroInicial.FreelaInicio.CadastroFreelaDois
 import com.example.conecti.cadastroInicial.FreelaInicio.CadastroFreelaOne
+import com.example.conecti.cadastroInicial.MicroInicio.CadastroMicroDois
 import com.example.conecti.ui.theme.ConecTITheme
 
 class Cadastro : ComponentActivity() {
@@ -81,8 +82,8 @@ fun LoginScreenCadastro(activity: Activity) {
 
                 Button(
                     onClick = {
-                        val cadastroFrellaTres = Intent(contexto, CadastroFreelaDois::class.java)
-                        contexto.startActivity(cadastroFrellaTres)
+                        val cadastroFreelaDois = Intent(contexto, CadastroFreelaDois::class.java)
+                        contexto.startActivity(cadastroFreelaDois)
                     },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
@@ -110,7 +111,10 @@ fun LoginScreenCadastro(activity: Activity) {
                 )
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        val cadastroMicroDois = Intent(contexto, CadastroMicroDois::class.java)
+                        contexto.startActivity(cadastroMicroDois)
+                    },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .padding(top = 5.dp)
