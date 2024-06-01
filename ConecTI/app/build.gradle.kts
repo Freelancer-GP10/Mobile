@@ -51,6 +51,10 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.compose.runtime:runtime-livedata:1.0.0")
+    implementation ("androidx.compose.runtime:runtime:1.0.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")

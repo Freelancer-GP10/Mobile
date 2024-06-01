@@ -7,6 +7,7 @@ import com.example.conecti.netWorkMIcro.ServiceMicro
 import com.example.conecti.network.Service
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 val Context.tokenUsuario: DataStore<Preferences> by preferencesDataStore("token")
 
@@ -25,5 +26,6 @@ interface ApiService {
     fun cadastrarEmpresa(@Body empresa: ServiceMicro.CadastrarEmpresaDto): Call<ServiceMicro.Empresa>
    // @POST("/cadastrarFreelancer")
     //fun cadastrarFreelancer(@Body freelaDto: ServiceFreela.freelaDetailsDto): Call<Void>
-
+   @GET("/lista-proximos-servicos")
+   fun getProximosServicos(): Call<List<Service.ListarServicoDto>>
 }

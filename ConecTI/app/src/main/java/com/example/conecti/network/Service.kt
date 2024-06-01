@@ -1,6 +1,7 @@
 package com.example.conecti.network
 
 import androidx.compose.runtime.MutableState
+import java.util.Date
 
 class Service {
 
@@ -80,6 +81,15 @@ class Service {
         val papel: String,
         val email: String,
         val token: String
+    )
+
+    data class ListarServicoDto(
+        val id :Long,
+        val nome:String,
+        val prazo:Date,
+        val dataInicio:Date,
+        val valor:Double,
+        val descricao:String
     )
 
 }

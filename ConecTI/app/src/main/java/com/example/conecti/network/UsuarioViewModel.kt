@@ -19,6 +19,8 @@ import retrofit2.Response
 
 class UsuarioViewModel(private val context: Context) : ViewModel() {
     private val apiService = connection()
+    val errorMessage = MutableLiveData<String>()
+    val servicos = MutableLiveData<List<Service.ListarServicoDto>>()
     var erroApi = MutableLiveData("")
 
     private val _cadastroFreela = MutableStateFlow(Service.CadastrarFreelaDto("", "", "", "", "", "", ""))
@@ -103,6 +105,27 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
         })
     }
 
+    fun fetchProximosServicos() {
+        viewModelScope.launch {
+            val call = apiService.getProximosServicos()
+            call.enqueue(object : Callback<List<Service.ListarServicoDto>> {
+                override fun onResponse(
+                    call: Call<List<Service.ListarServicoDto>>,
+                    response: Response<List<Service.ListarServicoDto>>
+                ) {
+                    if (response.isSuccessful) {
+                        servicos.postValue(response.body())
+                    } else {
+                        errorMessage.postValue("Erro ao buscar dados: ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Service.ListarServicoDto>>, t: Throwable) {
+                    errorMessage.postValue("Erro na chamada da API: ${t.message}")
+                }
+            })
+        }
+    }
 
     private suspend fun saveToken(token: String) {
         context.tokenUsuario.edit { settings ->
@@ -114,26 +137,6 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
 
 
 
-//    fun cadastrarFreelancer(dto: Service.CadastrarFreelaDto, navigateToNextScreen: () -> Unit) {
-//        val call = RetrofitClient.connection().cadastrarFreelancer(dto.toJson().toRequestBody())
-//        call.enqueue(object : retrofit2.Callback<Service.FreelancerResponse> {
-//            override fun onResponse(
-//                call: retrofit2.Call<Service.FreelancerResponse>,
-//                response: retrofit2.Response<Service.FreelancerResponse>
-//            ) {
-//                if (response.isSuccessful) {
-//                    // Sucesso
-//                    navigateToNextScreen()
-//                } else {
-//                    // Trate o erro
-//                }
-//            }
-//
-//            override fun onFailure(call: retrofit2.Call<Service.FreelancerResponse>, t: Throwable) {
-//                // Trate a falha
-//            }
-//        })
-//    }
 
 
 }
