@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.mutableStateOf
@@ -32,6 +33,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.network.Service
@@ -55,7 +59,6 @@ class CadastroFreelaDois : ComponentActivity() {
         }
     }
 }
-
 
 
 @Composable
@@ -134,7 +137,12 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                 )
             },
             shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            ),
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -151,7 +159,12 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                 )
             },
             shape = RoundedCornerShape(8.dp),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            ),
         )
         //  shape = RoundedCornerShape(8.dp),
         //                        border = BorderStroke(2.dp, Color(0xFF204A7B)),
@@ -203,7 +216,8 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
 
 
 
-    Column( verticalArrangement = Arrangement.Bottom,
+    Column(
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.End, // Centraliza horizontalmente
         modifier = Modifier
             .fillMaxHeight(0.94f)

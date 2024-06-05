@@ -1,7 +1,12 @@
 package com.example.conecti.Micro
 
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.DatePicker
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,10 +28,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -47,12 +53,10 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
@@ -61,27 +65,33 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.ButtonBars.BarraButtonMicro1
 import com.example.conecti.Freela.CustomMenuItem
+import com.example.conecti.Freela.WorkSpaceFreela
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
-class Perfil_Micro_Dois : ComponentActivity() {
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.conecti.ui.theme.ConecTITheme
+
+class CadastroDemanda : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-                PerfilMicro2()
+                ServicoCadastro()
             }
         }
     }
@@ -89,7 +99,7 @@ class Perfil_Micro_Dois : ComponentActivity() {
 
 
 @Composable
-fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContentMicro6(scope: CoroutineScope, iniciarJanela: DrawerState) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -114,6 +124,8 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
             )
         }
 
+        val context = LocalContext.current
+
         // Conteúdo principal da tela
         // Use weight(1f) para ocupar todo o espaço disponível na tela
         Box(
@@ -122,41 +134,49 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
         ) {
 
-            val nomeFreela = remember { mutableStateOf("") }
-            val sobrenomeFreela = remember { mutableStateOf("") }
-            val cpfFreela = remember { mutableStateOf("") }
-            val telefoneFreela = remember { mutableStateOf("") }
-            val emailFreela = remember { mutableStateOf("") }
-            val senhaFreela = remember { mutableStateOf("") }
+            val nomeServico = remember { mutableStateOf("") }
+            val descricaoServico = remember { mutableStateOf("") }
+            val valorServico = remember { mutableStateOf("") }
 
-            val expandedLinguagem = remember { mutableStateOf(false) }
-            val selectedLinguagem = remember { mutableStateOf("") }
-            val listaLinguagens = listOf(
-                "Java",
-                "C",
-                "C++",
-                "C#",
-                "Assemble"
+
+            val listaTipoServico = listOf(
+                "Consultoria",
+                "Desenvolvimento",
+                "Design",
+                "Marketing",
+                "Outro"
             )
-            val listaArea = listOf(
-                "Front-End",
-                "Back-End",
-                "UX Design",
-                "DevOps",
-                "QA"
+            val context = LocalContext.current
+
+            val dataIncioSelecionada = remember { mutableStateOf("") }
+            val dataFinalSelecionada = remember { mutableStateOf("") }
+            val calendario = Calendar.getInstance()
+
+            val datePickerDialogInicio = DatePickerDialog(
+                context,
+                { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                    dataIncioSelecionada.value = "$dayOfMonth/${month + 1}/$year"
+                },
+                calendario.get(Calendar.YEAR),
+                calendario.get(Calendar.MONTH),
+                calendario.get(Calendar.DAY_OF_MONTH)
             )
-            val listaFormacao = listOf(
-                "ADS",
-                "CCO",
-                "SIS"
+
+            val datePickerDialogFinal = DatePickerDialog(
+                context,
+                { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                    dataFinalSelecionada.value = "$dayOfMonth/${month + 1}/$year"
+                },
+                calendario.get(Calendar.YEAR),
+                calendario.get(Calendar.MONTH),
+                calendario.get(Calendar.DAY_OF_MONTH)
             )
 
-            val expandedArea = remember { mutableStateOf(false) }
-            val expandedFormacao = remember { mutableStateOf(false) }
+
+            val expandedTipoServico = remember { mutableStateOf(false) }
 
 
-            val selectedArea = remember { mutableStateOf("") }
-            val selectedFormacao = remember { mutableStateOf("") }
+            val selectTipoServico = remember { mutableStateOf("") }
 
 
             Column(
@@ -167,45 +187,103 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
+                Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "Perfil",
+                    text = "Adicionar serviço",
                     color = Color(0xFF215683),
-                    fontSize = 38.sp,
+                    fontSize = 28.sp,
                     modifier = Modifier
-                        .padding(start = 30.dp, bottom = 0.dp)
+                        .padding(start = 30.dp, bottom = 5.dp)
                         .align(Alignment.Start),
 
                     )
 
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = "Dados Provados da Empresa",
+                Spacer(modifier = Modifier.height(20.dp))
+
+
+                IconButton(
+                    onClick = {
+                        val mainIntent = Intent(context, ServiceMicro::class.java)
+                        context.startActivity(mainIntent)
+                    },
                     modifier = Modifier
-                        .padding(start = 30.dp, bottom = 40.dp)
-                        .align(Alignment.Start),
-                    fontSize = 17.sp
+                        .padding(start = 35.dp, bottom = 10.dp)
+                        .align(Alignment.Start)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Voltar",
+                        tint = Color(0xFF215683), // Cor do ícone
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(10.dp))
 
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(70.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+
+                ) {
+                    OutlinedTextField(
+                        value = dataIncioSelecionada.value,
+                        onValueChange = { dataIncioSelecionada.value = it },
+                        label = { Text(text = "Data de Inicio") },
+                        modifier = Modifier
+                            .height(60.dp)
+                            .fillMaxWidth(0.47f),
+                        trailingIcon = {
+                            IconButton(onClick = { datePickerDialogInicio.show() }) {
+                                Icon(
+                                    imageVector = Icons.Default.DateRange,
+                                    contentDescription = "Selecionar Data"
+                                )
+                            }
+                        }
+                    )
+
+                    OutlinedTextField(
+                        value = dataFinalSelecionada.value,
+                        onValueChange = { dataFinalSelecionada.value = it },
+                        label = { Text(text = "Prazo final") },
+                        modifier = Modifier
+                            .height(60.dp)
+                            .fillMaxWidth(0.8f),
+                        trailingIcon = {
+                            IconButton(onClick = { datePickerDialogFinal.show() }) {
+                                Icon(
+                                    imageVector = Icons.Default.DateRange,
+                                    contentDescription = "Selecionar Data"
+                                )
+                            }
+                        }
+                    )
 
 
+                }
+                Spacer(modifier = Modifier.padding(8.dp))
 
                 OutlinedTextField(
-                    value = nomeFreela.value,
-                    onValueChange = { nomeFreela.value = it },
-                    label = { Text(text = "Nome da Empresa") },
+                    value = nomeServico.value,
+                    onValueChange = { nomeServico.value = it },
+                    label = { Text(text = "Nome do serviço") },
                     modifier = Modifier
                         .height(60.dp)
+                        .fillMaxWidth(0.88f)
+
                 )
 
                 Spacer(modifier = Modifier.padding(8.dp))
 
 
                 OutlinedButton(
-                    onClick = { expandedArea.value = true },
+                    onClick = { expandedTipoServico.value = true },
                     shape = RoundedCornerShape(4.dp),
                     colors = ButtonDefaults.buttonColors(Color.Transparent),
                     modifier = Modifier
-                        .fillMaxWidth(0.717f)
+                        .fillMaxWidth(0.88f)
                         .height(53.5.dp),
                     contentPadding = PaddingValues(
                         start = 16.dp,
@@ -220,7 +298,7 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     ) {
                         Text(
 
-                            text = if (selectedArea.value.isEmpty()) "Ramo" else selectedArea.value,
+                            text = if (selectTipoServico.value.isEmpty()) "Tipo do serviço" else selectTipoServico.value,
 
                             modifier = Modifier
                                 .weight(1f),
@@ -230,14 +308,14 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                         )
                     }
                     DropdownMenu(
-                        expanded = expandedArea.value,
-                        onDismissRequest = { expandedArea.value = false },
+                        expanded = expandedTipoServico.value,
+                        onDismissRequest = { expandedTipoServico.value = false },
                         modifier = Modifier
-                            .fillMaxWidth(0.68f)
+                            .fillMaxWidth(0.80f)
                             .height(260.dp)
                             .background(Color(0xFF031224))
                     ) {
-                        listaArea.forEach { option ->
+                        listaTipoServico.forEach { option ->
                             DropdownMenuItem(
                                 text = {
                                     Text(
@@ -246,8 +324,8 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                                     )
                                 },
                                 onClick = {
-                                    selectedArea.value = option
-                                    expandedArea.value = false
+                                    selectTipoServico.value = option
+                                    expandedTipoServico.value = false
                                 })
                             Divider(color = Color.White)
                         }
@@ -258,50 +336,42 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
                 Spacer(modifier = Modifier.padding(4.dp))
 
-                OutlinedTextField(
-                    value = cpfFreela.value,
-                    onValueChange = { cpfFreela.value = it },
-                    label = { Text(text = "CNPJ") },
-                    modifier = Modifier
-                        .height(60.dp)
 
-                )
 
-                Spacer(modifier = Modifier.padding(4.dp))
 
-                OutlinedTextField(
-                    value = telefoneFreela.value,
-                    onValueChange = { telefoneFreela.value = it },
-                    label = { Text(text = "Telefone") },
-                    modifier = Modifier
-                        .height(60.dp)
 
-                )
                 Spacer(modifier = Modifier.padding(4.dp))
 
 
                 OutlinedTextField(
-                    value = emailFreela.value,
-                    onValueChange = { emailFreela.value = it },
-                    label = { Text(text = "Email") },
+                    value = descricaoServico.value,
+                    onValueChange = { descricaoServico.value = it },
+                    label = { Text(text = "Descrição") },
                     modifier = Modifier
-                        .height(60.dp)
+                        .height(180.dp)
+                        .fillMaxWidth(0.88f)
                 )
                 Spacer(modifier = Modifier.padding(4.dp))
 
-                OutlinedTextField(
-                    value = senhaFreela.value,
-                    onValueChange = { senhaFreela.value = it },
-                    label = { Text(text = "Senha") },
+                Row(
                     modifier = Modifier
-                        .height(60.dp),
-                    visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Done
-                    ),
+                        .fillMaxWidth()
+                        .height(70.dp),
+                    verticalAlignment = Alignment.CenterVertically,
 
+                    ) {
+                    Spacer(modifier = Modifier.width(25.dp))
+                    OutlinedTextField(
+                        value = valorServico.value,
+                        onValueChange = { valorServico.value = it },
+                        label = { Text(text = "R\$:  Valor") },
+                        modifier = Modifier
+                            .height(60.dp)
+                            .fillMaxWidth(0.6f)
                     )
+
+                }
+
 
                 Spacer(modifier = Modifier.height(30.dp))
 
@@ -310,49 +380,23 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     modifier = Modifier
                         .fillMaxWidth(0.98f)
                         .padding(top = 30.dp)
-                    //                .background(Color.Red)
                 ) {
 
                     Button(
                         onClick = { /* Salvar */ },
                         modifier = Modifier
-                            .width(100.dp)
-                            .height(50.dp),
+                            .fillMaxWidth(0.5f)
+                            .height(60.dp),
                         shape = RoundedCornerShape(7.dp)
                     ) {
                         Text(
-                            text = "Salvar",
-                            fontSize = 16.sp
+                            text = "Cadastrar",
+                            fontSize = 18.sp
                         )
                     }
 
-                    Button(
-                        onClick = { /* Editar */ },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(50.dp),
-                        shape = RoundedCornerShape(7.dp)
-                    ) {
-                        Text(
-                            text = "Editar",
-                            fontSize = 16.sp
-                        )
-                    }
 
-                    Button(
-                        onClick = { /* Cancelar */ },
-                        modifier = Modifier
-                            .width(115.dp)
-                            .height(50.dp),
-                        shape = RoundedCornerShape(7.dp)
-                    ) {
-                        Text(
-                            text = "Cancelar",
-                            fontSize = 16.sp
-                        )
-                    }
                 }
-                //Spacer(modifier = Modifier.padding(bottom = 40.dp))
 
                 Spacer(modifier = Modifier.padding(top = 120.dp))
             }
@@ -365,7 +409,7 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 //AQUI ESTA TODA PARTE DO MENU LATERAL
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PerfilMicro2() {
+fun ServicoCadastro() {
     val contexto = LocalContext.current
 
     val subMenus = listOf(
@@ -456,7 +500,7 @@ fun PerfilMicro2() {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 subMenus.forEach {
-                    CustomMenuItemMicro2(
+                    CustomMenuItemMicro6(
                         icon = it.icone,
                         text = it.texto_botao,
                         badgeCount = it.numeroNotificao,
@@ -513,7 +557,7 @@ fun PerfilMicro2() {
         }
     }, drawerState = iniciarJanela,
         content = {
-            MainContentMicro2(scope = scope, iniciarJanela = iniciarJanela)
+            MainContentMicro6(scope = scope, iniciarJanela = iniciarJanela)
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -522,13 +566,7 @@ fun PerfilMicro2() {
 
                 // Alinha o Column na parte inferior central da tela
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
 
-                ) {
-                    BarraButtonMicro1()
-                }
             }
 
         }
@@ -538,7 +576,7 @@ fun PerfilMicro2() {
 
 // DATA CLASS PARA PODER CHAMAR OS ICONES
 @Composable
-fun CustomMenuItemMicro2(
+fun CustomMenuItemMicro6(
     icon: ImageVector,
     text: String,
     badgeCount: Int = 0,
@@ -587,7 +625,7 @@ fun CustomMenuItemMicro2(
 
 
 // AQUI ESTA OS BOTÕES DE ESCOLHO DO MENU LATERAL
-data class SubMenusBotoesMicro2(
+data class SubMenusBotoesMicro6(
 
     val icone: ImageVector,
     val texto_botao: String,
@@ -595,10 +633,11 @@ data class SubMenusBotoesMicro2(
     val booleanNotificao: Boolean
 )
 
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview12() {
+fun GreetingPreview14() {
     ConecTITheme {
-        PerfilMicro2()
+        ServicoCadastro()
     }
 }

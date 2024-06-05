@@ -11,9 +11,14 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -24,7 +29,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -67,7 +76,7 @@ fun LoginScreenLogin(extras: Bundle?) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Faça seu login!",
+                    text = stringResource(R.string.login_faca),
                     fontSize = 24.sp,
                     color = MaterialTheme.colorScheme.background
                 )
@@ -77,27 +86,32 @@ fun LoginScreenLogin(extras: Bundle?) {
                     color = MaterialTheme.colorScheme.background,
                     modifier = Modifier.padding(top = 16.dp)
                 )
-                TextField(
+                OutlinedTextField(
                     value = emailValue,
                     onValueChange = { emailValue = it },
                     modifier = Modifier
                         .padding(top = 60.dp)
                         .padding(horizontal = 16.dp)
-                        .height(50.dp)
-                        .fillMaxWidth()
-                        .background(color = Color.Transparent),
-                    textStyle = TextStyle(color = Color.Black)
+                        .height(60.dp)
+                        .fillMaxWidth(),
+                    label = { Text(text = "Email", color = Color.White)},
+                    textStyle = TextStyle(color = Color.White)
                 )
-                TextField(
+                OutlinedTextField(
                     value = passwordValue,
                     onValueChange = { passwordValue = it },
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .padding(horizontal = 16.dp)
-                        .height(50.dp)
-                        .fillMaxWidth()
-                        .background(color = Color.White),
-                    textStyle = TextStyle(color = Color.Black)
+                        .height(60.dp)
+                        .fillMaxWidth(),
+                    textStyle = TextStyle(color = Color.White),
+                    label = { Text("Senha", color = Color.White) },
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
                 )
                 // Botão Voltar para MainActivity
                 Button(

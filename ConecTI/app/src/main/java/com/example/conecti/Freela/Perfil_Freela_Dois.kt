@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
@@ -61,6 +62,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -83,6 +87,7 @@ class Perfil_Freela_Dois : ComponentActivity() {
         }
     }
 }
+
 // AQUI ESTA O ÍCONE DO MENU E OS DADOS PESSOAIS (CAMPOS E BOTÕES)
 @Composable
 fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
@@ -97,7 +102,10 @@ fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     iniciarJanela.open()
                 }
             },
-            modifier = Modifier.padding(start = 16.dp,top = 15.dp), // Adiciona um espaçamento à esquerda
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 15.dp
+            ), // Adiciona um espaçamento à esquerda
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
@@ -409,7 +417,12 @@ fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     onValueChange = { senhaFreela.value = it },
                     label = { Text(text = "Senha") },
                     modifier = Modifier
-                        .height(60.dp)
+                        .height(60.dp),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
                 )
 
                 Spacer(modifier = Modifier.padding(8.dp))
@@ -462,7 +475,7 @@ fun MainContent(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 }
                 //Spacer(modifier = Modifier.padding(bottom = 40.dp))
 
-                Spacer(modifier = Modifier.padding(top =  90.dp))
+                Spacer(modifier = Modifier.padding(top = 90.dp))
             }
 
         }
@@ -634,7 +647,7 @@ fun Perfil2() {
                     modifier = Modifier
                         .fillMaxWidth()
 
-                ){
+                ) {
                     BarraButton1()
                 }
             }
