@@ -1,5 +1,6 @@
 package com.example.conecti.Micro
 
+import UsuarioViewModel
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 
@@ -83,6 +84,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
 
 class CadastroDemanda : ComponentActivity() {
@@ -99,7 +102,7 @@ class CadastroDemanda : ComponentActivity() {
 
 
 @Composable
-fun MainContentMicro6(scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContentMicro6(scope: CoroutineScope, iniciarJanela: DrawerState, usuarioViewModel: UsuarioViewModel = viewModel() ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -383,7 +386,15 @@ fun MainContentMicro6(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 ) {
 
                     Button(
-                        onClick = { /* Salvar */ },
+                        onClick = {
+                            val servico = Service.CadastrarServicoDto(
+                                nome = nomeServico.value,
+                                prazo = dataFinalSelecionada.value,
+                                dataInicio = dataIncioSelecionada.value,
+                                valor = valorServico.value.toDouble(),
+                                descricao = descricaoServico.value
+                            )
+                            usuarioViewModel.cadastrarServico(servico) },
                         modifier = Modifier
                             .fillMaxWidth(0.5f)
                             .height(60.dp),

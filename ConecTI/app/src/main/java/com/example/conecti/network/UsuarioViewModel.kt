@@ -2,9 +2,11 @@ import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.conecti.RetrofitClient
 import com.example.conecti.RetrofitClient.connection
 import com.example.conecti.network.Service
 import com.example.conecti.network.Service.UsuarioCriacaoDto
@@ -25,7 +27,10 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
     var usuarioAutenticado = MutableLiveData<Service.UsuarioTokenDto>()
 
     private val _cadastroFreela = MutableStateFlow(Service.CadastrarFreelaDto("", "", "", "", "", "", ""))
-    val cadastroFreela: StateFlow<Service.CadastrarFreelaDto> = _cadastroFreela
+  //  val cadastroFreela: StateFlow<Service.CadastrarFreelaDto> = _cadastroFreela
+
+    private val _cadastroStatus = MutableLiveData<Result<Void?>>()
+    val cadastroStatus: LiveData<Result<Void?>> = _cadastroStatus
 
     // Função para atualizar os dados do freelancer
     fun atualizarCadastroFreela(novoCadastro: Service.CadastrarFreelaDto) {
@@ -127,6 +132,22 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
                     errorMessage.postValue("Erro na chamada da API: ${t.message}")
                 }
             })
+        }
+    }
+
+    fun cadastrarServico(servico: Service.CadastrarServicoDto) {
+        viewModelScope.launch {
+            val result = try {
+                val response = apiService.cadastrarServico(servico).execute()
+                if (response.isSuccessful) {
+                    Result.success(response.body())
+                } else {
+                    Result.failure(Exception(response.errorBody()?.string()))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+            _cadastroStatus.postValue(result)
         }
     }
 

@@ -28,4 +28,6 @@ interface ApiService {
     //fun cadastrarFreelancer(@Body freelaDto: ServiceFreela.freelaDetailsDto): Call<Void>
    @GET("/lista-proximos-servicos")
    fun getProximosServicos(): Call<List<Service.ListarServicoDto>>
+    @POST("/api/servicos")
+    fun cadastrarServico(@Body cadastrarServicoDto: Service.CadastrarServicoDto): Call<Void>
 }

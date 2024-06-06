@@ -91,5 +91,13 @@ class Service {
         val valor:Double,
         val descricao:String
     )
+    data class CadastrarServicoDto(
+        val nome: String,
+        val prazo: String,
+        val dataInicio: String,
+        val valor: Double,
+        val descricao: String
+    )
+
 
 }
