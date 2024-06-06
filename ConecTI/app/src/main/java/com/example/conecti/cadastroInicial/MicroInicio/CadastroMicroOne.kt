@@ -37,12 +37,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.conecti.R
 import com.example.conecti.RetrofitClient.context
 import com.example.conecti.cadastroInicial.FreelaInicio.Background
 import com.example.conecti.netWorkMIcro.ServiceMicro
@@ -115,7 +117,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
             ) {
                 Spacer(modifier = Modifier.weight(1f)) // Ocupa todo o espaço à esquerda
                 Text(
-                    text = "Finalize seu registro",
+                    text = stringResource(R.string.finalize_registro_cadastro_freelaMicro_one),
                     fontSize = 30.sp
                 )
                 Spacer(modifier = Modifier.width(25.dp))
@@ -127,7 +129,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
             ) {
                 Spacer(modifier = Modifier.weight(1f)) //
                 Text(
-                    text = "E fique por dentro de tudo!",
+                    stringResource(R.string.fique_por_dentro_cadastro_freelaMicro_one),
                 )
 
                 Spacer(modifier = Modifier.width(28.dp))
@@ -138,7 +140,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
             OutlinedTextField(
                 value = nomeEmpresa.value,
                 onValueChange = { nomeEmpresa.value = it },
-                label = { Text(text = "Nome") },
+                label = { Text(text = stringResource(R.string.label_nome)) },
                 modifier = Modifier
                     .height(60.dp)
             )
@@ -149,7 +151,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
             OutlinedTextField(
                 value = cnpjEmpresa.value,
                 onValueChange = { cnpjEmpresa.value = it },
-                label = { Text(text = "CPF") },
+                label = { Text(text = stringResource(R.string.label_sobrenome)) },
                 modifier = Modifier
                     .height(60.dp)
 

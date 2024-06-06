@@ -22,6 +22,7 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
     val errorMessage = MutableLiveData<String>()
     val servicos = MutableLiveData<List<Service.ListarServicoDto>>()
     var erroApi = MutableLiveData("")
+    var usuarioAutenticado = MutableLiveData<Service.UsuarioTokenDto>()
 
     private val _cadastroFreela = MutableStateFlow(Service.CadastrarFreelaDto("", "", "", "", "", "", ""))
     val cadastroFreela: StateFlow<Service.CadastrarFreelaDto> = _cadastroFreela
@@ -92,6 +93,8 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
                             saveToken(token)
                         }
                     }
+                    usuarioAutenticado.postValue(response.body())
+                    erroApi.postValue("")
                 } else {
                     println("Erro ao fazer login: ${response.errorBody()?.string()}")
                     erroApi.postValue("Erro ao fazer login: ${response.errorBody()?.string()}")

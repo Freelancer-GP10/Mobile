@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -162,7 +163,7 @@ fun EtapaUmFreela() {
             ) {
                 Spacer(modifier = Modifier.weight(1f)) // Ocupa todo o espaço à esquerda
                 Text(
-                    text = "Finalize seu registro",
+                    text = stringResource(R.string.finalize_registro_cadastro_freelaMicro_one),
                     fontSize = 30.sp
                 )
                 Spacer(modifier = Modifier.width(25.dp))
@@ -174,7 +175,7 @@ fun EtapaUmFreela() {
             ) {
                 Spacer(modifier = Modifier.weight(1f)) //
                 Text(
-                    text = "E fique por dentro de tudo!",
+                    text = stringResource(R.string.fique_por_dentro_cadastro_freelaMicro_one),
                 )
 
                 Spacer(modifier = Modifier.width(28.dp))
@@ -185,7 +186,7 @@ fun EtapaUmFreela() {
             OutlinedTextField(
                 value = nomeFreela.value,
                 onValueChange = { nomeFreela.value = it },
-                label = { Text(text = "Nome") },
+                label = { Text(text = stringResource(R.string.label_nome)) },
                 modifier = Modifier
                     .height(60.dp)
             )
@@ -193,7 +194,7 @@ fun EtapaUmFreela() {
             OutlinedTextField(
                 value = sobrenomeFreela.value,
                 onValueChange = { sobrenomeFreela.value = it },
-                label = { Text(text = "Sobrenome") },
+                label = { Text(text = stringResource(R.string.label_sobrenome)) },
                 modifier = Modifier
                     .height(60.dp)
             )
@@ -203,7 +204,7 @@ fun EtapaUmFreela() {
             OutlinedTextField(
                 value = cpfFreela.value,
                 onValueChange = { cpfFreela.value = it },
-                label = { Text(text = "CPF") },
+                label = { Text(text = stringResource(R.string.label_cpf)) },
                 modifier = Modifier
                     .height(60.dp)
 
@@ -214,7 +215,7 @@ fun EtapaUmFreela() {
             OutlinedTextField(
                 value = telefoneFreela.value,
                 onValueChange = { telefoneFreela.value = it },
-                label = { Text(text = "Telefone") },
+                label = { Text(text = stringResource(R.string.label_cpf)) },
                 modifier = Modifier
                     .height(60.dp)
 
@@ -243,7 +244,7 @@ fun EtapaUmFreela() {
                 ) {
                     Text(
 
-                        text = if (selectedArea.value.isEmpty()) "Area de atuação" else selectedArea.value,
+                        text = if (selectedArea.value.isEmpty())  stringResource(R.string.label_area_atuacao) else selectedArea.value,
 
                         modifier = Modifier
                             .weight(1f),
@@ -301,7 +302,7 @@ fun EtapaUmFreela() {
                 ) {
                     Text(
 
-                        text = if (selectedLinguagem.value.isEmpty()) "Linguagem de domínio" else selectedLinguagem.value,
+                        text = if (selectedLinguagem.value.isEmpty())  stringResource(R.string.label_linguagem_atuacao) else selectedLinguagem.value,
 
                         modifier = Modifier
                             .weight(1f),
@@ -360,7 +361,7 @@ fun EtapaUmFreela() {
                 ) {
                     Text(
 
-                        text = if (selectedFormacao.value.isEmpty()) "Formação" else selectedFormacao.value,
+                        text = if (selectedFormacao.value.isEmpty()) stringResource(R.string.label_formacao) else selectedFormacao.value,
 
                         modifier = Modifier
                             .weight(1f),
@@ -416,7 +417,7 @@ fun EtapaUmFreela() {
                         fontSize = 21.sp,
                         color = Color(0xFF204A7B),
                         fontWeight = FontWeight.W400,
-                        text = "Continuar"
+                        text = stringResource(R.string.botao_continuar)
                     )
                 }
 
