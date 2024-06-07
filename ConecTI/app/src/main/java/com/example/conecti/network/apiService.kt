@@ -8,6 +8,7 @@ import com.example.conecti.network.Service
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 val Context.tokenUsuario: DataStore<Preferences> by preferencesDataStore("token")
 
@@ -20,8 +21,11 @@ interface ApiService {
 
 //    @POST("/freelancers")
 //    fun cadastrarFreelancer(@Body cadastrarFreelaDto: RequestBody): Call<Service.FreelancerResponse>
-    @POST("/usuarios")
-    fun cadastrarFreelancer(@Body freelancer: ServiceFreela.freelaDetailsDto): Call<Void>
+    @POST("/api/freelancer")
+    fun cadastrarFreelancer(
+    @Header("Authorization") token: String,
+    @Body freelaDto: ServiceFreela.freelaDetailsDto
+    ): Call<Void>
     @POST("api/empresa")
     fun cadastrarEmpresa(@Body empresa: ServiceMicro.CadastrarEmpresaDto): Call<ServiceMicro.Empresa>
    // @POST("/cadastrarFreelancer")

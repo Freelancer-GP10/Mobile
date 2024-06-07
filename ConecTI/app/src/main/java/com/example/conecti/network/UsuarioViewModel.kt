@@ -1,19 +1,23 @@
 import android.content.Context
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.conecti.RetrofitClient
 import com.example.conecti.RetrofitClient.connection
+import com.example.conecti.RetrofitClient.getToken
+import com.example.conecti.netWorkFreela.ServiceFreela
 import com.example.conecti.network.Service
 import com.example.conecti.network.Service.UsuarioCriacaoDto
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,41 +29,42 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
     val servicos = MutableLiveData<List<Service.ListarServicoDto>>()
     var erroApi = MutableLiveData("")
     var usuarioAutenticado = MutableLiveData<Service.UsuarioTokenDto>()
+    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     private val _cadastroFreela = MutableStateFlow(Service.CadastrarFreelaDto("", "", "", "", "", "", ""))
   //  val cadastroFreela: StateFlow<Service.CadastrarFreelaDto> = _cadastroFreela
 
     private val _cadastroStatus = MutableLiveData<Result<Void?>>()
-    val cadastroStatus: LiveData<Result<Void?>> = _cadastroStatus
-
-    // Função para atualizar os dados do freelancer
-    fun atualizarCadastroFreela(novoCadastro: Service.CadastrarFreelaDto) {
-        _cadastroFreela.value = novoCadastro
-    }
+//    val cadastroStatus: LiveData<Result<Void?>> = _cadastroStatus
+//
+//    // Função para atualizar os dados do freelancer
+//    fun atualizarCadastroFreela(novoCadastro: Service.CadastrarFreelaDto) {
+//        _cadastroFreela.value = novoCadastro
+//    }
 
     var nome = mutableStateOf("")
-    var sobrenome = mutableStateOf("")
-    var cpf = mutableStateOf("")
-    var telefone = mutableStateOf("")
-    var areaAtuacao = mutableStateOf("")
-    var linguagemDominio = mutableStateOf("")
-    var formacao = mutableStateOf("")
+//    var sobrenome = mutableStateOf("")
+//    var cpf = mutableStateOf("")
+//    var telefone = mutableStateOf("")
+//    var areaAtuacao = mutableStateOf("")
+//    var linguagemDominio = mutableStateOf("")
+//    var formacao = mutableStateOf("")
 
-    fun enviarDados() {
-        viewModelScope.launch {
-            // Crie o DTO com os dados
-            val freelaDto = Service.CadastrarFreelaDto(
-                nome = nome.value,
-                sobrenome = sobrenome.value,
-                cpf = cpf.value,
-                telefone = telefone.value,
-                areaAtuacao = areaAtuacao.value,
-                linguagemDominio = linguagemDominio.value,
-                formacao = formacao.value
-            )
-            // Envie o DTO ao servidor usando Retrofit
-        }
-    }
+//    fun enviarDados() {
+//        viewModelScope.launch {
+//            // Crie o DTO com os dados
+//            val freelaDto = Service.CadastrarFreelaDto(
+//                nome = nome.value,
+//                sobrenome = sobrenome.value,
+//                cpf = cpf.value,
+//                telefone = telefone.value,
+//                areaAtuacao = areaAtuacao.value,
+//                linguagemDominio = linguagemDominio.value,
+//                formacao = formacao.value
+//            )
+//            // Envie o DTO ao servidor usando Retrofit
+//        }
+//    }
 
 
     fun criarUsuario(usuarioCriacaoDto: UsuarioCriacaoDto) {
@@ -82,6 +87,14 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
                 erroApi.postValue("Falha ao criar usuário: ${t.message}")
             }
         })
+    }
+    suspend fun getToken(context: Context): String? {
+        val tokenKey = stringPreferencesKey("token")
+        val dataStore = context.dataStore
+        val preferences = dataStore.data.map { preferences ->
+            preferences[tokenKey]
+        }.first()
+        return preferences
     }
 
     fun loginUsuario(usuarioLoginDto: Service.UsuarioLoginDto) {
@@ -150,17 +163,32 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
             _cadastroStatus.postValue(result)
         }
     }
+    fun cadastrarFreelancer(freelaDto: ServiceFreela.freelaDetailsDto) {
+        viewModelScope.launch {
+            val token = getToken(context)
+            if (token != null) {
+                apiService.cadastrarFreelancer("Bearer $token", freelaDto).enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+                            println("Freelancer cadastrado com sucesso")
+                        } else {
+                            println("Erro ao cadastrar freelancer: ${response.errorBody()?.string()}")
+                            erroApi.postValue("Erro ao cadastrar freelancer: ${response.errorBody()?.string()}")
+                        }
+                    }
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        println("Falha ao cadastrar freelancer: ${t.message}")
+                        erroApi.postValue("Falha ao cadastrar freelancer: ${t.message}")
+                    }
+                })
+            }
+        }
+    }
+
 
     private suspend fun saveToken(token: String) {
         context.tokenUsuario.edit { settings ->
             settings[stringPreferencesKey("token")] = token
         }
     }
-
-
-
-
-
-
-
 }

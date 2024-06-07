@@ -1,5 +1,7 @@
 package com.example.conecti.cadastroInicial.FreelaInicio
 
+import ModelFreela
+import UsuarioViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -45,6 +47,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.R
+import com.example.conecti.netWorkFreela.ServiceFreela
+import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
 
 class CadastroFreelaOne : ComponentActivity() {
@@ -52,9 +56,8 @@ class CadastroFreelaOne : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ConecTITheme {
-
                 Background()
-                EtapaUmFreela()
+                EtapaUmFreela( UsuarioViewModel(this))
             }
         }
     }
@@ -93,7 +96,7 @@ fun Background() {
 }
 
 @Composable
-fun EtapaUmFreela() {
+fun EtapaUmFreela(modelFrela : UsuarioViewModel) {
 
 
     Column(
@@ -113,9 +116,6 @@ fun EtapaUmFreela() {
         val sobrenomeFreela = remember { mutableStateOf("") }
         val cpfFreela = remember { mutableStateOf("") }
         val telefoneFreela = remember { mutableStateOf("") }
-        val emailFreela = remember { mutableStateOf("") }
-        val senhaFreela = remember { mutableStateOf("") }
-
         val expandedLinguagem = remember { mutableStateOf(false) }
         val selectedLinguagem = remember { mutableStateOf("") }
         val listaLinguagens = listOf(
@@ -215,7 +215,7 @@ fun EtapaUmFreela() {
             OutlinedTextField(
                 value = telefoneFreela.value,
                 onValueChange = { telefoneFreela.value = it },
-                label = { Text(text = stringResource(R.string.label_cpf)) },
+                label = { Text(text = stringResource(R.string.label_telefone)) },
                 modifier = Modifier
                     .height(60.dp)
 
@@ -406,7 +406,19 @@ fun EtapaUmFreela() {
 
                 ) {
                 OutlinedButton(
-                    onClick = {},
+                    onClick = {
+                        modelFrela.cadastrarFreelancer(
+                            ServiceFreela.freelaDetailsDto(
+                                nomeFreela.value,
+                                sobrenomeFreela.value,
+                                cpfFreela.value,
+                                telefoneFreela.value,
+                                selectedArea.value,
+                                selectedLinguagem.value,
+                                selectedFormacao.value
+                            )
+                        )
+                    },
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(2.dp, Color(0xFF204A7B)),
                     modifier = Modifier
@@ -488,7 +500,6 @@ fun EtapaUmFreela() {
 fun FreelaOnePreview() {
     MaterialTheme {
         Background()
-
-        EtapaUmFreela()
+       // EtapaUmFreela( UsuarioViewModel(null))
     }
 }

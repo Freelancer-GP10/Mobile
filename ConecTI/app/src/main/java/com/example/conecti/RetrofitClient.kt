@@ -1,23 +1,24 @@
 package com.example.conecti
 
 import ApiService
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 import retrofit2.converter.gson.GsonConverterFactory
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import tokenUsuario
 
 
 object RetrofitClient {
-    const val BASE_URL = "http://3.88.148.30:80/api"
 
-    var context:Context? = null
+    const val BASE_URL = "http://3.82.17.25/api"
+    var context: Context? = null
 
 
+    @SuppressLint("StaticFieldLeak")
     fun connection(): ApiService {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor { chain ->
@@ -26,8 +27,8 @@ object RetrofitClient {
                  var token:String? = null;
 
                 runBlocking {
-                    if(getToken()!=null){
-                        token= getToken()
+                    if(context?.let { getToken(it) } !=null){
+                        token= getToken(context!!)
                     }
                 }
                 val newRequest = if (token != null) {
@@ -49,9 +50,9 @@ object RetrofitClient {
             .create(ApiService::class.java)
         return cliente
     }
-    suspend fun getToken(): String? {
+    suspend fun getToken(context: Context): String? {
         val token = stringPreferencesKey("token")
-        val preferences = context?.tokenUsuario?.data?.first()
+        val preferences = this.context?.tokenUsuario?.data?.first()
         return preferences?.get(token)
     }
 }
