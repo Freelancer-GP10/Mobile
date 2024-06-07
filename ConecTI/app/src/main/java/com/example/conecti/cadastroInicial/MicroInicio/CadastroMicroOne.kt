@@ -2,6 +2,7 @@ package com.example.conecti.cadastroInicial.MicroInicio
 
 import MicroViewModel
 import UsuarioViewModel
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -58,14 +59,14 @@ class CadastroMicroOne : ComponentActivity() {
         setContent {
             ConecTITheme {
                 Background()
-                EtapaUmMMicro()
+                EtapaUmMMicro(null)
             }
         }
     }
 }
 
 @Composable
-fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.current)) {
+fun EtapaUmMMicro(extras: Bundle?, viewModel: MicroViewModel = MicroViewModel(LocalContext.current)) {
     val context = LocalContext.current
 
     Column(
@@ -178,7 +179,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
                 ) {
                     Text(
 
-                        text = if (selectedRamo.value.isEmpty()) "Ramo" else selectedRamo.value,
+                        text = if (selectedRamo.value.isEmpty()) stringResource(R.string.label_ramo) else selectedRamo.value,
 
                         modifier = Modifier
                             .weight(1f),
@@ -219,7 +220,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
             OutlinedTextField(
                 value = telefoneEmpresa.value,
                 onValueChange = { telefoneEmpresa.value = it },
-                label = { Text(text = "Telefone") },
+                label = { Text(text = stringResource(R.string.label_telefone))},
                 modifier = Modifier
                     .height(60.dp)
 
@@ -257,6 +258,9 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
                                 println("Erro ao cadastrar empresa: ${response.errorBody()?.string()}")
                             }
                         }
+                        // navegar para a tela de ServiceMicro
+                        val serviceMicro = Intent(context, ServiceMicro::class.java)
+                        context.startActivity(serviceMicro)
                     },
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(2.dp, Color(0xFF204A7B)),
@@ -268,7 +272,7 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
                         fontSize = 21.sp,
                         color = Color(0xFF204A7B),
                         fontWeight = FontWeight.W400,
-                        text = "Continuar"
+                        text = stringResource(R.string.botao_continuar)
                     )
                 }
 
@@ -339,6 +343,6 @@ fun EtapaUmMMicro(viewModel: MicroViewModel = MicroViewModel(LocalContext.curren
 fun GreetingPreview2() {
     ConecTITheme {
         Background()
-        EtapaUmMMicro()
+        EtapaUmMMicro(null)
     }
 }

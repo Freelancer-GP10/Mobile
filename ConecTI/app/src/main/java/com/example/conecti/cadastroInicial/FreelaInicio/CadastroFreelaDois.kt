@@ -32,11 +32,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.conecti.R
 import androidx.compose.ui.unit.sp
 import com.example.conecti.network.Service
 
@@ -87,7 +89,7 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
         ) {
             Spacer(modifier = Modifier.weight(1f)) // Ocupa todo o espaço à esquerda
             Text(
-                text = "Faça seu registro!",
+                text = stringResource(R.string.label_faca_registro),
                 fontSize = 30.sp
             )
             Spacer(modifier = Modifier.width(25.dp))
@@ -99,10 +101,10 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
         ) {
             Spacer(modifier = Modifier.weight(1f)) //
             Text(
-                text = "Já possui cadastro? ",
+                text = stringResource(R.string.label_possui_cadastro),
             )
             Text(
-                text = "Login",
+                text = stringResource(R.string.label_ja_possui_cadastro_login),
                 color = Color(0xFF204A7B)
             )
             Spacer(modifier = Modifier.width(28.dp))
@@ -117,7 +119,8 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                 Text(
                     fontSize = 20.sp,
                     color = Color(0xFF031224),
-                    fontWeight = FontWeight.W400, text = "Email"
+                    fontWeight = FontWeight.W400,
+                    text = stringResource(R.string.label_email)
                 )
             },
             shape = RoundedCornerShape(8.dp),
@@ -133,7 +136,8 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                 Text(
                     fontSize = 20.sp,
                     color = Color(0xFF031224),
-                    fontWeight = FontWeight.W400, text = "Senha"
+                    fontWeight = FontWeight.W400,
+                    text = stringResource(R.string.label_senha)
                 )
             },
             shape = RoundedCornerShape(8.dp),
@@ -155,7 +159,7 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                     fontSize = 20.sp,
                     color = Color(0xFF031224),
                     fontWeight = FontWeight.W400,
-                    text = "Confirmar Senha"
+                    text = stringResource(R.string.label_confirmar_senha)
                 )
             },
             shape = RoundedCornerShape(8.dp),
@@ -204,7 +208,7 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                     fontSize = 21.sp,
                     color = Color(0xFF204A7B),
                     fontWeight = FontWeight.W400,
-                    text = "Cadastrar"
+                    text = stringResource(R.string.botao_cadadastrar)
                 )
             }
 

@@ -71,6 +71,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.ButtonBars.BarraButton4
+import com.example.conecti.Micro.HistoricoPayMicro
+import com.example.conecti.Micro.Perfil_Micro_One
+import com.example.conecti.Micro.ServiceMicro
+import com.example.conecti.Micro.WorkSpaceMicro
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
@@ -452,19 +456,18 @@ fun Perfil5() {
                                 iniciarJanela.close()
                             }
                             if (it.texto_botao == "Perfil") {
-                                val mainIntent = Intent(contexto, Perfil_Freela_One::class.java)
+                                val mainIntent = Intent(contexto, Perfil_Micro_One::class.java)
                                 contexto.startActivity(mainIntent)
                             } else if (it.texto_botao == "WorkSpace") {
-                                val mainIntent = Intent(contexto, WorkSpaceFreela::class.java)
+                                val mainIntent = Intent(contexto, WorkSpaceMicro::class.java)
                                 contexto.startActivity(mainIntent)
-                            } else if (it.texto_botao == "Services") {
-                                val mainIntent = Intent(contexto, ServiceFreela::class.java)
+                            }else if (it.texto_botao == "Services") {
+                                val mainIntent = Intent(contexto, ServiceMicro::class.java)
                                 contexto.startActivity(mainIntent)
-                            } else if (it.texto_botao == "Pay") {
-                                val mainIntent = Intent(contexto, HistoricoPay::class.java)
+                            }else if (it.texto_botao == "Pay") {
+                                val mainIntent = Intent(contexto, HistoricoPayMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }
-
                         }
                     )
                 }

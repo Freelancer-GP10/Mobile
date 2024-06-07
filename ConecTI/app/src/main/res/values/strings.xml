@@ -63,10 +63,21 @@
     <string name="label_area_atuacao">Área de atuação</string>"
     <string name="label_linguagem_atuacao">Linguagem de domínio</string>"
     <string name="label_formacao">Formação</string>"
+    <string name="botao_cadadastrar">Cadastrar</string>"
+
 
     //CADASTRO INICIAL MICRO 1
     <string name="label_cnpj">CPNJ</string>"
+    <string name="label_ramo">Ramo</string>"
 
+    CADASTRO INICIAL FREELA E MICRO 2
+    <string name="label_email">Email</string>"
+    <string name="label_senha">Senha</string>"
+    <string name="label_confirmar_senha">Confirmar Senha</string>"
+    <string name="label_faca_registro">Faça seu registro!</string>"
+    <string name="label_possui_cadastro">Já possui cadastro?</string>"
+    <string name="label_ja_possui_cadastro_login">Login</string>
+    <string name="title_activity_service_micro_finally">ServiceMicroFinally</string>"
 
 
 </resources>
