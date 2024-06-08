@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
@@ -60,11 +61,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.buttonBars.BarraButtonMicro1
+import com.example.conecti.ButtonBars.BarraButtonMicro1
 import com.example.conecti.Freela.CustomMenuItem
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
@@ -83,6 +87,7 @@ class Perfil_Micro_Dois : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
     Column(
@@ -96,7 +101,10 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     iniciarJanela.open()
                 }
             },
-            modifier = Modifier.padding(start = 16.dp,top = 15.dp), // Adiciona um espaçamento à esquerda
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 15.dp
+            ), // Adiciona um espaçamento à esquerda
         ) {
             Icon(
                 imageVector = Icons.Filled.Menu,
@@ -286,9 +294,14 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                     onValueChange = { senhaFreela.value = it },
                     label = { Text(text = "Senha") },
                     modifier = Modifier
-                        .height(60.dp)
+                        .height(60.dp),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
 
-                )
+                    )
 
                 Spacer(modifier = Modifier.height(30.dp))
 
@@ -341,7 +354,7 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 }
                 //Spacer(modifier = Modifier.padding(bottom = 40.dp))
 
-                Spacer(modifier = Modifier.padding(top =  120.dp))
+                Spacer(modifier = Modifier.padding(top = 120.dp))
             }
 
         }
@@ -360,7 +373,7 @@ fun PerfilMicro2() {
         SubMenusBotoesMicro2(Icons.Rounded.Home, "WorkSpace", 32, true),
         SubMenusBotoesMicro2(Icons.Filled.Build, "Services", 32, true),
         SubMenusBotoesMicro2(Icons.Filled.ShoppingCart, "Pay", 0, false),
-         )
+    )
     val subMenus2 = listOf(
         SubMenusBotoesMicro2(Icons.Default.ExitToApp, "Sair", 0, false),
     )
@@ -460,11 +473,11 @@ fun PerfilMicro2() {
                             } else if (it.texto_botao == "WorkSpace") {
                                 val mainIntent = Intent(contexto, WorkSpaceMicro::class.java)
                                 contexto.startActivity(mainIntent)
-                            }else if (it.texto_botao == "Services") {
+                            } else if (it.texto_botao == "Services") {
                                 val mainIntent = Intent(contexto, ServiceMicro::class.java)
                                 contexto.startActivity(mainIntent)
-                            }else if (it.texto_botao == "Pay") {
-                                val mainIntent = Intent(contexto, HIstoricoPayMicro::class.java)
+                            } else if (it.texto_botao == "Pay") {
+                                val mainIntent = Intent(contexto, HistoricoPayMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }
 
@@ -513,7 +526,7 @@ fun PerfilMicro2() {
                     modifier = Modifier
                         .fillMaxWidth()
 
-                ){
+                ) {
                     BarraButtonMicro1()
                 }
             }
@@ -582,10 +595,9 @@ data class SubMenusBotoesMicro2(
     val booleanNotificao: Boolean
 )
 
-
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview8() {
+fun GreetingPreview12() {
     ConecTITheme {
         PerfilMicro2()
     }

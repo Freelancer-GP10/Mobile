@@ -65,7 +65,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.buttonBars.BarraButton1
+import com.example.conecti.ButtonBars.BarraButton1
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
@@ -77,11 +77,13 @@ class Perfil_Freela_One : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-                Perfil1()
+
+
             }
         }
     }
 }
+
 
 
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
@@ -479,7 +481,7 @@ fun ProfileSection() {
                     onClick = {
                         val mainIntent2 = Intent(contexto4, Perfil_Freela_Dois::class.java)
                         contexto4.startActivity(mainIntent2)
-                              },
+                    },
                     modifier = Modifier
                         .height(40.dp) // Define a altura do botão como 40dp
                         .width(100.dp),
@@ -556,6 +558,7 @@ fun PortfolioSection() {
         }
     }
 }
+
 
 
 @Preview(showBackground = true)

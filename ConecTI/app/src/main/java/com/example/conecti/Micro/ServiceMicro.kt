@@ -9,49 +9,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.twotone.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -70,10 +38,16 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.buttonBars.BarraButtonMicro4
+import com.example.conecti.ButtonBars.BarraButton4
+import com.example.conecti.ButtonBars.BarraButtonMicro4
 import com.example.conecti.Freela.CustomMenuItem
+import com.example.conecti.Freela.HistoricoPay
+import com.example.conecti.Freela.Perfil_Freela_One
+import com.example.conecti.Freela.ServiceFreela
 import com.example.conecti.Freela.SubMenusBotoes
+import com.example.conecti.Freela.WorkSpaceFreela
 import com.example.conecti.R
+import com.example.conecti.cadastroInicial.FreelaInicio.CadastroFreelaOne
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -83,7 +57,9 @@ class ServiceMicro : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PerfilMicro5()
+            ConecTITheme {
+
+            }
         }
     }
 }
@@ -121,7 +97,7 @@ fun componentesServiceMicro(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .fillMaxWidth(0.66f),
+                    .fillMaxWidth(0.64f),
                 //.background(Color.Red),
                 horizontalAlignment = Alignment.Start
 
@@ -201,14 +177,14 @@ fun componentesServiceMicro(
                 Button(
                     onClick = { /*TODO*/ },
                     modifier = Modifier
-                        .padding(top = 15.dp, bottom = 15.dp, end = 10.dp)
+                        .padding(top = 15.dp, bottom = 15.dp, end = 7.dp)
                         .height(40.dp)
-                        .width(125.dp),
+                        .width(140.dp),
                     shape = RoundedCornerShape(7.dp)
                 ) {
                     Text(
                         text = "Aguardando",
-                        fontSize = 10.sp,
+                        fontSize = 12.sp,
 
                         )
                 }
@@ -221,8 +197,8 @@ fun componentesServiceMicro(
 
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
 @Composable
-fun MainContentMicro5(scope: CoroutineScope, iniciarJanela: DrawerState) {
-
+fun MainContentMicro5(extras: Bundle?,scope: CoroutineScope, iniciarJanela: DrawerState) {
+val context = LocalContext.current
     val pesquisaPay = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
@@ -262,46 +238,36 @@ fun MainContentMicro5(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
             ) {
                 Spacer(modifier = Modifier.height(10.dp))
+
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                     //   .background(Color.Red),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = "Service",
                         color = Color(0xFF215683),
                         fontSize = 38.sp,
                         modifier = Modifier
-                            .padding(start = 0.dp, bottom = 10.dp)
-
-
+                            .padding(start = 0.dp, bottom = 0.dp, end = 30.dp)
                     )
 
-                    Button(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier
-                            .height(60.dp)
-                            .width(125.dp),
-                        shape = RoundedCornerShape(7.dp)
-                    ) {
-                        Column(
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "Aguardando",
-                                fontSize = 14.sp,
+                    //Spacer(modifier = Modifier.width(25.dp)) // Espaço entre o texto e o botão
 
-                                )
-                            Text(
-                                text = "Serviço",
-                                fontSize = 14.sp,
-                            )
+                    Button(
+                        onClick = {
+                            val adicionarDemandas = Intent(context, CadastroDemanda::class.java)
+                            context.startActivity(adicionarDemandas)
+                        },
+                        modifier = Modifier.padding(start = 30.dp),
+                        shape = RoundedCornerShape (7.dp)
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(text = "Adicionar", fontSize = 15.sp)
+                            Text(text = "Servico", fontSize = 15.sp)
                         }
                     }
                 }
+
 
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -379,7 +345,6 @@ fun MainContentMicro5(scope: CoroutineScope, iniciarJanela: DrawerState) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PerfilMicro5() {
-
     val contexto = LocalContext.current
 
     val subMenus = listOf(
@@ -387,7 +352,6 @@ fun PerfilMicro5() {
         SubMenusBotoes(Icons.Rounded.Home, "WorkSpace", 32, true),
         SubMenusBotoes(Icons.Filled.Build, "Services", 32, true),
         SubMenusBotoes(Icons.Filled.ShoppingCart, "Pay", 0, false),
-
     )
     val subMenus2 = listOf(
         SubMenusBotoes(Icons.Default.ExitToApp, "Sair", 0, false),
@@ -483,7 +447,6 @@ fun PerfilMicro5() {
                             scope.launch {
                                 iniciarJanela.close()
                             }
-
                             if (it.texto_botao == "Perfil") {
                                 val mainIntent = Intent(contexto, Perfil_Micro_One::class.java)
                                 contexto.startActivity(mainIntent)
@@ -494,7 +457,7 @@ fun PerfilMicro5() {
                                 val mainIntent = Intent(contexto, ServiceMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }else if (it.texto_botao == "Pay") {
-                                val mainIntent = Intent(contexto, HIstoricoPayMicro::class.java)
+                                val mainIntent = Intent(contexto, HistoricoPayMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }
 
@@ -525,13 +488,12 @@ fun PerfilMicro5() {
 
                 }
                 Spacer(modifier = Modifier.height(35.dp))
-
             }
         }
     }, drawerState = iniciarJanela,
         content = {
 
-            MainContentMicro5(scope = scope, iniciarJanela = iniciarJanela)
+            MainContentMicro5(extras = null, scope = scope, iniciarJanela = iniciarJanela)
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -616,7 +578,7 @@ fun CustomMenuItemMicro5(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview13() {
+fun GreetingPreview5() {
     ConecTITheme {
         PerfilMicro5()
     }

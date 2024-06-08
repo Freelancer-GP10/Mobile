@@ -65,7 +65,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.buttonBars.BarraButtonMicro1
+import com.example.conecti.ButtonBars.BarraButtonMicro1
 import com.example.conecti.Freela.CustomMenuItem
 import com.example.conecti.Freela.SubMenusBotoes
 import com.example.conecti.R
@@ -80,10 +80,12 @@ class Perfil_Micro_One : ComponentActivity() {
         setContent {
             ConecTITheme {
                 PerfilMicro1()
+
             }
         }
     }
 }
+
 
 @Composable
 fun MainContentMicro1(scope: CoroutineScope, iniciarJanela: DrawerState) {
@@ -170,7 +172,7 @@ fun PerfilMicro1() {
         SubMenusBotoes(Icons.Rounded.Home, "WorkSpace", 32, true),
         SubMenusBotoes(Icons.Filled.Build, "Services", 32, true),
         SubMenusBotoes(Icons.Filled.ShoppingCart, "Pay", 0, false),
-     )
+    )
     val subMenus2 = listOf(
         SubMenusBotoes(Icons.Default.ExitToApp, "Sair", 0, false),
     )
@@ -274,7 +276,7 @@ fun PerfilMicro1() {
                                 val mainIntent = Intent(contexto, ServiceMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }else if (it.texto_botao == "Pay") {
-                                val mainIntent = Intent(contexto, HIstoricoPayMicro::class.java)
+                                val mainIntent = Intent(contexto, HistoricoPayMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }
 
@@ -310,7 +312,7 @@ fun PerfilMicro1() {
         }
     }, drawerState = iniciarJanela,
         content = {
-           MainContentMicro1(scope = scope, iniciarJanela = iniciarJanela)
+            MainContentMicro1(scope = scope, iniciarJanela = iniciarJanela)
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -558,10 +560,11 @@ fun PortfolioSection() {
 }
 
 
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview7() {
+fun GreetingPreview11() {
     ConecTITheme {
-      PerfilMicro1()
+        PerfilMicro1()
     }
 }

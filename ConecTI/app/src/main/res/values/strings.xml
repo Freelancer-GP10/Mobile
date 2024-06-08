@@ -3,9 +3,10 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_cadastro">Cadastro</string>
     <string name="title_activity_cadastro_free">Cadastro_Free</string>
-    <string name="title_activity_perfil_free">Perfil_Free</string>
+    <string name="title_activity_perfil_freela_one">Perfil_Freela_one</string>
+    <string name="title_activity_service_freela">Service_Freela</string>
     <string name="title_activity_cadastro_freela_one">CadastroFreelaOne</string>
-    <string name="title_activity_cadastro_freela_dois">CadastroFreelaDois</string>
+    <string name="title_activity_cadastro_freela_tres">CadastroFreelaTres</string>
     <string name="title_activity_menu_lateral">MenuLateral</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -18,20 +19,65 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="title_activity_perfil_freela_one">Perfil_freela_one</string>
-    <string name="title_activity_nav_bar">NavBar</string>
+    <string name="title_activity_teste">Teste</string>
+    <string name="title_activity_button_bar">F</string>
     <string name="title_activity_perfil_freela_dois">Perfil_freela_dois</string>
     <string name="title_activity_teststst">Teststst</string>
     <string name="title_activity_historico_pay">HistoricoPay</string>
     <string name="title_activity_work_space_freela">WorkSpaceFreela</string>
-    <string name="title_activity_service_freela">ServiceFreela</string>
+    <string name="title_activity_cadastro_freela_dois">Cadastro_Freela_Dois</string>
+    <string name="title_activity_cadastro_micro_inicio">CadastroMicroInicio</string>
+    <string name="title_activity_cadastro_micro_one">CadastroMicroOne</string>
+    <string name="title_activity_cadastro_micro_dois">CadastroMicroDois</string>
+    <string name="title_activity_historico_pay_micro">HistoricoPayMicro</string>
     <string name="title_activity_perfil_micro_one">Perfil_Micro_One</string>
     <string name="title_activity_perfil_micro_dois">Perfil_Micro_Dois</string>
-    <string name="title_activity_historico_pay_micro">HIstoricoPayMicro</string>
     <string name="title_activity_work_space_micro">WorkSpaceMicro</string>
     <string name="title_activity_service_micro">ServiceMicro</string>
     <string name="title_activity_button_bar_micro">ButtonBarMicro</string>
-    <string name="title_activity_cadastro_usuario_dois">Cadastro_UsuarioDois</string>
-    <string name="title_activity_cadastro_micro_one">CadastroMicroOne</string>
-    <string name="title_activity_cadastro_micro_dois">CadastroMicroDois</string>
+
+
+    // --- LOGIN -----
+    <string name="login_faca">Faça seu login!</string>
+    <string name="title_activity_cadastro_demanda">CadastroDemanda</string>"
+    <string name="nao_pssuo_cadastro">Não possui cadastro? Cadastre - se</string>"
+    <string name="entrar_botton">Entrar</string>"
+    <string name="voltar_botton">Voltar</string>"
+
+    // -- CADASTRO INICIAL
+    <string name="deseja_cadastrar_inicio">Como você deseja\n se registrar?</string>"
+    <string name="botao_freela_inicio">Freelancer</string>"
+    <string name="botao_micro_inicio">Microempreendedor</string>"
+
+    //CADASTRO INICIAL FREELA E MICRO 1
+    <string name="finalize_registro_cadastro_freelaMicro_one">Finalize seu registro</string>"
+    <string name="fique_por_dentro_cadastro_freelaMicro_one">E fique por dentro de tudo!</string>"
+    <string name="botao_continuar">Continuar</string>"
+
+
+    CADASTRO INICIAL FREELA 1
+    <string name="label_nome">Nome</string>"
+    <string name="label_sobrenome">Sobrenome</string>"
+    <string name="label_cpf">CPF</string>"
+    <string name="label_telefone">Telefone</string>"
+    <string name="label_area_atuacao">Área de atuação</string>"
+    <string name="label_linguagem_atuacao">Linguagem de domínio</string>"
+    <string name="label_formacao">Formação</string>"
+    <string name="botao_cadadastrar">Cadastrar</string>"
+
+
+    //CADASTRO INICIAL MICRO 1
+    <string name="label_cnpj">CPNJ</string>"
+    <string name="label_ramo">Ramo</string>"
+
+    CADASTRO INICIAL FREELA E MICRO 2
+    <string name="label_email">Email</string>"
+    <string name="label_senha">Senha</string>"
+    <string name="label_confirmar_senha">Confirmar Senha</string>"
+    <string name="label_faca_registro">Faça seu registro!</string>"
+    <string name="label_possui_cadastro">Já possui cadastro?</string>"
+    <string name="label_ja_possui_cadastro_login">Login</string>
+    <string name="title_activity_service_micro_finally">ServiceMicroFinally</string>"
+
+
 </resources>

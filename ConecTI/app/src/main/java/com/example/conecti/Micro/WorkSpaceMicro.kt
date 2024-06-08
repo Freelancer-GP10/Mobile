@@ -69,7 +69,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.buttonBars.BarraButtonMicro3
+import com.example.conecti.ButtonBars.BarraButtonMicro3
 import com.example.conecti.Freela.CustomMenuItem
 import com.example.conecti.Freela.SubMenusBotoes
 import com.example.conecti.R
@@ -84,12 +84,11 @@ class WorkSpaceMicro : ComponentActivity() {
         setContent {
             ConecTITheme {
                 PerfilMicro4()
+
             }
         }
     }
 }
-
-
 //AQUI ESTA AS VARIAVEIS E OS COMPONENTES DAS DEMANDAS
 @Composable
 fun componentesWorkSpaceMicro(
@@ -464,7 +463,7 @@ fun PerfilMicro4() {
                                 val mainIntent = Intent(contexto, ServiceMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }else if (it.texto_botao == "Pay") {
-                                val mainIntent = Intent(contexto, HIstoricoPayMicro::class.java)
+                                val mainIntent = Intent(contexto, HistoricoPayMicro::class.java)
                                 contexto.startActivity(mainIntent)
                             }
 
@@ -534,10 +533,12 @@ data class SubMenusBotoesMicro4(
 )
 
 
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview12() {
+fun GreetingPreview13() {
     ConecTITheme {
         PerfilMicro4()
+
     }
 }

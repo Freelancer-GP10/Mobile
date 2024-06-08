@@ -69,7 +69,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.buttonBars.BarraButton3
+import com.example.conecti.ButtonBars.BarraButton3
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
@@ -81,7 +81,7 @@ class WorkSpaceFreela : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-                Perfil4()
+
             }
         }
     }
@@ -527,10 +527,11 @@ data class SubMenusBotoes4(
 )
 
 
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview9() {
     ConecTITheme {
-        Perfil4()
+Perfil4()
     }
 }

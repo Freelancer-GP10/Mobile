@@ -19,11 +19,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.cadastroInicio.InicioFreela.CadastroFrellaDois
+import com.example.conecti.cadastroInicial.FreelaInicio.CadastroFreelaDois
+import com.example.conecti.cadastroInicial.FreelaInicio.CadastroFreelaOne
+import com.example.conecti.cadastroInicial.MicroInicio.CadastroMicroDois
 import com.example.conecti.ui.theme.ConecTITheme
 
 class Cadastro : ComponentActivity() {
@@ -70,8 +73,7 @@ fun LoginScreenCadastro(activity: Activity) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Como você deseja\n" +
-                            "se registrar?",
+                    text = stringResource(R.string.deseja_cadastrar_inicio),
                     fontSize = 30.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
@@ -80,8 +82,8 @@ fun LoginScreenCadastro(activity: Activity) {
 
                 Button(
                     onClick = {
-                        val cadastroFrellaTres = Intent(contexto, CadastroFrellaDois::class.java)
-                        contexto.startActivity(cadastroFrellaTres)
+                        val cadastroFreelaDois = Intent(contexto, CadastroFreelaDois::class.java)
+                        contexto.startActivity(cadastroFreelaDois)
                     },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
@@ -94,7 +96,7 @@ fun LoginScreenCadastro(activity: Activity) {
 
                     
                     Text(
-                        text = "Freelancer",
+                        text = stringResource(R.string.botao_freela_inicio),
                         fontSize = 24.sp,
                         color = Color.White,
                         modifier = Modifier // Adicionando o argumento opcional nomeado
@@ -109,7 +111,10 @@ fun LoginScreenCadastro(activity: Activity) {
                 )
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        val cadastroMicroDois = Intent(contexto, CadastroMicroDois::class.java)
+                        contexto.startActivity(cadastroMicroDois)
+                    },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .padding(top = 5.dp)
@@ -117,7 +122,7 @@ fun LoginScreenCadastro(activity: Activity) {
                         .height(71.dp)
                 ) {
                     Text(
-                        text = "Microempreendedor",
+                        text = stringResource(R.string.botao_micro_inicio),
                         fontSize = 24.sp,
                         color = Color.White,
                         modifier = Modifier // Adicionando o argumento opcional nomeado

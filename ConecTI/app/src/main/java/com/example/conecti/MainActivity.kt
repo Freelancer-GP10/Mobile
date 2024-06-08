@@ -33,11 +33,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.conecti.Freela.Perfil1
-import com.example.conecti.Freela.Perfil5
-import com.example.conecti.Micro.PerfilMicro1
-import com.example.conecti.Micro.PerfilMicro4
-import com.example.conecti.Micro.WorkSpaceMicro
 import com.example.conecti.ui.theme.ConecTITheme
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
@@ -47,6 +42,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            RetrofitClient.context= LocalContext.current
+
             configureNetworkSecurityExceptions()
             ConecTITheme {
                 // A surface container using the 'background' color from the theme
@@ -54,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Perfil1()
+                    LoginScreen("android")
                 }
             }
         }
@@ -172,6 +169,6 @@ fun BackgroundImage() {
 @Composable
 fun GreetingPreview() {
     ConecTITheme {
-        Perfil1()
+        LoginScreen("android")
     }
 }
