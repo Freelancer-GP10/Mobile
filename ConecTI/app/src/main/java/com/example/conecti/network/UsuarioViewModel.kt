@@ -88,14 +88,14 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
             }
         })
     }
-    suspend fun getToken(context: Context): String? {
-        val tokenKey = stringPreferencesKey("token")
-        val dataStore = context.dataStore
-        val preferences = dataStore.data.map { preferences ->
-            preferences[tokenKey]
-        }.first()
-        return preferences
-    }
+//    suspend fun getToken(): String? { // Alteração 1: Nome da função getToken foi corrigido e usada a mesma para obter o token
+//        val tokenKey = stringPreferencesKey("token")
+//        val dataStore = context.dataStore
+//        val preferences = dataStore.data.map { preferences ->
+//            preferences[tokenKey]
+//        }.first()
+//        return preferences
+//    }
 
     fun loginUsuario(usuarioLoginDto: Service.UsuarioLoginDto) {
         apiService.login(usuarioLoginDto).enqueue(object :
@@ -165,7 +165,7 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
     }
     fun cadastrarFreelancer(freelaDto: ServiceFreela.freelaDetailsDto) {
         viewModelScope.launch {
-            val token = getToken(context)
+            val token = getToken2()
             if (token != null) {
                 apiService.cadastrarFreelancer("Bearer $token", freelaDto).enqueue(object : Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -190,5 +190,10 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
         context.tokenUsuario.edit { settings ->
             settings[stringPreferencesKey("token")] = token
         }
+    }
+
+    private suspend fun getToken2(): String? {
+        val preferences = context.tokenUsuario.data.first()
+        return preferences[stringPreferencesKey("token")]
     }
 }

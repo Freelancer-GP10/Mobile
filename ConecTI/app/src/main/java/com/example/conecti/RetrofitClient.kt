@@ -14,7 +14,7 @@ import tokenUsuario
 
 object RetrofitClient {
 
-    const val BASE_URL = "http://3.82.17.25/api"
+    const val BASE_URL = "http://3.89.50.143/api"
     var context: Context? = null
 
 
@@ -26,14 +26,19 @@ object RetrofitClient {
 
                  var token:String? = null;
 
+//                runBlocking {
+//                    if(context?.let { getToken(it) } !=null){
+//                        token= getToken(context!!)
+//                    }
+//                }
+
                 runBlocking {
-                    if(context?.let { getToken(it) } !=null){
-                        token= getToken(context!!)
-                    }
+                    token = context?.let { getToken(it) } // Alteração: Correção na forma de recuperar o token
                 }
+
                 val newRequest = if (token != null) {
                     originalRequest.newBuilder()
-                        .header("Authorization", " $token")
+                        .header("Authorization", "Bearer $token")
                         .build()
                 } else {
                     originalRequest
@@ -52,7 +57,7 @@ object RetrofitClient {
     }
     suspend fun getToken(context: Context): String? {
         val token = stringPreferencesKey("token")
-        val preferences = this.context?.tokenUsuario?.data?.first()
+        val preferences = context.tokenUsuario.data.first()
         return preferences?.get(token)
     }
 }
