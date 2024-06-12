@@ -15,11 +15,7 @@
         android:theme="@style/Theme.ConecTI"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".Micro.ServiceMicroFinally"
-            android:exported="false"
-            android:label="@string/title_activity_service_micro_finally"
-            android:theme="@style/Theme.ConecTI" />
+
         <activity
             android:name=".Micro.CadastroDemanda"
             android:exported="false"

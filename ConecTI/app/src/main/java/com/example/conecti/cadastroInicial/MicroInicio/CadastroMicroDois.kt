@@ -1,5 +1,6 @@
 package com.example.conecti.cadastroInicial.MicroInicio
 
+import UsuarioViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import com.example.conecti.R
 import androidx.compose.ui.unit.sp
 import com.example.conecti.cadastroInicial.FreelaInicio.Background
+import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
 
 class CadastroMicroDois : ComponentActivity() {
@@ -54,11 +57,11 @@ class CadastroMicroDois : ComponentActivity() {
 }
 
 @Composable
-fun EtapaDoisMicro() {
+fun EtapaDoisMicro(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.current)) {
 
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
-    val entradaPapel = remember { mutableStateOf("Freelancer") }
+    val entradaPapel = remember { mutableStateOf("Empresa") }
     val entradaConfirmarSenha = remember { mutableStateOf("") }
 
 
@@ -177,6 +180,13 @@ fun EtapaDoisMicro() {
                     println(entradaSenha)
                     // Imprime "Hello, world!" no console
 
+                    viewModel.criarUsuario(
+                        usuarioCriacaoDto = Service.UsuarioCriacaoDto(
+                            email = entradaEmail.value,
+                            papel = entradaPapel.value,
+                            senha = entradaSenha.value
+                        )
+                    )
 
                 },
                 shape = RoundedCornerShape(8.dp),

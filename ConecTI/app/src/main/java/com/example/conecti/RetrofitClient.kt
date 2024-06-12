@@ -14,7 +14,7 @@ import tokenUsuario
 
 object RetrofitClient {
 
-    const val BASE_URL = "http://3.89.50.143/api"
+    const val BASE_URL = "http://52.90.179.211/api"
     var context: Context? = null
 
 

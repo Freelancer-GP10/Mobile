@@ -58,7 +58,7 @@ class ServiceMicro : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-
+            PerfilMicro5()
             }
         }
     }

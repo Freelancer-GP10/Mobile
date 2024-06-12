@@ -148,6 +148,7 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
         }
     }
 
+
     fun cadastrarServico(servico: Service.CadastrarServicoDto) {
         viewModelScope.launch {
             val result = try {
@@ -163,6 +164,7 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
             _cadastroStatus.postValue(result)
         }
     }
+
     fun cadastrarFreelancer(freelaDto: ServiceFreela.freelaDetailsDto) {
         viewModelScope.launch {
             val token = getToken2()
@@ -185,14 +187,13 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
         }
     }
 
-
     private suspend fun saveToken(token: String) {
         context.tokenUsuario.edit { settings ->
             settings[stringPreferencesKey("token")] = token
         }
     }
 
-    private suspend fun getToken2(): String? {
+    public suspend fun getToken2(): String? {
         val preferences = context.tokenUsuario.data.first()
         return preferences[stringPreferencesKey("token")]
     }

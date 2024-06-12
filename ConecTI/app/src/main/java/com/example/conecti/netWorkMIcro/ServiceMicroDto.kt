@@ -2,8 +2,7 @@ package com.example.conecti.netWorkMIcro
 
 import com.example.conecti.network.Service
 
-class ServiceMicro {
-
+class ServiceMicroDto {
     data class CadastrarEmpresaDto(
         val nome: String,
         val cnpj: String,

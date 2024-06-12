@@ -163,7 +163,7 @@ fun LoginScreenLogin(extras: Bundle?, usuarioViewModel: UsuarioViewModel) {
                     "Redirecionando para a tela de cadastro do Freelancer",
                     Toast.LENGTH_LONG
                 ).show()
-            } else if (usuarioAutenticado.papel.toString() == "Microempreendedor") {
+            } else if (usuarioAutenticado.papel.toString() == "Empresa") {
                 val cadastroMicro = Intent(contexto, CadastroMicroOne::class.java)
                 contexto.startActivity(cadastroMicro)
                 Toast.makeText(

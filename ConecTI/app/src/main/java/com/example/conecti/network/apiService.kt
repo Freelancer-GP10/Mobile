@@ -3,7 +3,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.conecti.netWorkFreela.ServiceFreela
-import com.example.conecti.netWorkMIcro.ServiceMicro
+import com.example.conecti.netWorkMIcro.ServiceMicroDto
 import com.example.conecti.network.Service
 import retrofit2.Call
 import retrofit2.http.Body
@@ -26,12 +26,16 @@ interface ApiService {
     @Header("Authorization") token: String,
     @Body freelaDto: ServiceFreela.freelaDetailsDto
     ): Call<Void>
-    @POST("api/empresa")
-    fun cadastrarEmpresa(@Body empresa: ServiceMicro.CadastrarEmpresaDto): Call<ServiceMicro.Empresa>
+    @POST("/api/empresa")
+    fun cadastrarEmpresa(
+        @Header("Authorization") token: String,
+        @Body empresa: ServiceMicroDto.CadastrarEmpresaDto): Call<ServiceMicroDto.Empresa>
    // @POST("/cadastrarFreelancer")
     //fun cadastrarFreelancer(@Body freelaDto: ServiceFreela.freelaDetailsDto): Call<Void>
    @GET("/lista-proximos-servicos")
-   fun getProximosServicos(): Call<List<Service.ListarServicoDto>>
+   fun getProximosServicos(
+
+   ): Call<List<Service.ListarServicoDto>>
     @POST("/api/servicos")
     fun cadastrarServico(@Body cadastrarServicoDto: Service.CadastrarServicoDto): Call<Void>
 }
