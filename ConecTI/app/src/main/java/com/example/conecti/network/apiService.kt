@@ -32,10 +32,12 @@ interface ApiService {
         @Body empresa: ServiceMicroDto.CadastrarEmpresaDto): Call<ServiceMicroDto.Empresa>
    // @POST("/cadastrarFreelancer")
     //fun cadastrarFreelancer(@Body freelaDto: ServiceFreela.freelaDetailsDto): Call<Void>
-   @GET("/lista-proximos-servicos")
+   @GET("/api/servico/lista-proximos-servicos")
    fun getProximosServicos(
-
+       @Header("Authorization") token: String,
    ): Call<List<Service.ListarServicoDto>>
-    @POST("/api/servicos")
-    fun cadastrarServico(@Body cadastrarServicoDto: Service.CadastrarServicoDto): Call<Void>
+    @POST("/api/servico")
+    fun cadastrarServico(
+        @Header("Authorization") token: String,
+        @Body cadastrarServicoDto: Service.CadastrarServicoDto): Call<Void>
 }

@@ -1,4 +1,5 @@
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -128,7 +129,9 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
 
     fun fetchProximosServicos() {
         viewModelScope.launch {
-            val call = apiService.getProximosServicos()
+            val token = getToken2()
+
+            val call = apiService.getProximosServicos(token!!)
             call.enqueue(object : Callback<List<Service.ListarServicoDto>> {
                 override fun onResponse(
                     call: Call<List<Service.ListarServicoDto>>,
@@ -151,19 +154,29 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
 
     fun cadastrarServico(servico: Service.CadastrarServicoDto) {
         viewModelScope.launch {
-            val result = try {
-                val response = apiService.cadastrarServico(servico).execute()
-                if (response.isSuccessful) {
-                    Result.success(response.body())
-                } else {
-                    Result.failure(Exception(response.errorBody()?.string()))
+            val token = getToken2()
+            if (token != null) {
+
+                val result = try {
+                    val response = apiService.cadastrarServico(token, servico).execute()
+                    if (response.isSuccessful) {
+                        Log.i("api","cadastro de demanda")
+                        Result.success(response.body())
+                    } else {
+                        Log.e("api","sem retorno no cadastro ${response.errorBody()?.string()}")
+                        Result.failure(Exception(response.errorBody()?.string()))
+                    }
+                } catch (e: Exception) {
+                    Log.e("api","demanda n foi cadastrada ${e.message}")
+                    Result.failure(e)
                 }
-            } catch (e: Exception) {
-                Result.failure(e)
+                _cadastroStatus.postValue(result)
+            } else {
+                _cadastroStatus.postValue(Result.failure(Exception("Token não encontrado")))
             }
-            _cadastroStatus.postValue(result)
         }
     }
+
 
     fun cadastrarFreelancer(freelaDto: ServiceFreela.freelaDetailsDto) {
         viewModelScope.launch {

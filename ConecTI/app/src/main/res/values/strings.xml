@@ -77,7 +77,8 @@
     <string name="label_faca_registro">Faça seu registro!</string>"
     <string name="label_possui_cadastro">Já possui cadastro?</string>"
     <string name="label_ja_possui_cadastro_login">Login</string>
-    <string name="title_activity_service_micro_finally">ServiceMicroFinally</string>"
+    <string name="title_activity_service_micro_finally">ServiceMicroFinally</string>
+    <string name="title_activity_cadastrar_service_final">CadastrarServiceFinal</string>"
 
 
 </resources>

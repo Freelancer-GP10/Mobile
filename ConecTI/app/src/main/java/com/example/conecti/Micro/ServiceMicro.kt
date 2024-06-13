@@ -1,5 +1,6 @@
 package com.example.conecti.Micro
 
+import UsuarioViewModel
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,6 +12,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -20,6 +22,7 @@ import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.twotone.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -197,9 +200,15 @@ fun componentesServiceMicro(
 
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
 @Composable
-fun MainContentMicro5(extras: Bundle?,scope: CoroutineScope, iniciarJanela: DrawerState) {
+fun MainContentMicro5(extras: Bundle?,scope: CoroutineScope, iniciarJanela: DrawerState, usuarioViewModel: UsuarioViewModel) {
 val context = LocalContext.current
     val pesquisaPay = remember { mutableStateOf("") }
+    var servicos =  usuarioViewModel.servicos.observeAsState().value
+
+    LaunchedEffect(Unit) {
+        usuarioViewModel.fetchProximosServicos()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -255,7 +264,7 @@ val context = LocalContext.current
 
                     Button(
                         onClick = {
-                            val adicionarDemandas = Intent(context, CadastroDemanda::class.java)
+                            val adicionarDemandas = Intent(context, CadastrarServiceFinal::class.java)
                             context.startActivity(adicionarDemandas)
                         },
                         modifier = Modifier.padding(start = 30.dp),
@@ -321,16 +330,18 @@ val context = LocalContext.current
                         .padding(bottom = 50.dp),
                     verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
                 ) {
-                    items(8) { index ->
+                    items(items = servicos ?: emptyList()) {
                         componentesServiceMicro(
-                            tagTipo = "Front-End",
-                            titulo = "Site institucional",
+                            tagTipo = it.nome,
+                            titulo = it.descricao,
                             empresa = "SpTech",
                             description = "Este é um texto gerado com 40 caracteres que eu pesquisei no chat e ele é chat muito vida loka e pah e isso mesmo e tchururu e pahh e thcururu e pah ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ",
-                            valor = "2.000,00 ",
+                            valor = it.valor.toString(),
                             data = "21/jan"
                         )
                     }
+
+
                 }
 
 
@@ -493,7 +504,7 @@ fun PerfilMicro5() {
     }, drawerState = iniciarJanela,
         content = {
 
-            MainContentMicro5(extras = null, scope = scope, iniciarJanela = iniciarJanela)
+            MainContentMicro5(extras = null, scope = scope, iniciarJanela = iniciarJanela, usuarioViewModel=UsuarioViewModel(contexto))
             Column(
                 modifier = Modifier
                     .fillMaxSize()
