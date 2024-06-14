@@ -54,8 +54,6 @@ class CadastroFreelaDois : ComponentActivity() {
                 ) {
                     Background()
                     EtapaDoisFreela()
-
-
                 }
             }
         }

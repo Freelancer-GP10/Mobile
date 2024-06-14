@@ -132,6 +132,9 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
             val token = getToken2()
 
             val call = apiService.getProximosServicos(token!!)
+            if(token.isEmpty() || token==null){
+                println("Token não encontrado")
+            }
             call.enqueue(object : Callback<List<Service.ListarServicoDto>> {
                 override fun onResponse(
                     call: Call<List<Service.ListarServicoDto>>,
@@ -156,21 +159,25 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
         viewModelScope.launch {
             val token = getToken2()
             if (token != null) {
+                Log.i("api", "Token: $token")
+                Log.i("api", "Dados do serviço: $servico")
 
-                val result = try {
-                    val response = apiService.cadastrarServico(token, servico).execute()
-                    if (response.isSuccessful) {
-                        Log.i("api","cadastro de demanda")
-                        Result.success(response.body())
-                    } else {
-                        Log.e("api","sem retorno no cadastro ${response.errorBody()?.string()}")
-                        Result.failure(Exception(response.errorBody()?.string()))
+                apiService.cadastrarServico("Bearer $token", servico).enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+                            println("servico cadastrado com sucesso")
+                            Log.i("api", "servico cadastrado com sucesso")
+                        } else {
+                            println("Erro ao cadastrar servico: ${response.errorBody()?.string()}")
+                            erroApi.postValue("Erro ao cadastrar servico: ${response.errorBody()?.string()}")
+                        }
                     }
-                } catch (e: Exception) {
-                    Log.e("api","demanda n foi cadastrada ${e.message}")
-                    Result.failure(e)
-                }
-                _cadastroStatus.postValue(result)
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        println("Falha ao cadastrar servico : ${t.message}")
+                        erroApi.postValue("Falha ao cadastrar servico 2: ${t.message}")
+                    }
+                })
+            //    _cadastroStatus.postValue(result)
             } else {
                 _cadastroStatus.postValue(Result.failure(Exception("Token não encontrado")))
             }

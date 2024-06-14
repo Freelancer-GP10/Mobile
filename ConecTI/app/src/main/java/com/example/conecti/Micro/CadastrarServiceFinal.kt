@@ -7,14 +7,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -76,6 +80,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.conecti.Freela.CustomMenuItem
+
 import com.example.conecti.Freela.WorkSpaceFreela
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
@@ -86,6 +91,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class CadastrarServiceFinal : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,13 +100,16 @@ class CadastrarServiceFinal : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
-               ServicoCadastro2()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    ServicoCadastro2()
+                }
             }
         }
     }
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainContentMicroDemanda(scope: CoroutineScope, iniciarJanela: DrawerState,usuarioViewModel: UsuarioViewModel) {
 
@@ -154,6 +164,7 @@ fun MainContentMicroDemanda(scope: CoroutineScope, iniciarJanela: DrawerState,us
             val dataIncioSelecionada = remember { mutableStateOf("") }
             val dataFinalSelecionada = remember { mutableStateOf("") }
             val calendario = Calendar.getInstance()
+
 
             val datePickerDialogInicio = DatePickerDialog(
                 context,
@@ -387,16 +398,23 @@ fun MainContentMicroDemanda(scope: CoroutineScope, iniciarJanela: DrawerState,us
 
                     Button(
                         onClick = {
+                            val formatterInput = DateTimeFormatter.ofPattern("d/M/yyyy")
+                            val formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                            val prazo = LocalDate.parse(dataFinalSelecionada.value, formatterInput).format(formatterOutput)
+                            val dataInicio = LocalDate.parse(dataIncioSelecionada.value, formatterInput).format(formatterOutput)
 
                             val servico = Service.CadastrarServicoDto(
                                 nome = nomeServico.value,
-                                prazo = dataFinalSelecionada.value,
-                                dataInicio = dataIncioSelecionada.value,
-                                valor = valorServico.value.toDouble(),
+                                prazo = prazo,
+                                dataInicio = dataInicio,
+                                valor = valorServico.value.toDoubleOrNull() ?: 0.0,
                                 descricao = descricaoServico.value
                             )
-                            usuarioViewModel.cadastrarServico(servico)
 
+                            Log.i("compose", "Dados do serviço: $servico")
+                            val usuarioViewModel2: UsuarioViewModel = UsuarioViewModel(context);
+                            //usuarioViewModel2.cadastrarServico(servico)
+                            usuarioViewModel2.cadastrarServico(servico)
 
                         },
                         modifier = Modifier
@@ -422,6 +440,7 @@ fun MainContentMicroDemanda(scope: CoroutineScope, iniciarJanela: DrawerState,us
 
 
 //AQUI ESTA TODA PARTE DO MENU LATERAL
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ServicoCadastro2() {
@@ -572,7 +591,9 @@ fun ServicoCadastro2() {
         }
     }, drawerState = iniciarJanela,
         content = {
-            MainContentMicroDemanda(scope = scope, iniciarJanela = iniciarJanela, UsuarioViewModel(contexto))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                MainContentMicroDemanda(scope = scope, iniciarJanela = iniciarJanela, UsuarioViewModel(contexto))
+            }
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -653,6 +674,8 @@ data class SubMenusBotoesMicroDemanda(
 @Composable
 fun GreetingPreview16() {
     ConecTITheme {
-        ServicoCadastro2()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            ServicoCadastro2()
+//        }
     }
 }

@@ -34,8 +34,7 @@ interface ApiService {
     //fun cadastrarFreelancer(@Body freelaDto: ServiceFreela.freelaDetailsDto): Call<Void>
    @GET("/api/servico/lista-proximos-servicos")
    fun getProximosServicos(
-       @Header("Authorization") token: String,
-   ): Call<List<Service.ListarServicoDto>>
+       @Header("Authorization") token: String): Call<List<Service.ListarServicoDto>>
     @POST("/api/servico")
     fun cadastrarServico(
         @Header("Authorization") token: String,

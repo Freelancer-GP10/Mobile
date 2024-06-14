@@ -332,11 +332,11 @@ val context = LocalContext.current
                 ) {
                     items(items = servicos ?: emptyList()) {
                         componentesServiceMicro(
-                            tagTipo = it.nome,
-                            titulo = it.descricao,
+                            tagTipo = "aaaa",
+                            titulo = "aaa",
                             empresa = "SpTech",
-                            description = "Este é um texto gerado com 40 caracteres que eu pesquisei no chat e ele é chat muito vida loka e pah e isso mesmo e tchururu e pahh e thcururu e pah ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ",
-                            valor = it.valor.toString(),
+                            description = "Este é um texto gerado com 40 caracteres que eu pesquisei no chat e ele é chat",
+                            valor = "a",
                             data = "21/jan"
                         )
                     }
