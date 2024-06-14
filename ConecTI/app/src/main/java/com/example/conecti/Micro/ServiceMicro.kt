@@ -3,6 +3,7 @@ package com.example.conecti.Micro
 import UsuarioViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -205,6 +206,7 @@ val context = LocalContext.current
     val pesquisaPay = remember { mutableStateOf("") }
     var servicos =  usuarioViewModel.servicos.observeAsState().value
 
+
     LaunchedEffect(Unit) {
         usuarioViewModel.fetchProximosServicos()
     }
@@ -330,16 +332,22 @@ val context = LocalContext.current
                         .padding(bottom = 50.dp),
                     verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
                 ) {
-                    items(items = servicos ?: emptyList()) {
-                        componentesServiceMicro(
-                            tagTipo = "aaaa",
-                            titulo = "aaa",
-                            empresa = "SpTech",
-                            description = "Este é um texto gerado com 40 caracteres que eu pesquisei no chat e ele é chat",
-                            valor = "a",
-                            data = "21/jan"
-                        )
+
+                    if(servicos != null){
+                        items(items = servicos) { servico ->
+                            componentesServiceMicro(
+                                tagTipo = servico.nome?: "tag nula",
+                                titulo = servico.nome?: "titulo nulo",
+                                empresa = "nome da empresa"?: "nome Da empresa nulo",
+                                description = servico.descricao?: "DEscricao sla",
+                                valor =  "${servico.valor}"?: "valor nulo" ,
+                                data =  "${servico.prazo}"?:"data nula"
+                            )
+                        }
+                    }else{
+                        Log.i("tag", "foi nullo")
                     }
+
 
 
                 }
