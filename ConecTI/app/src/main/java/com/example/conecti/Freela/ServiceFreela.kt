@@ -1,7 +1,9 @@
 package com.example.conecti.Freela
 
+import UsuarioViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,6 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -47,7 +50,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -75,6 +80,7 @@ import com.example.conecti.Micro.HistoricoPayMicro
 import com.example.conecti.Micro.Perfil_Micro_One
 import com.example.conecti.Micro.ServiceMicro
 import com.example.conecti.Micro.WorkSpaceMicro
+import com.example.conecti.Micro.componentesServiceMicro
 import com.example.conecti.R
 import com.example.conecti.ui.theme.ConecTITheme
 import kotlinx.coroutines.CoroutineScope
@@ -86,33 +92,170 @@ class ServiceFreela : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ConecTITheme {
+                MainContentMicro5WithAcceptButton(
+                    extras = intent.extras,
+                    scope = rememberCoroutineScope(),
+                    iniciarJanela = rememberDrawerState(DrawerValue.Closed),
+                    usuarioViewModel = UsuarioViewModel(this)
+                )
+            }
+        }
+    }
+}
+@Composable
+fun MainContentMicro5WithAcceptButton(
+    extras: Bundle?,
+    scope: CoroutineScope,
+    iniciarJanela: DrawerState,
+    usuarioViewModel: UsuarioViewModel
+) {
+    val context = LocalContext.current
+    val pesquisaPay = remember { mutableStateOf("") }
+    var servicos = usuarioViewModel.servicos.observeAsState().value
 
+    LaunchedEffect(Unit) {
+        usuarioViewModel.fetchProximosServicos()
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 15.dp) // Adiciona um espaçamento na parte superior da tela
+    ) {
+        IconButton(
+            onClick = {
+                scope.launch {
+                    iniciarJanela.open()
+                }
+            },
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 15.dp
+            ), // Adiciona um espaçamento à esquerda
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Menu,
+                contentDescription = "menu Icon",
+                tint = Color(0xFF50FAAB),
+                modifier = Modifier.size(40.dp)
+            )
+        }
+
+        // Conteúdo principal da tela
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 24.dp)
+
+            ) {
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Service",
+                        color = Color(0xFF215683),
+                        fontSize = 38.sp,
+                        modifier = Modifier
+                            .padding(start = 0.dp, bottom = 0.dp, end = 30.dp)
+                    )
+
+                    Spacer(modifier = Modifier.width(25.dp)) // Espaço entre o texto e o botão
+
+                    // Botão "Adicionar" removido
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    OutlinedTextField(
+                        value = pesquisaPay.value,
+                        onValueChange = { pesquisaPay.value = it },
+                        label = {
+                            Text(
+                                "Pesquisar",
+                                modifier = Modifier
+                                    .fillMaxSize(),
+                                textAlign = TextAlign.Start
+                            )
+                        },
+                        modifier = Modifier
+                            .width(280.dp) // Define a largura desejada
+                            .height(58.dp), // Define a altura desejada
+                        trailingIcon = {
+                            IconButton(
+                                onClick = {
+                                    // Ação ao clicar no ícone de lupa
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.TwoTone.Search,
+                                    contentDescription = "Pesquisar"
+                                )
+                            }
+                        }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 50.dp),
+                    verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
+                ) {
+
+                    if(servicos != null){
+                        items(items = servicos) { servico ->
+                            componentesService(
+                                idDemanda = servico.id?: 0,
+                                tagTipo = servico.nome?: "tag nula",
+                                titulo = servico.nome?: "titulo nulo",
+                                empresa = "ConecTi"?: "nome Da empresa nulo",
+                                description = servico.descricao?: "DEscricao sla",
+                                valor =  "${servico.valor}"?: "valor nulo" ,
+                                data =  "${servico.prazo}"?:"data nula"
+                            )
+                        }
+                    }else{
+                        Log.i("tag", "foi nullo")
+                    }
+                }
             }
         }
     }
 }
 
-
 //AQUI ESTA AS VARIAVEIS E OS COMPONENTES DAS DEMANDAS
 @Composable
 fun componentesService(
+    idDemanda: Long,
     tagTipo: String,
     titulo: String,
     empresa: String,
     description: String,
     valor: String,
-    data : String
-
+    data: String
 ) {
+    val usuarioViewModel = UsuarioViewModel(LocalContext.current)
     var expanded by remember { mutableStateOf(false) }
     val showExpandButton = description.length > 40
     val displayText = if (expanded || !showExpandButton) description else description.take(70) + "..."
     Box(
         modifier = Modifier
-            //.fillMaxWidth()
             .fillMaxSize()
-            //.height(200.dp)
-            //.background(Color.Yellow)
             .padding(16.dp)
     ) {
         Box(
@@ -120,23 +263,20 @@ fun componentesService(
                 .fillMaxSize()
                 .clip(RoundedCornerShape(8.dp))
                 .border(1.dp, Color(0xFF204A7B), RoundedCornerShape(8.dp))
-            //.background(Color.Green)
-        ){
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(0.66f),
-                //.background(Color.Red),
                 horizontalAlignment = Alignment.Start
-
-            ){
+            ) {
                 Text(
-                    text = "[ ${tagTipo} ] - ${titulo}",
+                    text = "[ $tagTipo ] - $titulo",
                     fontSize = 15.sp,
                     modifier = Modifier.padding(start = 8.dp, top = 15.dp)
                 )
                 Text(
-                    text = "Empresa: ${empresa}",
+                    text = "Empresa: $empresa",
                     fontSize = 15.sp,
                     modifier = Modifier.padding(start = 8.dp, top = 2.dp)
                 )
@@ -172,54 +312,48 @@ fun componentesService(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 8.dp),
-
-                        )
+                    )
                 }
-
             }
 
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(0.34f)
-                    //.background(Color.Blue)
                     .align(Alignment.TopEnd),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
-
-            ){
-
+            ) {
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "R$ ${valor}",
+                    text = "R$ $valor",
                     fontSize = 15.sp,
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Inicio: ${data}",
+                    text = "Inicio: $data",
                     fontSize = 15.sp
                 )
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        usuarioViewModel.aceitarServico(idDemanda)
+                    },
                     modifier = Modifier
                         .padding(top = 15.dp, bottom = 15.dp)
                         .height(40.dp)
                         .width(88.dp),
                     shape = RoundedCornerShape(7.dp)
-                ){
+                ) {
                     Text(
                         text = "Aceitar",
                         fontSize = 12.sp,
-
-                        )
+                    )
                 }
-
             }
         }
-
     }
 }
 // AQUI ESTA O ÍCONE DO MENU E O CONTEUDO INICIAL VISIVEL
@@ -314,29 +448,6 @@ fun MainContent5(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-
-
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = 50.dp),
-                    verticalArrangement = Arrangement.spacedBy(-15.dp) // Espaço de 4dp entre os itens
-                ) {
-                    items(8) { index ->
-                        componentesService(
-                            tagTipo = "Front-End",
-                            titulo = "Site institucional",
-                            empresa = "SpTech",
-                            description = "Este é um texto gerado com 40 caracteres que eu pesquisei no chat e ele é chat muito vida loka e pah e isso mesmo e tchururu e pahh e thcururu e pah ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ",
-                            valor = "2.000,00 ",
-                            data = "21/jan"
-                        )
-                    }
-                }
-
-
-
-
             }
 
         }

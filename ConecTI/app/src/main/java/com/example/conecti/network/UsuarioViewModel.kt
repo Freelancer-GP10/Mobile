@@ -206,6 +206,32 @@ class UsuarioViewModel(private val context: Context) : ViewModel() {
             }
         }
     }
+    fun aceitarServico(fkServico: Long) {
+        viewModelScope.launch {
+            val token = getToken2()
+            if (token != null) {
+                val aceitarServicoDto = Service.AceitarServicoDTO(fkServico)
+                apiService.aceitarServico("Bearer $token", aceitarServicoDto).enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+                            println("Serviço aceito com sucesso")
+                            // Tratar a resposta do servidor, se necessário
+                        } else {
+                            println("Erro ao aceitar serviço: ${response.errorBody()?.string()}")
+                            erroApi.postValue("Erro ao aceitar serviço: ${response.errorBody()?.string()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        println("Falha ao aceitar serviço: ${t.message}")
+                        erroApi.postValue("Falha ao aceitar serviço: ${t.message}")
+                    }
+                })
+            } else {
+                erroApi.postValue("Token não encontrado")
+            }
+        }
+    }
 
     private suspend fun saveToken(token: String) {
         context.tokenUsuario.edit { settings ->

@@ -2,6 +2,7 @@ package com.example.conecti.cadastroInicial.FreelaInicio
 
 import ModelFreela
 import UsuarioViewModel
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,13 +41,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.conecti.Micro.ServiceMicro
 import com.example.conecti.R
+import com.example.conecti.RetrofitClient.context
 import com.example.conecti.netWorkFreela.ServiceFreela
 import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
@@ -97,7 +101,7 @@ fun Background() {
 
 @Composable
 fun EtapaUmFreela(modelFrela : UsuarioViewModel) {
-
+    val context = LocalContext.current
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -418,7 +422,10 @@ fun EtapaUmFreela(modelFrela : UsuarioViewModel) {
                                 selectedFormacao.value
                             )
                         )
+                        val serviceFreela = Intent(context, com.example.conecti.Freela.ServiceFreela::class.java)
+                        context.startActivity(serviceFreela)
                     },
+
                     shape = RoundedCornerShape(8.dp),
                     border = BorderStroke(2.dp, Color(0xFF204A7B)),
                     modifier = Modifier

@@ -82,6 +82,9 @@ class Service {
         val email: String,
         val token: String
     )
+    data class AceitarServicoDTO(
+        val fkServico: Long
+    )
 
     data class ListarServicoDto(
         val id :Long,

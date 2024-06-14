@@ -39,4 +39,8 @@ interface ApiService {
     fun cadastrarServico(
         @Header("Authorization") token: String,
         @Body cadastrarServicoDto: Service.CadastrarServicoDto): Call<Void>
+
+        @POST("/api/conexao/aceitar-servico")
+        fun aceitarServico(@Header("Authorization") token: String,@Body aceitarServicoDto: Service.AceitarServicoDTO): Call<Void>
+
 }
