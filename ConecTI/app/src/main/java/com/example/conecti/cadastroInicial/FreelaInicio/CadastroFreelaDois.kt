@@ -1,6 +1,8 @@
 package com.example.conecti.cadastroInicial.FreelaInicio
 
 import UsuarioViewModel
+import android.app.Activity
+import android.content.Intent
 import  android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,6 +42,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.conecti.R
 import androidx.compose.ui.unit.sp
+import com.example.conecti.Login
 import com.example.conecti.network.Service
 
 class CadastroFreelaDois : ComponentActivity() {
@@ -65,7 +68,7 @@ class CadastroFreelaDois : ComponentActivity() {
 
 @Composable
 fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.current)) {
-
+    val contexto = LocalContext.current
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
     val entradaPapel = remember { mutableStateOf("Freelancer") }
@@ -196,7 +199,8 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
                             senha = entradaSenha.value
                         )
                     )
-
+                    val login = Intent(contexto, Login::class.java)
+                    contexto.startActivity(login)
                 },
                 shape = RoundedCornerShape(8.dp),
                 border = BorderStroke(2.dp, Color(0xFF204A7B)),
@@ -264,6 +268,8 @@ fun EtapaDoisFreela(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.
     }
 
 }
+
+
 
 @Preview(showBackground = true)
 @Composable

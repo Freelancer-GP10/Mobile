@@ -1,3 +1,11 @@
 
-ckotlin:S125u"Remove this commented out code.(¨ó¡Á8ƒà«Òû1J$ac91a4cc-1dd9-4523-8979-7ea26120b35f
-rkotlin:S1481+".Remove this unused "freelaDto" local variable.(Æ¬î#8¢‘…äû1J$e4af646f-c6e2-4c98-933e-b77b34fa0e5a
+tkotlin:S6508%"*Replace this usage of Void type with Unit.(»äüÍıÿÿÿÿ8üß»±‚2J$e224f079-b7fa-4407-a597-208f74083163
+ukotlin:S6508ª"*Replace this usage of Void type with Unit.(Å–¿ûÿÿÿÿ8ıß»±‚2J$68f27964-b702-4499-97dc-2fa561a63452
+ukotlin:S6508«"*Replace this usage of Void type with Unit.(´‹¦”ıÿÿÿÿ8ıß»±‚2J$a6514fa5-c8c9-4e36-994b-478977c5d763
+ukotlin:S6508«"*Replace this usage of Void type with Unit.(´‹¦”ıÿÿÿÿ8ıß»±‚2J$fca6abd3-1182-4f41-9b9d-47edb7ae30d5
+ukotlin:S6508³"*Replace this usage of Void type with Unit.(ºÔÂşÿÿÿÿ8şß»±‚2J$a47018f2-76c4-482a-9862-904ad5bab706
+ckotlin:S125&"Remove this commented out code.(†ºà“8„à»±‚2J$0f785f7d-9184-4e19-a35c-27473fbcdd71
+ckotlin:S125."Remove this commented out code.(Ûâõ‚8‡à»±‚2J$43500357-4291-46b1-bd61-5907c52d2c1c
+ckotlin:S1255"Remove this commented out code.(à§ª¹8‰à»±‚2J$765ba57d-eec3-4194-9507-bdf9887a4aaa
+ikotlin:S6313["EClasses extending "ViewModel" should not expose suspending functions.(òÙÈŠøÿÿÿÿ8ï™Ó±‚2
+>kotlin:S1128"Remove this unused import.(œ‘Ü„úÿÿÿÿ8šÓ±‚2

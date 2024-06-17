@@ -1,0 +1,12 @@
+
+kkotlin:S117‚"NRename this parameter to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(¿¬æ ûÿÿÿÿ
+Pkotlin:S1135…"2Complete the task associated to this TODO comment.(åâ´ñüÿÿÿÿ
+Jkotlin:S1481‚",Remove this unused "context" local variable.(˜®¾‚øÿÿÿÿ
+2kotlin:S1128R"Remove this unused import.(€Ğú¬
+Vkotlin:S6511"=Merge chained "if" statements into a single "when" statement.(Ñ¹€“
+Jkotlin:S6518£",Replace function call with indexed accessor.( ½Èßúÿÿÿÿ
+Ekotlin:S6518¤",Replace function call with indexed accessor.(Ç¿‚É
+Ekotlin:S6518¥",Replace function call with indexed accessor.(ãşã­
+Jkotlin:S6518­",Replace function call with indexed accessor.( ½Èßúÿÿÿÿ
+Ekotlin:S6518®",Replace function call with indexed accessor.(Ç¿‚É
+Ekotlin:S6518¯",Replace function call with indexed accessor.(ãşã­

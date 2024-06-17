@@ -78,7 +78,6 @@ class Perfil_Freela_One : ComponentActivity() {
         setContent {
             ConecTITheme {
 
-
             }
         }
     }

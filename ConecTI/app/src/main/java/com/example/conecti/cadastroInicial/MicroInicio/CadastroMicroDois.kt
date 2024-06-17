@@ -1,5 +1,8 @@
 package com.example.conecti.cadastroInicial.MicroInicio
 
+import UsuarioViewModel
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -37,7 +41,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.conecti.R
 import androidx.compose.ui.unit.sp
+import com.example.conecti.Login
 import com.example.conecti.cadastroInicial.FreelaInicio.Background
+import com.example.conecti.network.Service
 import com.example.conecti.ui.theme.ConecTITheme
 
 class CadastroMicroDois : ComponentActivity() {
@@ -47,15 +53,15 @@ class CadastroMicroDois : ComponentActivity() {
         setContent {
             ConecTITheme {
                 Background()
-                EtapaDoisMicro()
+                EtapaDoisMicro( )
             }
         }
     }
 }
 
 @Composable
-fun EtapaDoisMicro() {
-
+fun EtapaDoisMicro(viewModel: UsuarioViewModel = UsuarioViewModel(LocalContext.current)) {
+    val contexto = LocalContext.current
     val entradaEmail = remember { mutableStateOf("") }
     val entradaSenha = remember { mutableStateOf("") }
     val entradaPapel = remember { mutableStateOf("Freelancer") }
@@ -176,7 +182,16 @@ fun EtapaDoisMicro() {
                     println(entradaPapel)
                     println(entradaSenha)
                     // Imprime "Hello, world!" no console
-
+                    viewModel.criarUsuario(
+                        usuarioCriacaoDto = Service.UsuarioCriacaoDto(
+                            email = entradaEmail.value,
+                            papel = entradaPapel.value,
+                            senha = entradaSenha.value
+                        )
+                    )
+                    //Renderizar para a tela de Login
+                    val login = Intent(contexto, Login::class.java)
+                    contexto.startActivity(login)
 
                 },
                 shape = RoundedCornerShape(8.dp),

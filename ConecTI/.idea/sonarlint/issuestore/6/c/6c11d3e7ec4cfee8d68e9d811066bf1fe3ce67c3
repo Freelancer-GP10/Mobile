@@ -1,0 +1,12 @@
+
+˜kotlin:S117Ñ"NRename this parameter to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(¿¬æ ûÿÿÿÿ8ñÎù²‚2J$0899a63e-e004-4e34-b319-f214100ad97d
+|kotlin:S1135v"2Complete the task associated to this TODO comment.(åâ´ñüÿÿÿÿ8ëüö²‚2J$8684f010-17cc-48cc-9bd3-2a25b1884bfc
+€kotlin:S1481Ÿ"5Remove this unused "selectedFormacao" local variable.(ËíÌºüÿÿÿÿ8¤‰û²‚2J$99727a57-3bc8-4558-aa45-9bbadf0b933c
+€kotlin:S1481›"5Remove this unused "expandedFormacao" local variable.(Î’„¨şÿÿÿÿ8¤‰û²‚2J$302c1fb5-c1f2-4ef3-a200-3334b166355d
+xkotlin:S1481”"2Remove this unused "listaFormacao" local variable.(ô«Òğ8¤‰û²‚2J$b22d1fa0-3850-4179-9a7e-a86d4c219ae8
+zkotlin:S1481†"4Remove this unused "listaLinguagens" local variable.(½Ïà8¤‰û²‚2J$a22e5235-af5d-44e0-ac07-c3fb1874de05
+|kotlin:S1481…"6Remove this unused "selectedLinguagem" local variable.(Û§£Ê8¤‰û²‚2J$73c6517b-911b-4592-90dd-7b66ef20f4bf
+kotlin:S1481„"6Remove this unused "expandedLinguagem" local variable.(è‰ø±şÿÿÿÿ8¤‰û²‚2J$c2d1cf63-efa4-420d-b7ec-43bcaaf0b532
+skotlin:S1481~")Remove this unused "ramo" local variable.(…‹á™şÿÿÿÿ8óüö²‚2J$ecb90f83-e07c-44cb-a5e0-b6f80d12a3e5
+˜kotlin:S101N"TRename class "Perfil_Micro_Dois" to match the regular expression ^[A-Z][a-zA-Z0-9]*$(®Òæ“8€ıö²‚2J$dc0e4f0a-6447-4012-b065-94884d817f9c
+ƒkotlin:S6511Ö"=Merge chained "if" statements into a single "when" statement.(Ñ¹€“8³Ïù²‚2J$bb2c55a1-fcc5-4aa9-a12f-2e75d7c35448

@@ -1,6 +1,6 @@
 
-kkotlin:S117½"NRename this parameter to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(¿¬æ ûÿÿÿÿ
-Okotlin:S1135o"2Complete the task associated to this TODO comment.(åâ´ñüÿÿÿÿ
-qkotlin:S101J"URename class "Perfil_Freela_Dois" to match the regular expression ^[A-Z][a-zA-Z0-9]*$(­Þñëøÿÿÿÿ
-jkotlin:S3776X"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ÙŠìÝ
-Vkotlin:S6511Ã"=Merge chained "if" statements into a single "when" statement.(Ñ¹€“
+‘kotlin:S117Ê"NRename this parameter to match the regular expression ^`?[_a-z][a-zA-Z0-9]*`?$(¿¬æ ûÿÿÿÿJ$9954cf97-d3d0-4b81-bef9-25f9e238da58
+Vkotlin:S1135w"2Complete the task associated to this TODO comment.(åâ´ñüÿÿÿÿ8­®À§ÿ1
+xkotlin:S101N"URename class "Perfil_Freela_Dois" to match the regular expression ^[A-Z][a-zA-Z0-9]*$(­Þñëøÿÿÿÿ8Æ®À§ÿ1
+qkotlin:S3776]"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ÙŠìÝ8Ö®À§ÿ1
+]kotlin:S6511Ð"=Merge chained "if" statements into a single "when" statement.(Ñ¹€“8ñ®À§ÿ1

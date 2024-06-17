@@ -11,10 +11,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import tokenUsuario
 
-
 object RetrofitClient {
 
-    const val BASE_URL = "http://3.82.17.25/api"
+    const val BASE_URL = "http://34.228.189.246/api"
     var context: Context? = null
 
 

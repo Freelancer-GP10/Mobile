@@ -122,10 +122,10 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
         ) {
 
-            val nomeFreela = remember { mutableStateOf("") }
-            val sobrenomeFreela = remember { mutableStateOf("") }
-            val cpfFreela = remember { mutableStateOf("") }
-            val telefoneFreela = remember { mutableStateOf("") }
+            val nomeEmpresa = remember { mutableStateOf("") }
+            val ramo = remember { mutableStateOf("") }
+            val cnpj = remember { mutableStateOf("")}
+            val telefoneMicro = remember { mutableStateOf("") }
             val emailFreela = remember { mutableStateOf("") }
             val senhaFreela = remember { mutableStateOf("") }
 
@@ -190,8 +190,8 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
 
 
                 OutlinedTextField(
-                    value = nomeFreela.value,
-                    onValueChange = { nomeFreela.value = it },
+                    value = nomeEmpresa.value,
+                    onValueChange = { nomeEmpresa.value = it },
                     label = { Text(text = "Nome da Empresa") },
                     modifier = Modifier
                         .height(60.dp)
@@ -259,8 +259,8 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 OutlinedTextField(
-                    value = cpfFreela.value,
-                    onValueChange = { cpfFreela.value = it },
+                    value = cnpj.value,
+                    onValueChange = { cnpj.value = it },
                     label = { Text(text = "CNPJ") },
                     modifier = Modifier
                         .height(60.dp)
@@ -270,8 +270,8 @@ fun MainContentMicro2(scope: CoroutineScope, iniciarJanela: DrawerState) {
                 Spacer(modifier = Modifier.padding(4.dp))
 
                 OutlinedTextField(
-                    value = telefoneFreela.value,
-                    onValueChange = { telefoneFreela.value = it },
+                    value = telefoneMicro.value,
+                    onValueChange = { telefoneMicro.value = it },
                     label = { Text(text = "Telefone") },
                     modifier = Modifier
                         .height(60.dp)
